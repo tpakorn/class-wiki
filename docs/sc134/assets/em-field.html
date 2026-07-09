@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E&M Field Explorer</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --pos:#c0392b; --neg:#2471a3; --line:#555; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --pos:#e74c3c; --neg:#5dade2; --line:#aaa; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block;
+           touch-action:none; cursor:grab; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; padding:8px 2px; align-items:center; }
+  button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:4px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--pos); }
+  label.cb { font-size:12px; display:flex; gap:4px; align-items:center; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <button id="addP">+ charge</button>
+    <button id="addN">− charge</button>
+    <button id="clear">Clear</button>
+    <span style="width:8px"></span>
+    <button data-preset="single">Single</button>
+    <button data-preset="dipole">Dipole</button>
+    <button data-preset="pair">Like pair</button>
+    <button data-preset="quad">Quadrupole</button>
+    <span style="flex:1"></span>
+    <label class="cb"><input type="checkbox" id="showV" checked> potential shading</label>
+    <label class="cb"><input type="checkbox" id="showL" checked> field lines</label>
+  </div>
+  <canvas id="cv" width="760" height="480"></canvas>
+  <p class="note"><b>Drag charges</b> to move them. Field lines leave + charges and land on
+  − charges; background shading shows the potential (warm = positive, cool = negative).
+  Notice: field lines never cross, and where they crowd together |E| is large. Try the
+  dipole preset and find the point where the field of the like pair vanishes.</p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let charges = [{x: W/2 - 90, y: H/2, q: 1}, {x: W/2 + 90, y: H/2, q: -1}];
+
+  const presets = {
+    single: [{x: W/2, y: H/2, q: 1}],
+    dipole: [{x: W/2 - 90, y: H/2, q: 1}, {x: W/2 + 90, y: H/2, q: -1}],
+    pair:   [{x: W/2 - 90, y: H/2, q: 1}, {x: W/2 + 90, y: H/2, q: 1}],
+    quad:   [{x: W/2 - 90, y: H/2 - 80, q: 1}, {x: W/2 + 90, y: H/2 - 80, q: -1},
+             {x: W/2 - 90, y: H/2 + 80, q: -1}, {x: W/2 + 90, y: H/2 + 80, q: 1}]
+  };
+
+  function field(x, y) {
+    let ex = 0, ey = 0;
+    for (const c of charges) {
+      const dx = x - c.x, dy = y - c.y, r2 = dx*dx + dy*dy + 25;
+      const f = c.q * 2e4 / (r2 * Math.sqrt(r2));
+      ex += f*dx; ey += f*dy;
+    }
+    return [ex, ey];
+  }
+  function potential(x, y) {
+    let v = 0;
+    for (const c of charges) {
+      const r = Math.hypot(x - c.x, y - c.y) + 6;
+      v += c.q * 120 / r;
+    }
+    return v;
+  }
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim();
+    ctx.fillRect(0, 0, W, H);
+    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // potential shading (coarse grid)
+    if (document.getElementById('showV').checked && charges.length) {
+      const cell = 8;
+      for (let gx = 0; gx < W; gx += cell)
+        for (let gy = 0; gy < H; gy += cell) {
+          const v = potential(gx + cell/2, gy + cell/2);
+          const t = Math.tanh(v * 0.6);
+          if (Math.abs(t) < 0.02) continue;
+          const a = Math.min(0.5, Math.abs(t) * 0.5);
+          ctx.fillStyle = t > 0
+            ? `rgba(224,110,80,${a})` : `rgba(80,140,200,${a})`;
+          ctx.fillRect(gx, gy, cell, cell);
+        }
+    }
+
+    // field lines
+    if (document.getElementById('showL').checked) {
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = css.getPropertyValue('--line').trim();
+      const nSeeds = 12;
+      for (const c of charges) {
+        if (c.q <= 0) continue;  // seed from positives (and from negatives if no positives)
+        seedLines(c, nSeeds, +1);
+      }
+      if (!charges.some(c => c.q > 0))
+        for (const c of charges) if (c.q < 0) seedLines(c, nSeeds, -1);
+    }
+
+    function seedLines(c, n, dir) {
+      for (let k = 0; k < n; k++) {
+        const th = (k + 0.5) / n * 2 * Math.PI;
+        let x = c.x + 14*Math.cos(th), y = c.y + 14*Math.sin(th);
+        ctx.beginPath(); ctx.moveTo(x, y);
+        for (let i = 0; i < 600; i++) {
+          const [ex, ey] = field(x, y);
+          const m = Math.hypot(ex, ey); if (m < 1e-6) break;
+          x += dir * 3 * ex/m; y += dir * 3 * ey/m;
+          ctx.lineTo(x, y);
+          if (x < -20 || x > W+20 || y < -20 || y > H+20) break;
+          // stop at a charge
+          let stop = false;
+          for (const o of charges) if (Math.hypot(x - o.x, y - o.y) < 12) { stop = true; break; }
+          if (stop) { ctx.lineTo(x, y); break; }
+        }
+        ctx.stroke();
+      }
+    }
+
+    // charges
+    for (const c of charges) {
+      ctx.beginPath(); ctx.arc(c.x, c.y, 11, 0, 2*Math.PI);
+      ctx.fillStyle = css.getPropertyValue(c.q > 0 ? '--pos' : '--neg').trim();
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(c.q > 0 ? '+' : '−', c.x, c.y + 0.5);
+    }
+  }
+
+  // interactions
+  let dragging = null;
+  function pos(ev) {
+    const r = cv.getBoundingClientRect();
+    const p = ev.touches ? ev.touches[0] : ev;
+    return [(p.clientX - r.left) * W/r.width, (p.clientY - r.top) * H/r.height];
+  }
+  function down(ev) {
+    const [x, y] = pos(ev);
+    for (const c of charges)
+      if (Math.hypot(x - c.x, y - c.y) < 16) { dragging = c; ev.preventDefault(); return; }
+  }
+  function move(ev) {
+    if (!dragging) return;
+    const [x, y] = pos(ev);
+    dragging.x = x; dragging.y = y; ev.preventDefault(); draw();
+  }
+  cv.addEventListener('mousedown', down); cv.addEventListener('touchstart', down);
+  window.addEventListener('mousemove', move); window.addEventListener('touchmove', move, {passive:false});
+  window.addEventListener('mouseup', () => dragging = null);
+  window.addEventListener('touchend', () => dragging = null);
+
+  document.getElementById('addP').onclick = () => { charges.push({x: W/2 + (Math.random()-0.5)*100, y: H/2 + (Math.random()-0.5)*100, q: 1}); draw(); };
+  document.getElementById('addN').onclick = () => { charges.push({x: W/2 + (Math.random()-0.5)*100, y: H/2 + (Math.random()-0.5)*100, q: -1}); draw(); };
+  document.getElementById('clear').onclick = () => { charges = []; draw(); };
+  document.querySelectorAll('button[data-preset]').forEach(b =>
+    b.onclick = () => { charges = presets[b.dataset.preset].map(c => ({...c})); draw(); });
+  document.getElementById('showV').onchange = draw;
+  document.getElementById('showL').onchange = draw;
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Streaming Instability
 
-*Source lecture:* pc368_lec11_streaming_ins
+*Source lecture(s):* [pc368_lec11_streaming_ins](../lectures.md)
 
 ## Intuition
 

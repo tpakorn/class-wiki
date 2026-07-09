@@ -1,6 +1,6 @@
 # Plasma Sheath
 
-*Source lecture:* pc368_lec06_shealth
+*Source lecture(s):* [pc368_lec06_shealth](../lectures.md)
 
 ## Intuition
 

@@ -1,0 +1,202 @@
+{
+  "nodes": [
+    {
+      "id": "electric-charge",
+      "label": "Electric Charge"
+    },
+    {
+      "id": "conductors-insulators",
+      "label": "Conductors, Insulators, and Semiconductors"
+    },
+    {
+      "id": "electric-current",
+      "label": "Electric Current"
+    },
+    {
+      "id": "coulombs-law",
+      "label": "Coulomb's Law"
+    },
+    {
+      "id": "electric-field",
+      "label": "Electric Field"
+    },
+    {
+      "id": "electric-force",
+      "label": "Electric Force on Charges"
+    },
+    {
+      "id": "electric-dipole",
+      "label": "Electric Dipole"
+    },
+    {
+      "id": "gauss-law",
+      "label": "Gauss's Law"
+    },
+    {
+      "id": "electric-flux",
+      "label": "Electric Flux"
+    },
+    {
+      "id": "electric-potential",
+      "label": "Electric Potential"
+    },
+    {
+      "id": "equipotential",
+      "label": "Equipotential Surfaces"
+    },
+    {
+      "id": "capacitance",
+      "label": "Capacitance"
+    },
+    {
+      "id": "dielectrics",
+      "label": "Dielectrics"
+    },
+    {
+      "id": "current-resistance",
+      "label": "Current, Resistance, and Resistivity"
+    },
+    {
+      "id": "dc-circuits",
+      "label": "DC Circuits"
+    },
+    {
+      "id": "rc-circuits",
+      "label": "RC Circuits"
+    },
+    {
+      "id": "magnetic-field",
+      "label": "Magnetic Field and Forces"
+    },
+    {
+      "id": "magnetic-force",
+      "label": "Magnetic Force"
+    },
+    {
+      "id": "biot-savart-law",
+      "label": "Biot-Savart Law"
+    },
+    {
+      "id": "amperes-law",
+      "label": "Ampere's Law"
+    },
+    {
+      "id": "faraday-law",
+      "label": "Faraday's Law of Induction"
+    },
+    {
+      "id": "magnetic-flux",
+      "label": "Magnetic Flux"
+    },
+    {
+      "id": "gauss-law-magnetism",
+      "label": "Gauss's Law for Magnetism"
+    },
+    {
+      "id": "maxwell-equations",
+      "label": "Maxwell's Equations"
+    },
+    {
+      "id": "electromagnetic-waves",
+      "label": "Electromagnetic Waves"
+    }
+  ],
+  "edges": [
+    {
+      "source": "electric-charge",
+      "target": "coulombs-law"
+    },
+    {
+      "source": "coulombs-law",
+      "target": "electric-force"
+    },
+    {
+      "source": "coulombs-law",
+      "target": "electric-field"
+    },
+    {
+      "source": "electric-field",
+      "target": "electric-force"
+    },
+    {
+      "source": "electric-field",
+      "target": "electric-dipole"
+    },
+    {
+      "source": "conductors-insulators",
+      "target": "electric-current"
+    },
+    {
+      "source": "electric-current",
+      "target": "current-resistance"
+    },
+    {
+      "source": "electric-field",
+      "target": "gauss-law"
+    },
+    {
+      "source": "electric-field",
+      "target": "electric-flux"
+    },
+    {
+      "source": "electric-flux",
+      "target": "gauss-law"
+    },
+    {
+      "source": "electric-field",
+      "target": "electric-potential"
+    },
+    {
+      "source": "electric-potential",
+      "target": "equipotential"
+    },
+    {
+      "source": "electric-potential",
+      "target": "capacitance"
+    },
+    {
+      "source": "capacitance",
+      "target": "dielectrics"
+    },
+    {
+      "source": "dc-circuits",
+      "target": "rc-circuits"
+    },
+    {
+      "source": "current-resistance",
+      "target": "dc-circuits"
+    },
+    {
+      "source": "magnetic-force",
+      "target": "magnetic-field"
+    },
+    {
+      "source": "magnetic-field",
+      "target": "biot-savart-law"
+    },
+    {
+      "source": "biot-savart-law",
+      "target": "amperes-law"
+    },
+    {
+      "source": "magnetic-field",
+      "target": "magnetic-force"
+    },
+    {
+      "source": "magnetic-flux",
+      "target": "faraday-law"
+    },
+    {
+      "source": "magnetic-flux",
+      "target": "gauss-law-magnetism"
+    },
+    {
+      "source": "faraday-law",
+      "target": "maxwell-equations"
+    },
+    {
+      "source": "maxwell-equations",
+      "target": "electromagnetic-waves"
+    }
+  ]
+}

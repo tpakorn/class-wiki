@@ -1,6 +1,6 @@
 # Debye Shielding
 
-*Source lectures:* pc368_lec01_intro, pc368_lec02_debye
+*Source lecture(s):* [pc368_lec01_intro, pc368_lec02_debye](../lectures.md)
 
 ## Intuition
 

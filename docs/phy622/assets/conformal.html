@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conformal Map Explorer</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --h:#c0392b; --v:#2471a3; --dot:#1e8449; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --h:#e74c3c; --v:#5dade2; --dot:#58d68d; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  .panes { display:flex; gap:8px; }
+  .pane { flex:1; min-width:0; }
+  .pane h4 { margin:2px 0 4px; font-size:12px; color:var(--muted); font-weight:600;
+             text-align:center; letter-spacing:0.05em; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block;
+           touch-action:none; cursor:crosshair; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; padding:8px 2px; align-items:center; }
+  select { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:3px 8px; font-size:13px; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <label style="font-size:12px;color:var(--muted)">Map&nbsp;
+      <select id="fn">
+        <option value="z2">w = z²</option>
+        <option value="inv">w = 1/z</option>
+        <option value="exp">w = e^z</option>
+        <option value="jouk">w = z + 1/z (Joukowski)</option>
+        <option value="sin">w = sin z</option>
+        <option value="mobius">w = (z−1)/(z+1)</option>
+      </select>
+    </label>
+    <span class="note" id="cap"></span>
+  </div>
+  <div class="panes">
+    <div class="pane"><h4>z-PLANE</h4><canvas id="zc" width="370" height="370"></canvas></div>
+    <div class="pane"><h4>w-PLANE</h4><canvas id="wc" width="370" height="370"></canvas></div>
+  </div>
+  <p class="note">Move your pointer over the <b>z-plane</b>: the green dot (and a tiny right-angle
+  cross) appears at its image in the <b>w-plane</b>. Angles between the red and blue grid lines
+  stay 90° everywhere the map is conformal — find the points where it fails
+  (f′(z) = 0 or singular).</p>
+</div>
+<script>
+(() => {
+  const zc = document.getElementById('zc'), zx = zc.getContext('2d');
+  const wcv = document.getElementById('wc'), wx = wcv.getContext('2d');
+  const N = 370;
+
+  const maps = {
+    z2:   { f: (x,y) => [x*x - y*y, 2*x*y], zr: 2.2, wr: 4.4,
+            cap: 'Squares the modulus, doubles the argument. Conformal except at z = 0 (f′=0): angles there double.' },
+    inv:  { f: (x,y) => { const r2 = x*x + y*y + 1e-12; return [x/r2, -y/r2]; }, zr: 2.2, wr: 2.2,
+            cap: 'Inversion: circles and lines map to circles and lines. Pole at z = 0.' },
+    exp:  { f: (x,y) => [Math.exp(x)*Math.cos(y), Math.exp(x)*Math.sin(y)], zr: 2.6, wr: 6,
+            cap: 'Horizontal lines → rays, vertical lines → circles: Cartesian grid becomes polar grid. Never zero, conformal everywhere.' },
+    jouk: { f: (x,y) => { const r2 = x*x + y*y + 1e-12; return [x + x/r2, y - y/r2]; }, zr: 2.6, wr: 3.4,
+            cap: 'The Joukowski map: circles through z = ±1 become airfoils. f′ = 0 at z = ±1 — the sharp trailing edge.' },
+    sin:  { f: (x,y) => [Math.sin(x)*Math.cosh(y), Math.cos(x)*Math.sinh(y)], zr: 2.6, wr: 4,
+            cap: 'sin z: the strip |Re z| < π/2 opens onto the whole plane. f′ = cos z = 0 at z = ±π/2.' },
+    mobius: { f: (x,y) => { const d = (x+1)*(x+1) + y*y + 1e-12;
+              return [((x-1)*(x+1) + y*y)/d, (y*(x+1) - (x-1)*y)/d]; }, zr: 3, wr: 3,
+            cap: 'A Möbius transformation: the right half-plane maps into the unit disk. Generalized circles → generalized circles.' }
+  };
+  let cur = 'z2', mouse = null;
+
+  document.getElementById('fn').onchange = e => { cur = e.target.value; draw(); };
+
+  function grid(cb, zr) {
+    // returns array of polylines {pts, dir} covering [-zr, zr]^2
+    const lines = [];
+    const n = 17, seg = 160;
+    for (let i = 0; i < n; i++) {
+      const c = -zr + 2*zr*i/(n-1);
+      const hpts = [], vpts = [];
+      for (let j = 0; j <= seg; j++) {
+        const t = -zr + 2*zr*j/seg;
+        hpts.push([t, c]); vpts.push([c, t]);
+      }
+      lines.push({ pts: hpts, dir: 'h' }, { pts: vpts, dir: 'v' });
+    }
+    return lines;
+  }
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    const m = maps[cur];
+    document.getElementById('cap').textContent = m.cap;
+    for (const [ctx2, rng, mapped] of [[zx, m.zr, false], [wx, m.wr, true]]) {
+      ctx2.fillStyle = css.getPropertyValue('--bg').trim();
+      ctx2.fillRect(0, 0, N, N);
+      const px = x => N/2 + x/rng * N/2, py = y => N/2 - y/rng * N/2;
+      // axes
+      ctx2.strokeStyle = css.getPropertyValue('--panel').trim(); ctx2.lineWidth = 1;
+      ctx2.beginPath(); ctx2.moveTo(0, N/2); ctx2.lineTo(N, N/2);
+      ctx2.moveTo(N/2, 0); ctx2.lineTo(N/2, N); ctx2.stroke();
+      // grid
+      ctx2.lineWidth = 1;
+      for (const line of grid(null, m.zr)) {
+        ctx2.strokeStyle = css.getPropertyValue(line.dir === 'h' ? '--h' : '--v').trim();
+        ctx2.globalAlpha = 0.65;
+        ctx2.beginPath();
+        let started = false;
+        for (const [x, y] of line.pts) {
+          const [u, v] = mapped ? m.f(x, y) : [x, y];
+          if (!isFinite(u) || !isFinite(v) || Math.abs(u) > rng*3 || Math.abs(v) > rng*3) { started = false; continue; }
+          const X = px(u), Y = py(v);
+          if (!started) { ctx2.moveTo(X, Y); started = true; } else ctx2.lineTo(X, Y);
+        }
+        ctx2.stroke();
+        ctx2.globalAlpha = 1;
+      }
+      // mouse marker
+      if (mouse) {
+        const [u, v] = mapped ? m.f(mouse[0], mouse[1]) : mouse;
+        if (isFinite(u) && isFinite(v)) {
+          ctx2.fillStyle = css.getPropertyValue('--dot').trim();
+          ctx2.beginPath(); ctx2.arc(px(u), py(v), 5, 0, 2*Math.PI); ctx2.fill();
+        }
+      }
+    }
+  }
+
+  zc.addEventListener('mousemove', ev => {
+    const r = zc.getBoundingClientRect(), m = maps[cur];
+    const x = ((ev.clientX - r.left)/r.width * 2 - 1) * m.zr;
+    const y = (1 - (ev.clientY - r.top)/r.height * 2) * m.zr;
+    mouse = [x, y]; draw();
+  });
+  zc.addEventListener('mouseleave', () => { mouse = null; draw(); });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

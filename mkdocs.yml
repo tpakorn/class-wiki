@@ -67,6 +67,7 @@ nav:
   - Knowledge Map: graph.md
   - SC133 · Physics I:
       - Overview: physics1/index.md
+      - Lecture Timeline: physics1/lectures.md
       - Concept Graph: physics1/concept-graph.md
       - Concepts:
           - "Acceleration": physics1/concepts/acceleration.md
@@ -164,53 +165,51 @@ nav:
       - Glossary: physics1/glossary.md
       - "Concepts": physics1/concepts.md
       - "Equations": physics1/equations.md
-  - PC368 · Plasma:
-      - Overview: plasma/index.md
-      - Concept Graph: plasma/concept-graph.md
+  - SC134 · Physics II:
+      - Overview: sc134/index.md
+      - Lecture Timeline: sc134/lectures.md
+      - Concept Graph: sc134/concept-graph.md
       - Concepts:
-          - "Adiabatic Invariant": plasma/concepts/adiabatic-invariant.md
-          - "Debye Shielding": plasma/concepts/debye-shielding.md
-          - "Drift Motions": plasma/concepts/drift-motion.md
-          - "Frozen-in Theorem": plasma/concepts/frozen-in-theorem.md
-          - "Ideal Plasma": plasma/concepts/ideal-plasma.md
-          - "Ion Acoustic Wave": plasma/concepts/ion-acoustic-wave.md
-          - "Landau Damping": plasma/concepts/landau-damping.md
-          - "Langmuir Waves": plasma/concepts/langmuir-waves.md
-          - "Larmor Radius": plasma/concepts/larmor-radius.md
-          - "Magnetic Islands": plasma/concepts/magnetic-islands.md
-          - "Magnetic Mirror": plasma/concepts/magnetic-mirror.md
-          - "Magnetic Reconnection": plasma/concepts/magnetic-reconnection.md
-          - "Magnetized Waves": plasma/concepts/magnetized-waves.md
-          - "MHD Equilibrium": plasma/concepts/mhd-equilibrium.md
-          - "MHD Instability": plasma/concepts/mhd-instability.md
-          - "Magnetohydrodynamics (MHD)": plasma/concepts/mhd.md
-          - "Plasma Frequency": plasma/concepts/plasma-frequency.md
-          - "Plasma Sheath": plasma/concepts/plasma-sheath.md
-          - "Plasma Waves": plasma/concepts/plasma-waves.md
-          - "Plasma": plasma/concepts/plasma.md
-          - "Poisson’s Equation in Plasma": plasma/concepts/poisson-equation.md
-          - "Quasi-neutrality": plasma/concepts/quasi-neutrality.md
-          - "Sound Speed": plasma/concepts/sound-speed.md
-          - "Streaming Instability": plasma/concepts/streaming-instability.md
-          - "Sweet–Parker Model": plasma/concepts/sweet-parker-model.md
-          - "Vlasov Equation": plasma/concepts/vlasov-equation.md
+          - "Ampere's Law": sc134/concepts/amperes-law.md
+          - "Biot-Savart Law": sc134/concepts/biot-savart-law.md
+          - "Capacitance": sc134/concepts/capacitance.md
+          - "Conductors, Insulators, and Semiconductors": sc134/concepts/conductors-insulators.md
+          - "Coulomb's Law": sc134/concepts/coulombs-law.md
+          - "Current, Resistance, and Resistivity": sc134/concepts/current-resistance.md
+          - "DC Circuits": sc134/concepts/dc-circuits.md
+          - "Dielectrics": sc134/concepts/dielectrics.md
+          - "Electric Charge": sc134/concepts/electric-charge.md
+          - "Electric Current": sc134/concepts/electric-current.md
+          - "Electric Dipole": sc134/concepts/electric-dipole.md
+          - "Electric Field": sc134/concepts/electric-field.md
+          - "Electric Flux": sc134/concepts/electric-flux.md
+          - "Electric Force on Charges": sc134/concepts/electric-force.md
+          - "Electric Potential": sc134/concepts/electric-potential.md
+          - "Electromagnetic Waves": sc134/concepts/electromagnetic-waves.md
+          - "Equipotential Surfaces": sc134/concepts/equipotential.md
+          - "Faraday's Law of Induction": sc134/concepts/faraday-law.md
+          - "Gauss's Law for Magnetism": sc134/concepts/gauss-law-magnetism.md
+          - "Gauss's Law": sc134/concepts/gauss-law.md
+          - "Magnetic Field and Forces": sc134/concepts/magnetic-field.md
+          - "Magnetic Flux": sc134/concepts/magnetic-flux.md
+          - "Magnetic Force": sc134/concepts/magnetic-force.md
+          - "Maxwell's Equations": sc134/concepts/maxwell-equations.md
+          - "RC Circuits": sc134/concepts/rc-circuits.md
       - Equations:
-          - "Alfvén Speed": plasma/equations/alfven-velocity.md
-          - "Cold Plasma Dispersion Tensor": plasma/equations/cold-plasma-dispersion.md
-          - "Continuity Equation": plasma/equations/continuity-equation.md
-          - "Debye Length": plasma/equations/debye-length.md
-          - "Grad–Shafranov Equation": plasma/equations/grad-shafranov.md
-          - "Induction Equation": plasma/equations/induction-equation.md
-          - "Landau Dispersion Relation": plasma/equations/landau-dispersion.md
-          - "Lundquist Number": plasma/equations/lundquist-number.md
-          - "Momentum Equation": plasma/equations/momentum-equation.md
-          - "Plasma Frequency": plasma/equations/plasma-frequency.md
-          - "Sweet–Parker Reconnection Rate": plasma/equations/sweet-parker-rate.md
-          - "Vlasov Equation": plasma/equations/vlasov-equation.md
-      - Quizzes: plasma/quizzes.md
-      - Glossary: plasma/glossary.md
+          - "Coulomb's Law": sc134/equations/coulombs-law-eq.md
+          - "Electric Field Definition": sc134/equations/electric-field-eq.md
+          - "Electric Potential": sc134/equations/electric-potential-eq.md
+          - "Faraday's Law": sc134/equations/faraday-law-eq.md
+          - "Gauss's Law": sc134/equations/gauss-law-eq.md
+      - Simulations:
+          - "Overview": sc134/simulations/index.md
+          - "E&M Field Explorer": sc134/simulations/em-field-explorer.md
+          - "RC / RLC Circuit Lab": sc134/simulations/rc-rlc-lab.md
+      - Quizzes: sc134/quizzes.md
+      - Glossary: sc134/glossary.md
   - PC316 · Fluids:
       - Overview: fluids/index.md
+      - Lecture Timeline: fluids/lectures.md
       - Concept Graph: fluids/concept-graph.md
       - Concepts:
           - "Bernoulli's Principle": fluids/concepts/bernoulli-principle.md
@@ -260,8 +259,124 @@ nav:
           - "Potential-Flow Builder": fluids/simulations/potential-flow-builder.md
       - Quizzes: fluids/quizzes.md
       - Glossary: fluids/glossary.md
+  - PC368 · Plasma:
+      - Overview: plasma/index.md
+      - Lecture Timeline: plasma/lectures.md
+      - Concept Graph: plasma/concept-graph.md
+      - Concepts:
+          - "Adiabatic Invariant": plasma/concepts/adiabatic-invariant.md
+          - "Debye Shielding": plasma/concepts/debye-shielding.md
+          - "Drift Motions": plasma/concepts/drift-motion.md
+          - "Frozen-in Theorem": plasma/concepts/frozen-in-theorem.md
+          - "Ideal Plasma": plasma/concepts/ideal-plasma.md
+          - "Ion Acoustic Wave": plasma/concepts/ion-acoustic-wave.md
+          - "Landau Damping": plasma/concepts/landau-damping.md
+          - "Langmuir Waves": plasma/concepts/langmuir-waves.md
+          - "Larmor Radius": plasma/concepts/larmor-radius.md
+          - "Magnetic Islands": plasma/concepts/magnetic-islands.md
+          - "Magnetic Mirror": plasma/concepts/magnetic-mirror.md
+          - "Magnetic Reconnection": plasma/concepts/magnetic-reconnection.md
+          - "Magnetized Waves": plasma/concepts/magnetized-waves.md
+          - "MHD Equilibrium": plasma/concepts/mhd-equilibrium.md
+          - "MHD Instability": plasma/concepts/mhd-instability.md
+          - "Magnetohydrodynamics (MHD)": plasma/concepts/mhd.md
+          - "Plasma Frequency": plasma/concepts/plasma-frequency.md
+          - "Plasma Sheath": plasma/concepts/plasma-sheath.md
+          - "Plasma Waves": plasma/concepts/plasma-waves.md
+          - "Plasma": plasma/concepts/plasma.md
+          - "Poisson’s Equation in Plasma": plasma/concepts/poisson-equation.md
+          - "Quasi-neutrality": plasma/concepts/quasi-neutrality.md
+          - "Sound Speed": plasma/concepts/sound-speed.md
+          - "Streaming Instability": plasma/concepts/streaming-instability.md
+          - "Sweet–Parker Model": plasma/concepts/sweet-parker-model.md
+          - "Vlasov Equation": plasma/concepts/vlasov-equation.md
+      - Equations:
+          - "Alfvén Speed": plasma/equations/alfven-velocity.md
+          - "Cold Plasma Dispersion Tensor": plasma/equations/cold-plasma-dispersion.md
+          - "Continuity Equation": plasma/equations/continuity-equation.md
+          - "Debye Length": plasma/equations/debye-length.md
+          - "Grad–Shafranov Equation": plasma/equations/grad-shafranov.md
+          - "Induction Equation": plasma/equations/induction-equation.md
+          - "Landau Dispersion Relation": plasma/equations/landau-dispersion.md
+          - "Lundquist Number": plasma/equations/lundquist-number.md
+          - "Momentum Equation": plasma/equations/momentum-equation.md
+          - "Plasma Frequency": plasma/equations/plasma-frequency.md
+          - "Sweet–Parker Reconnection Rate": plasma/equations/sweet-parker-rate.md
+          - "Vlasov Equation": plasma/equations/vlasov-equation.md
+      - Quizzes: plasma/quizzes.md
+      - Glossary: plasma/glossary.md
+  - PHY621 · Math I:
+      - Overview: phy621/index.md
+      - Lecture Timeline: phy621/lectures.md
+      - Concept Graph: phy621/concept-graph.md
+      - Concepts:
+          - "Convolution": phy621/concepts/convolution.md
+          - "Coordinate Systems": phy621/concepts/coordinate-systems.md
+          - "Diagonalization": phy621/concepts/diagonalization.md
+          - "Divergence Theorem": phy621/concepts/divergence-theorem.md
+          - "Eigenvalues and Eigenvectors": phy621/concepts/eigenvalues-eigenvectors.md
+          - "Fourier Series": phy621/concepts/fourier-series.md
+          - "Fourier Transform": phy621/concepts/fourier-transform.md
+          - "Gradient, Divergence, and Curl": phy621/concepts/gradient-divergence-curl.md
+          - "Green's Functions": phy621/concepts/greens-functions.md
+          - "Hermitian Matrices": phy621/concepts/hermitian-matrices.md
+          - "Laplace Transform": phy621/concepts/laplace-transform.md
+          - "Matrices and Determinants": phy621/concepts/matrices-determinants.md
+          - "Ordinary Differential Equations": phy621/concepts/ordinary-differential-equations.md
+          - "Orthogonal Transformations": phy621/concepts/orthogonal-transformations.md
+          - "Partial Differential Equations": phy621/concepts/partial-differential-equations.md
+          - "Special Functions": phy621/concepts/special-functions.md
+          - "Stokes' Theorem": phy621/concepts/stokes-theorem.md
+          - "Vector Operations": phy621/concepts/vector-operations.md
+          - "Vector Triple Product": phy621/concepts/vector-triple-product.md
+      - Equations:
+          - "Characteristic Equation": phy621/equations/characteristic-equation.md
+          - "Fourier Integral Transform": phy621/equations/fourier-integral.md
+          - "Green's Function (ODE Form)": phy621/equations/greens-ode.md
+          - "Laplace Transform": phy621/equations/laplace-integral.md
+          - "Vector Calculus Operators": phy621/equations/vector-calculus-operators.md
+      - Simulations:
+          - "Overview": phy621/simulations/index.md
+          - "Fourier Series Builder": phy621/simulations/fourier-builder.md
+      - Quizzes: phy621/quizzes.md
+      - Glossary: phy621/glossary.md
+  - PHY622 · Math II:
+      - Overview: phy622/index.md
+      - Lecture Timeline: phy622/lectures.md
+      - Concept Graph: phy622/concept-graph.md
+      - Concepts:
+          - "Analytic Functions": phy622/concepts/analytic-functions.md
+          - "Calculus of Variations": phy622/concepts/calculus-of-variations.md
+          - "Cauchy's Integral Formula": phy622/concepts/cauchy-integral-formula.md
+          - "Cauchy-Riemann Equations": phy622/concepts/cauchy-riemann.md
+          - "Cauchy's Theorem": phy622/concepts/cauchy-theorem.md
+          - "Complex Numbers and Functions": phy622/concepts/complex-numbers.md
+          - "Conformal Mapping": phy622/concepts/conformal-mapping.md
+          - "Contour Integration": phy622/concepts/contour-integration.md
+          - "Euler-Lagrange Equation": phy622/concepts/euler-lagrange-equation.md
+          - "Geodesics": phy622/concepts/geodesics.md
+          - "Group Representations": phy622/concepts/group-representations.md
+          - "Hamilton's Principle": phy622/concepts/hamilton-principle.md
+          - "Lagrange Multipliers (Variational)": phy622/concepts/lagrange-multipliers.md
+          - "Lie Groups": phy622/concepts/lie-groups.md
+          - "Minimal Surfaces": phy622/concepts/minimal-surfaces.md
+          - "Residue Theorem": phy622/concepts/residue-theorem.md
+          - "SU(2) and SO(3)": phy622/concepts/su2-so3.md
+          - "Symmetry Groups": phy622/concepts/symmetry-groups.md
+      - Equations:
+          - "Cauchy-Riemann Equations": phy622/equations/cauchy-riemann-eq.md
+          - "Euler-Lagrange Equation": phy622/equations/euler-lagrange-eq.md
+          - "Geodesic Equation": phy622/equations/geodesic-curvature.md
+          - "Lie Bracket": phy622/equations/lie-bracket.md
+          - "Residue Formula": phy622/equations/residue-formula.md
+      - Simulations:
+          - "Overview": phy622/simulations/index.md
+          - "Conformal Map Explorer": phy622/simulations/conformal-explorer.md
+      - Quizzes: phy622/quizzes.md
+      - Glossary: phy622/glossary.md
   - PHY653 · Computational:
       - Overview: comp-plasma/index.md
+      - Lecture Timeline: comp-plasma/lectures.md
       - Concept Graph: comp-plasma/concept-graph.md
       - Concepts:
           - "Backward Euler Method": comp-plasma/concepts/backward-euler.md

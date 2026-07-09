@@ -1,6 +1,6 @@
 # Plasma Frequency
 
-*Source lecture:* pc368_lec03_frequency
+*Source lecture(s):* [pc368_lec03_frequency](../lectures.md)
 
 ## Intuition
 

@@ -2,7 +2,7 @@
 
 $$\rho \frac{D\mathbf{U}}{Dt} = -\nabla p + \mathbf{J}\times\mathbf{B} + \mu \nabla^2\mathbf{U}$$
 
-*Source lecture:* pc368_lec05_mhd
+*Source lecture(s):* [pc368_lec05_mhd](../lectures.md)
 
 ## Physical Meaning
 

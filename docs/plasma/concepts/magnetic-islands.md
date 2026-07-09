@@ -1,6 +1,6 @@
 # Magnetic Islands
 
-*Source lecture:* pc368_lec16_reconnection
+*Source lecture(s):* [pc368_lec16_reconnection](../lectures.md)
 
 ## Intuition
 

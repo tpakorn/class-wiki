@@ -37,11 +37,11 @@ flowchart TD
     POIS --> PIC
     PIC --> TWOSTREAM["Two-stream instability"]
 
-    classDef found fill:#e8f4f8,stroke:#4a90a4
-    classDef integ fill:#fdf2e0,stroke:#c8963e
-    classDef orbit fill:#efe8f8,stroke:#8464a4
-    classDef field fill:#e8f8ec,stroke:#54a06a
-    classDef many fill:#fde8e8,stroke:#c85454
+    classDef found stroke:#4a90a4,stroke-width:2.5px
+    classDef integ stroke:#c8963e,stroke-width:2.5px
+    classDef orbit stroke:#8464a4,stroke-width:2.5px
+    classDef field stroke:#54a06a,stroke-width:2.5px
+    classDef many stroke:#c85454,stroke-width:2.5px
     class WHY,LORENTZ,CYC found
     class ODE,FE,BE,LF,RK,CONV integ
     class GC,EXB,GBC,MIRROR,FERMI orbit

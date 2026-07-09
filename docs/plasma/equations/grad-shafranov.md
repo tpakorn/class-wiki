@@ -2,7 +2,7 @@
 
 $$\Delta^* \psi + \mu_0 R^2 \frac{dp}{d\psi} + F \frac{dF}{d\psi} = 0$$
 
-*Source lecture:* pc368_lec14_mhd_equilibrium
+*Source lecture(s):* [pc368_lec14_mhd_equilibrium](../lectures.md)
 
 ## Physical Meaning
 

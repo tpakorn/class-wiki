@@ -1,6 +1,6 @@
 # Magnetohydrodynamics (MHD)
 
-*Source lectures:* pc368_lec05_mhd
+*Source lecture(s):* [pc368_lec05_mhd](../lectures.md)
 
 ## Intuition
 

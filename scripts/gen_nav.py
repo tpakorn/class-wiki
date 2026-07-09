@@ -16,14 +16,18 @@ DOCS = ROOT / "docs"
 
 COURSES = [
     ("physics1", "SC133 · Physics I"),
-    ("plasma", "PC368 · Plasma"),
+    ("sc134", "SC134 · Physics II"),
     ("fluids", "PC316 · Fluids"),
+    ("plasma", "PC368 · Plasma"),
+    ("phy621", "PHY621 · Math I"),
+    ("phy622", "PHY622 · Math II"),
     ("comp-plasma", "PHY653 · Computational"),
 ]
 
 # per-course ordered sections: (subdir or file, label)
 SECTIONS = [
     ("index.md", "Overview"),
+    ("lectures.md", "Lecture Timeline"),
     ("concept-graph.md", "Concept Graph"),
     ("concepts", "Concepts"),
     ("equations", "Equations"),

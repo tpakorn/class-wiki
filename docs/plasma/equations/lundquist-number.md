@@ -2,7 +2,7 @@
 
 $$S = \frac{\mu_0 v_A L}{\eta}$$
 
-*Source lecture:* pc368_lec17_sweetparker
+*Source lecture(s):* [pc368_lec17_sweetparker](../lectures.md)
 
 ## Physical Meaning
 

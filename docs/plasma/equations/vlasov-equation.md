@@ -3,7 +3,7 @@
 $$\frac{\partial f}{\partial t} + \mathbf{v}\cdot\frac{\partial f}{\partial \mathbf{r}}
 + \frac{q}{m}\bigl(\mathbf{E} + \mathbf{v}\times\mathbf{B}\bigr)\cdot\frac{\partial f}{\partial \mathbf{v}} = 0$$
 
-*Source lecture:* pc368_lec04_vlasov
+*Source lecture(s):* [pc368_lec04_vlasov](../lectures.md)
 
 ## Physical Meaning
 

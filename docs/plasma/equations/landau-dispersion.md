@@ -2,7 +2,7 @@
 
 $$1 + \frac{1}{k^2 \lambda_D^2} \Bigl[ 1 + \zeta Z(\zeta) \Bigr] = 0$$
 
-*Source lecture:* pc368_lec12_landau_damping
+*Source lecture(s):* [pc368_lec12_landau_damping](../lectures.md)
 
 ## Physical Meaning
 

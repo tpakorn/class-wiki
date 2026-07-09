@@ -1,6 +1,6 @@
 # Magnetized Waves
 
-*Source lecture:* pc368_lec13_magnetized_wave
+*Source lecture(s):* [pc368_lec13_magnetized_wave](../lectures.md)
 
 ## Intuition
 

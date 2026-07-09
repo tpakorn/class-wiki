@@ -1,6 +1,6 @@
 # MHD Instability
 
-*Source lecture:* pc368_lec15_dynamics_instability
+*Source lecture(s):* [pc368_lec15_dynamics_instability](../lectures.md)
 
 ## Intuition
 

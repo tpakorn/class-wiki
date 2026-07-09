@@ -2,7 +2,7 @@
 
 $$\mathbf{n}\times(\mathbf{n}\times\mathbf{E}) + \mathbf{K}\cdot\mathbf{E} = 0$$
 
-*Source lecture:* pc368_lec13_magnetized_wave
+*Source lecture(s):* [pc368_lec13_magnetized_wave](../lectures.md)
 
 ## Physical Meaning
 

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RC / RLC Circuit Lab</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --c1:#c0392b; --c2:#2471a3; --c3:#1e8449; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --c1:#e74c3c; --c2:#5dade2; --c3:#58d68d; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; min-width:130px; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; font-variant-numeric:tabular-nums; }
+  input[type=range] { width:130px; accent-color:var(--c1); }
+  .tabs { display:flex; gap:6px; padding-bottom:6px; }
+  .tabs button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+                 border-radius:4px; padding:4px 12px; font-size:12px; cursor:pointer; }
+  .tabs button.on { border-color:var(--c1); color:var(--c1); font-weight:600; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tabs">
+    <button id="tabRC" class="on">RC charging</button>
+    <button id="tabRLC">RLC resonance</button>
+  </div>
+  <div class="row" id="rowRC">
+    <div class="ctl"><label>R (kΩ)</label>
+      <input type="range" id="R1" min="0.5" max="20" step="0.5" value="5"><output id="oR1">5.0 kΩ</output></div>
+    <div class="ctl"><label>C (µF)</label>
+      <input type="range" id="C1" min="0.5" max="20" step="0.5" value="2"><output id="oC1">2.0 µF</output></div>
+    <div class="ctl"><label></label><output id="tau" style="color:var(--c1);font-weight:600"></output></div>
+  </div>
+  <div class="row" id="rowRLC" style="display:none">
+    <div class="ctl"><label>R (Ω)</label>
+      <input type="range" id="R2" min="5" max="200" step="5" value="30"><output id="oR2">30 Ω</output></div>
+    <div class="ctl"><label>L (mH)</label>
+      <input type="range" id="L2" min="10" max="500" step="10" value="100"><output id="oL2">100 mH</output></div>
+    <div class="ctl"><label>C (µF)</label>
+      <input type="range" id="C2" min="1" max="50" step="1" value="10"><output id="oC2">10 µF</output></div>
+    <div class="ctl"><label></label><output id="f0" style="color:var(--c1);font-weight:600"></output></div>
+  </div>
+  <canvas id="cv" width="760" height="430"></canvas>
+  <p class="note" id="cap"></p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, ML = 55, MB = 35, MT = 15, MR = 15;
+  let mode = 'RC';
+  const S = { R1: 5, C1: 2, R2: 30, L2: 100, C2: 10 };
+  const fmt = { R1: v => v.toFixed(1) + ' kΩ', C1: v => v.toFixed(1) + ' µF',
+                R2: v => v + ' Ω', L2: v => v + ' mH', C2: v => v + ' µF' };
+  for (const id of Object.keys(S)) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById('o' + id).value = fmt[id](S[id]); draw(); });
+  }
+  document.getElementById('tabRC').onclick = () => setMode('RC');
+  document.getElementById('tabRLC').onclick = () => setMode('RLC');
+  function setMode(m) {
+    mode = m;
+    document.getElementById('tabRC').classList.toggle('on', m === 'RC');
+    document.getElementById('tabRLC').classList.toggle('on', m === 'RLC');
+    document.getElementById('rowRC').style.display = m === 'RC' ? 'flex' : 'none';
+    document.getElementById('rowRLC').style.display = m === 'RLC' ? 'flex' : 'none';
+    draw();
+  }
+
+  function axes(css, xlab, ylab) {
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim();
+    ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(ML, MT); ctx.lineTo(ML, H - MB); ctx.lineTo(W - MR, H - MB); ctx.stroke();
+    ctx.fillStyle = css.getPropertyValue('--muted').trim();
+    ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(xlab, (ML + W - MR)/2, H - 8);
+    ctx.save(); ctx.translate(14, (MT + H - MB)/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText(ylab, 0, 0); ctx.restore();
+  }
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim();
+    ctx.fillRect(0, 0, W, H);
+    if (mode === 'RC') drawRC(css); else drawRLC(css);
+  }
+
+  function drawRC(css) {
+    const tau = S.R1 * 1e3 * S.C1 * 1e-6;   // seconds
+    document.getElementById('tau').value = 'τ = RC = ' + (tau*1e3).toFixed(1) + ' ms';
+    const tmax = 5 * 0.1;  // fixed 500 ms window so τ changes are visible
+    axes(css, 'time (ms)', 'V_C / ε');
+    const px = t => ML + t/tmax * (W - ML - MR);
+    const py = v => H - MB - v * (H - MT - MB);
+    // gridline at 63%
+    ctx.setLineDash([4,4]); ctx.strokeStyle = css.getPropertyValue('--muted').trim();
+    ctx.beginPath(); ctx.moveTo(ML, py(0.632)); ctx.lineTo(W - MR, py(0.632)); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText('63%', ML + 20, py(0.632) - 5);
+    // charging curve
+    ctx.strokeStyle = css.getPropertyValue('--c1').trim(); ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= 400; i++) {
+      const t = tmax * i/400, v = 1 - Math.exp(-t/tau);
+      i ? ctx.lineTo(px(t), py(v)) : ctx.moveTo(px(t), py(v));
+    }
+    ctx.stroke();
+    // discharging curve
+    ctx.strokeStyle = css.getPropertyValue('--c2').trim();
+    ctx.beginPath();
+    for (let i = 0; i <= 400; i++) {
+      const t = tmax * i/400, v = Math.exp(-t/tau);
+      i ? ctx.lineTo(px(t), py(v)) : ctx.moveTo(px(t), py(v));
+    }
+    ctx.stroke();
+    // tau marker
+    if (tau < tmax) {
+      ctx.setLineDash([2,3]); ctx.strokeStyle = css.getPropertyValue('--c1').trim();
+      ctx.beginPath(); ctx.moveTo(px(tau), H - MB); ctx.lineTo(px(tau), py(0.632)); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = css.getPropertyValue('--c1').trim();
+      ctx.fillText('τ', px(tau), H - MB - 6);
+    }
+    // x labels
+    ctx.fillStyle = css.getPropertyValue('--muted').trim();
+    for (let m = 0; m <= 500; m += 100) ctx.fillText(m, px(m/1000), H - MB + 14);
+    document.getElementById('cap').innerHTML =
+      '<b style="color:var(--c1)">Charging</b> V<sub>C</sub> = ε(1−e<sup>−t/RC</sup>) and ' +
+      '<b style="color:var(--c2)">discharging</b> V<sub>C</sub> = εe<sup>−t/RC</sup>. ' +
+      'At t = τ the capacitor reaches 63% — five τ is "fully" charged. Double R or C and watch τ stretch.';
+  }
+
+  function drawRLC(css) {
+    const R = S.R2, L = S.L2*1e-3, C = S.C2*1e-6;
+    const w0 = 1/Math.sqrt(L*C), f0 = w0/(2*Math.PI);
+    const Q = w0*L/R;
+    document.getElementById('f0').value = 'f₀ = ' + f0.toFixed(0) + ' Hz · Q = ' + Q.toFixed(1);
+    axes(css, 'frequency (Hz)', 'I / I_max');
+    const fmax = 2.2 * 160;  // fixed axis ~350 Hz
+    const px = f => ML + f/fmax * (W - ML - MR);
+    const py = v => H - MB - v * (H - MT - MB);
+    // amplitude curve: I ∝ 1/|Z|, normalized by 1/R
+    ctx.strokeStyle = css.getPropertyValue('--c3').trim(); ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 1; i <= 500; i++) {
+      const f = fmax * i/500, w = 2*Math.PI*f;
+      const Z = Math.hypot(R, w*L - 1/(w*C));
+      const v = R / Z;   // = I/I_max
+      i > 1 ? ctx.lineTo(px(f), py(v)) : ctx.moveTo(px(f), py(v));
+    }
+    ctx.stroke();
+    // resonance marker
+    if (f0 < fmax) {
+      ctx.setLineDash([2,3]); ctx.strokeStyle = css.getPropertyValue('--c1').trim();
+      ctx.beginPath(); ctx.moveTo(px(f0), H - MB); ctx.lineTo(px(f0), py(1)); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = css.getPropertyValue('--c1').trim();
+      ctx.textAlign = 'center';
+      ctx.fillText('f₀ = 1/2π√LC', px(f0), py(1) - 5);
+    }
+    ctx.fillStyle = css.getPropertyValue('--muted').trim();
+    for (let f = 0; f <= fmax; f += 50) ctx.fillText(f, px(f), H - MB + 14);
+    document.getElementById('cap').innerHTML =
+      'Series RLC driven at frequency f: current amplitude I = ε/|Z| with ' +
+      'Z² = R² + (ωL − 1/ωC)². At resonance the reactances cancel and only R limits the ' +
+      'current. Lower R → taller, sharper peak (higher Q). This curve is your radio tuner.';
+  }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

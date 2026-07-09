@@ -1,6 +1,6 @@
 # Magnetic Mirror
 
-*Source lecture:* pc368_lec08_adiabatic_invariant
+*Source lecture(s):* [pc368_lec08_adiabatic_invariant](../lectures.md)
 
 ## Intuition
 

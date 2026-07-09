@@ -1,6 +1,6 @@
 # Quasi-neutrality
 
-*Source lecture:* pc368_lec02_debye
+*Source lecture(s):* [pc368_lec02_debye](../lectures.md)
 
 ## Intuition
 

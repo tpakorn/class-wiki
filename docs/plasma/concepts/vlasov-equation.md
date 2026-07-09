@@ -1,6 +1,6 @@
 # Vlasov Equation
 
-*Source lectures:* pc368_lec04_vlasov, pc368_lec12_landau_damping
+*Source lecture(s):* [pc368_lec04_vlasov, pc368_lec12_landau_damping](../lectures.md)
 
 ## Intuition
 

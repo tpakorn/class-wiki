@@ -133,9 +133,27 @@
 .cw-card p { font-size: 0.66rem; margin: 0 0 0.4rem; color: var(--md-default-fg-color--light); }
 .cw-card .cw-meta { font-size: 0.58rem; color: var(--md-default-fg-color--light); }
 
-/* mermaid: nodes use light pastel fills — keep label text dark in both schemes */
-.md-typeset .mermaid .nodeLabel,
-.md-typeset .mermaid .nodeLabel p { color: #1f2328 !important; }
+/* ── mermaid: readable in BOTH color schemes ──────────────────
+   Material renders mermaid in a shadow DOM, so ordinary CSS can't
+   reach it. Styling goes through Material's --md-mermaid-* theme
+   variables (read at render time). Diagrams that use pastel
+   classDef fills also set  color:#1f2328  inside the classDef so
+   their label text stays dark regardless of scheme. */
+
+[data-md-color-scheme="default"] {
+  --md-mermaid-node-bg-color: #edeae3;
+  --md-mermaid-node-fg-color: #8a8a92;
+  --md-mermaid-label-fg-color: #1f2328;
+  --md-mermaid-label-bg-color: #fdfcfa;
+  --md-mermaid-edge-color: #8a8a92;
+}
+[data-md-color-scheme="slate"] {
+  --md-mermaid-node-bg-color: #262a31;
+  --md-mermaid-node-fg-color: #9a9aa2;
+  --md-mermaid-label-fg-color: #e2e0db;
+  --md-mermaid-label-bg-color: #16181d;
+  --md-mermaid-edge-color: #9a9aa2;
+}
 
 /* footer minimal */
 .md-footer-meta { background: var(--md-primary-fg-color); }

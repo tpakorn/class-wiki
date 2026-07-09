@@ -1,6 +1,6 @@
 # Plasma
 
-*Source lectures:* pc368_lec01_intro
+*Source lecture(s):* [pc368_lec01_intro](../lectures.md)
 
 ## Intuition
 

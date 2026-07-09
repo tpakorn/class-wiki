@@ -1,6 +1,6 @@
 # Langmuir Waves
 
-*Source lecture:* pc368_lec09_wave1, pc368_lec10_wave2
+*Source lecture(s):* [pc368_lec09_wave1, pc368_lec10_wave2](../lectures.md)
 
 ## Intuition
 

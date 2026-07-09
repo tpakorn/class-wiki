@@ -2,7 +2,7 @@
 
 $$v_A = \frac{B}{\sqrt{\mu_0 \rho}}$$
 
-*Source lecture:* pc368_lec05_mhd, pc368_lec17_sweetparker
+*Source lecture(s):* [pc368_lec05_mhd, pc368_lec17_sweetparker](../lectures.md)
 
 ## Physical Meaning
 

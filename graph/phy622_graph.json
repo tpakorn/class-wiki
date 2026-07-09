@@ -1,0 +1,154 @@
+{
+  "nodes": [
+    {
+      "id": "calculus-of-variations",
+      "label": "Calculus of Variations"
+    },
+    {
+      "id": "euler-lagrange-equation",
+      "label": "Euler-Lagrange Equation"
+    },
+    {
+      "id": "lagrange-multipliers",
+      "label": "Lagrange Multipliers (Variational)"
+    },
+    {
+      "id": "geodesics",
+      "label": "Geodesics"
+    },
+    {
+      "id": "minimal-surfaces",
+      "label": "Minimal Surfaces"
+    },
+    {
+      "id": "hamilton-principle",
+      "label": "Hamilton's Principle"
+    },
+    {
+      "id": "complex-numbers",
+      "label": "Complex Numbers and Functions"
+    },
+    {
+      "id": "analytic-functions",
+      "label": "Analytic Functions"
+    },
+    {
+      "id": "cauchy-riemann",
+      "label": "Cauchy-Riemann Equations"
+    },
+    {
+      "id": "cauchy-theorem",
+      "label": "Cauchy's Theorem"
+    },
+    {
+      "id": "cauchy-integral-formula",
+      "label": "Cauchy's Integral Formula"
+    },
+    {
+      "id": "residue-theorem",
+      "label": "Residue Theorem"
+    },
+    {
+      "id": "contour-integration",
+      "label": "Contour Integration"
+    },
+    {
+      "id": "conformal-mapping",
+      "label": "Conformal Mapping"
+    },
+    {
+      "id": "symmetry-groups",
+      "label": "Symmetry Groups"
+    },
+    {
+      "id": "group-representations",
+      "label": "Group Representations"
+    },
+    {
+      "id": "lie-groups",
+      "label": "Lie Groups"
+    },
+    {
+      "id": "su2-so3",
+      "label": "SU(2) and SO(3)"
+    }
+  ],
+  "edges": [
+    {
+      "source": "calculus-of-variations",
+      "target": "euler-lagrange-equation"
+    },
+    {
+      "source": "calculus-of-variations",
+      "target": "lagrange-multipliers"
+    },
+    {
+      "source": "lagrange-multipliers",
+      "target": "geodesics"
+    },
+    {
+      "source": "lagrange-multipliers",
+      "target": "minimal-surfaces"
+    },
+    {
+      "source": "euler-lagrange-equation",
+      "target": "hamilton-principle"
+    },
+    {
+      "source": "hamilton-principle",
+      "target": "euler-lagrange-equation"
+    },
+    {
+      "source": "geodesics",
+      "target": "euler-lagrange-equation"
+    },
+    {
+      "source": "complex-numbers",
+      "target": "analytic-functions"
+    },
+    {
+      "source": "analytic-functions",
+      "target": "cauchy-riemann"
+    },
+    {
+      "source": "cauchy-riemann",
+      "target": "cauchy-theorem"
+    },
+    {
+      "source": "cauchy-theorem",
+      "target": "cauchy-integral-formula"
+    },
+    {
+      "source": "cauchy-integral-formula",
+      "target": "residue-theorem"
+    },
+    {
+      "source": "residue-theorem",
+      "target": "contour-integration"
+    },
+    {
+      "source": "analytic-functions",
+      "target": "conformal-mapping"
+    },
+    {
+      "source": "symmetry-groups",
+      "target": "group-representations"
+    },
+    {
+      "source": "group-representations",
+      "target": "lie-groups"
+    },
+    {
+      "source": "lie-groups",
+      "target": "su2-so3"
+    },
+    {
+      "source": "symmetry-groups",
+      "target": "su2-so3"
+    },
+    {
+      "source": "group-representations",
+      "target": "su2-so3"
+    }
+  ]
+}

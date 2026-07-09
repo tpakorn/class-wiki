@@ -60,10 +60,10 @@ flowchart TD
     RANS --> TKE["TKE budget"]
     CASC --> TKE
 
-    classDef statics fill:#e8f4f8,stroke:#4a90a4
-    classDef kinematics fill:#fdf2e0,stroke:#c8963e
-    classDef dynamics fill:#efe8f8,stroke:#8464a4
-    classDef advanced fill:#fde8e8,stroke:#c85454
+    classDef statics stroke:#4a90a4,stroke-width:2.5px
+    classDef kinematics stroke:#c8963e,stroke-width:2.5px
+    classDef dynamics stroke:#8464a4,stroke-width:2.5px
+    classDef advanced stroke:#c85454,stroke-width:2.5px
     class FLUID,PRESS,HYDRO,BUOY,FSURF,RBM statics
     class EULAG,MATD,RTT,CONT kinematics
     class EULER,BERN,POT,CONF,VISC,NS,EXACT dynamics

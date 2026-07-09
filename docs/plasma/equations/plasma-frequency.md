@@ -2,7 +2,7 @@
 
 $$\omega_{pe} = \sqrt{\frac{n_e e^2}{m_e \varepsilon_0}}$$
 
-*Source lecture:* pc368_lec03_frequency, pc368_lec01_intro
+*Source lecture(s):* [pc368_lec03_frequency, pc368_lec01_intro](../lectures.md)
 
 ## Physical Meaning
 

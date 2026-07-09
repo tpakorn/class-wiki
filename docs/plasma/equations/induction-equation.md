@@ -2,7 +2,7 @@
 
 $$\frac{\partial \mathbf{B}}{\partial t} = \nabla\times(\mathbf{U}\times\mathbf{B}) + \eta \nabla^2\mathbf{B}$$
 
-*Source lecture:* pc368_lec05_mhd
+*Source lecture(s):* [pc368_lec05_mhd](../lectures.md)
 
 ## Physical Meaning
 

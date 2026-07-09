@@ -411,6 +411,246 @@
    "page": "physics1/concepts/work.md"
   },
   {
+   "id": "amperes-law",
+   "course": "sc134",
+   "page": "sc134/concepts/amperes-law.md"
+  },
+  {
+   "id": "biot-savart-law",
+   "course": "sc134",
+   "page": "sc134/concepts/biot-savart-law.md"
+  },
+  {
+   "id": "capacitance",
+   "course": "sc134",
+   "page": "sc134/concepts/capacitance.md"
+  },
+  {
+   "id": "conductors-insulators",
+   "course": "sc134",
+   "page": "sc134/concepts/conductors-insulators.md"
+  },
+  {
+   "id": "coulombs-law",
+   "course": "sc134",
+   "page": "sc134/concepts/coulombs-law.md"
+  },
+  {
+   "id": "current-resistance",
+   "course": "sc134",
+   "page": "sc134/concepts/current-resistance.md"
+  },
+  {
+   "id": "dc-circuits",
+   "course": "sc134",
+   "page": "sc134/concepts/dc-circuits.md"
+  },
+  {
+   "id": "dielectrics",
+   "course": "sc134",
+   "page": "sc134/concepts/dielectrics.md"
+  },
+  {
+   "id": "electric-charge",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-charge.md"
+  },
+  {
+   "id": "electric-current",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-current.md"
+  },
+  {
+   "id": "electric-dipole",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-dipole.md"
+  },
+  {
+   "id": "electric-field",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-field.md"
+  },
+  {
+   "id": "electric-flux",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-flux.md"
+  },
+  {
+   "id": "electric-force",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-force.md"
+  },
+  {
+   "id": "electric-potential",
+   "course": "sc134",
+   "page": "sc134/concepts/electric-potential.md"
+  },
+  {
+   "id": "electromagnetic-waves",
+   "course": "sc134",
+   "page": "sc134/concepts/electromagnetic-waves.md"
+  },
+  {
+   "id": "equipotential",
+   "course": "sc134",
+   "page": "sc134/concepts/equipotential.md"
+  },
+  {
+   "id": "faraday-law",
+   "course": "sc134",
+   "page": "sc134/concepts/faraday-law.md"
+  },
+  {
+   "id": "gauss-law-magnetism",
+   "course": "sc134",
+   "page": "sc134/concepts/gauss-law-magnetism.md"
+  },
+  {
+   "id": "gauss-law",
+   "course": "sc134",
+   "page": "sc134/concepts/gauss-law.md"
+  },
+  {
+   "id": "magnetic-field",
+   "course": "sc134",
+   "page": "sc134/concepts/magnetic-field.md"
+  },
+  {
+   "id": "magnetic-flux",
+   "course": "sc134",
+   "page": "sc134/concepts/magnetic-flux.md"
+  },
+  {
+   "id": "magnetic-force",
+   "course": "sc134",
+   "page": "sc134/concepts/magnetic-force.md"
+  },
+  {
+   "id": "maxwell-equations",
+   "course": "sc134",
+   "page": "sc134/concepts/maxwell-equations.md"
+  },
+  {
+   "id": "rc-circuits",
+   "course": "sc134",
+   "page": "sc134/concepts/rc-circuits.md"
+  },
+  {
+   "id": "bernoulli-principle",
+   "course": "fluids",
+   "page": "fluids/concepts/bernoulli-principle.md"
+  },
+  {
+   "id": "buckingham-pi-theorem",
+   "course": "fluids",
+   "page": "fluids/concepts/buckingham-pi-theorem.md"
+  },
+  {
+   "id": "buoyancy",
+   "course": "fluids",
+   "page": "fluids/concepts/buoyancy.md"
+  },
+  {
+   "id": "conformal-mapping-and-images",
+   "course": "fluids",
+   "page": "fluids/concepts/conformal-mapping-and-images.md"
+  },
+  {
+   "id": "dimensional-analysis",
+   "course": "fluids",
+   "page": "fluids/concepts/dimensional-analysis.md"
+  },
+  {
+   "id": "energy-cascade",
+   "course": "fluids",
+   "page": "fluids/concepts/energy-cascade.md"
+  },
+  {
+   "id": "eulerian-vs-lagrangian",
+   "course": "fluids",
+   "page": "fluids/concepts/eulerian-vs-lagrangian.md"
+  },
+  {
+   "id": "fluid-in-rigid-body-motion",
+   "course": "fluids",
+   "page": "fluids/concepts/fluid-in-rigid-body-motion.md"
+  },
+  {
+   "id": "hydrodynamic-stability",
+   "course": "fluids",
+   "page": "fluids/concepts/hydrodynamic-stability.md"
+  },
+  {
+   "id": "hydrostatic-equilibrium",
+   "course": "fluids",
+   "page": "fluids/concepts/hydrostatic-equilibrium.md"
+  },
+  {
+   "id": "hydrostatic-force-on-surfaces",
+   "course": "fluids",
+   "page": "fluids/concepts/hydrostatic-force-on-surfaces.md"
+  },
+  {
+   "id": "kelvin-helmholtz-instability",
+   "course": "fluids",
+   "page": "fluids/concepts/kelvin-helmholtz-instability.md"
+  },
+  {
+   "id": "material-derivative",
+   "course": "fluids",
+   "page": "fluids/concepts/material-derivative.md"
+  },
+  {
+   "id": "potential-flow",
+   "course": "fluids",
+   "page": "fluids/concepts/potential-flow.md"
+  },
+  {
+   "id": "pressure",
+   "course": "fluids",
+   "page": "fluids/concepts/pressure.md"
+  },
+  {
+   "id": "rayleigh-taylor-instability",
+   "course": "fluids",
+   "page": "fluids/concepts/rayleigh-taylor-instability.md"
+  },
+  {
+   "id": "reynolds-averaging",
+   "course": "fluids",
+   "page": "fluids/concepts/reynolds-averaging.md"
+  },
+  {
+   "id": "reynolds-number",
+   "course": "fluids",
+   "page": "fluids/concepts/reynolds-number.md"
+  },
+  {
+   "id": "reynolds-transport-theorem",
+   "course": "fluids",
+   "page": "fluids/concepts/reynolds-transport-theorem.md"
+  },
+  {
+   "id": "shock-waves",
+   "course": "fluids",
+   "page": "fluids/concepts/shock-waves.md"
+  },
+  {
+   "id": "turbulence",
+   "course": "fluids",
+   "page": "fluids/concepts/turbulence.md"
+  },
+  {
+   "id": "viscosity",
+   "course": "fluids",
+   "page": "fluids/concepts/viscosity.md"
+  },
+  {
+   "id": "what-is-a-fluid",
+   "course": "fluids",
+   "page": "fluids/concepts/what-is-a-fluid.md"
+  },
+  {
    "id": "adiabatic-invariant",
    "course": "plasma",
    "page": "plasma/concepts/adiabatic-invariant.md"
@@ -541,119 +781,189 @@
    "page": "plasma/concepts/vlasov-equation.md"
   },
   {
-   "id": "bernoulli-principle",
-   "course": "fluids",
-   "page": "fluids/concepts/bernoulli-principle.md"
+   "id": "convolution",
+   "course": "phy621",
+   "page": "phy621/concepts/convolution.md"
   },
   {
-   "id": "buckingham-pi-theorem",
-   "course": "fluids",
-   "page": "fluids/concepts/buckingham-pi-theorem.md"
+   "id": "coordinate-systems",
+   "course": "phy621",
+   "page": "phy621/concepts/coordinate-systems.md"
   },
   {
-   "id": "buoyancy",
-   "course": "fluids",
-   "page": "fluids/concepts/buoyancy.md"
+   "id": "diagonalization",
+   "course": "phy621",
+   "page": "phy621/concepts/diagonalization.md"
   },
   {
-   "id": "conformal-mapping-and-images",
-   "course": "fluids",
-   "page": "fluids/concepts/conformal-mapping-and-images.md"
+   "id": "divergence-theorem",
+   "course": "phy621",
+   "page": "phy621/concepts/divergence-theorem.md"
   },
   {
-   "id": "dimensional-analysis",
-   "course": "fluids",
-   "page": "fluids/concepts/dimensional-analysis.md"
+   "id": "eigenvalues-eigenvectors",
+   "course": "phy621",
+   "page": "phy621/concepts/eigenvalues-eigenvectors.md"
   },
   {
-   "id": "energy-cascade",
-   "course": "fluids",
-   "page": "fluids/concepts/energy-cascade.md"
+   "id": "fourier-series",
+   "course": "phy621",
+   "page": "phy621/concepts/fourier-series.md"
   },
   {
-   "id": "eulerian-vs-lagrangian",
-   "course": "fluids",
-   "page": "fluids/concepts/eulerian-vs-lagrangian.md"
+   "id": "fourier-transform",
+   "course": "phy621",
+   "page": "phy621/concepts/fourier-transform.md"
   },
   {
-   "id": "fluid-in-rigid-body-motion",
-   "course": "fluids",
-   "page": "fluids/concepts/fluid-in-rigid-body-motion.md"
+   "id": "gradient-divergence-curl",
+   "course": "phy621",
+   "page": "phy621/concepts/gradient-divergence-curl.md"
   },
   {
-   "id": "hydrodynamic-stability",
-   "course": "fluids",
-   "page": "fluids/concepts/hydrodynamic-stability.md"
+   "id": "greens-functions",
+   "course": "phy621",
+   "page": "phy621/concepts/greens-functions.md"
   },
   {
-   "id": "hydrostatic-equilibrium",
-   "course": "fluids",
-   "page": "fluids/concepts/hydrostatic-equilibrium.md"
+   "id": "hermitian-matrices",
+   "course": "phy621",
+   "page": "phy621/concepts/hermitian-matrices.md"
   },
   {
-   "id": "hydrostatic-force-on-surfaces",
-   "course": "fluids",
-   "page": "fluids/concepts/hydrostatic-force-on-surfaces.md"
+   "id": "laplace-transform",
+   "course": "phy621",
+   "page": "phy621/concepts/laplace-transform.md"
   },
   {
-   "id": "kelvin-helmholtz-instability",
-   "course": "fluids",
-   "page": "fluids/concepts/kelvin-helmholtz-instability.md"
+   "id": "matrices-determinants",
+   "course": "phy621",
+   "page": "phy621/concepts/matrices-determinants.md"
   },
   {
-   "id": "material-derivative",
-   "course": "fluids",
-   "page": "fluids/concepts/material-derivative.md"
+   "id": "ordinary-differential-equations",
+   "course": "phy621",
+   "page": "phy621/concepts/ordinary-differential-equations.md"
   },
   {
-   "id": "potential-flow",
-   "course": "fluids",
-   "page": "fluids/concepts/potential-flow.md"
+   "id": "orthogonal-transformations",
+   "course": "phy621",
+   "page": "phy621/concepts/orthogonal-transformations.md"
   },
   {
-   "id": "pressure",
-   "course": "fluids",
-   "page": "fluids/concepts/pressure.md"
+   "id": "partial-differential-equations",
+   "course": "phy621",
+   "page": "phy621/concepts/partial-differential-equations.md"
   },
   {
-   "id": "rayleigh-taylor-instability",
-   "course": "fluids",
-   "page": "fluids/concepts/rayleigh-taylor-instability.md"
+   "id": "special-functions",
+   "course": "phy621",
+   "page": "phy621/concepts/special-functions.md"
   },
   {
-   "id": "reynolds-averaging",
-   "course": "fluids",
-   "page": "fluids/concepts/reynolds-averaging.md"
+   "id": "stokes-theorem",
+   "course": "phy621",
+   "page": "phy621/concepts/stokes-theorem.md"
   },
   {
-   "id": "reynolds-number",
-   "course": "fluids",
-   "page": "fluids/concepts/reynolds-number.md"
+   "id": "vector-operations",
+   "course": "phy621",
+   "page": "phy621/concepts/vector-operations.md"
   },
   {
-   "id": "reynolds-transport-theorem",
-   "course": "fluids",
-   "page": "fluids/concepts/reynolds-transport-theorem.md"
+   "id": "vector-triple-product",
+   "course": "phy621",
+   "page": "phy621/concepts/vector-triple-product.md"
   },
   {
-   "id": "shock-waves",
-   "course": "fluids",
-   "page": "fluids/concepts/shock-waves.md"
+   "id": "analytic-functions",
+   "course": "phy622",
+   "page": "phy622/concepts/analytic-functions.md"
   },
   {
-   "id": "turbulence",
-   "course": "fluids",
-   "page": "fluids/concepts/turbulence.md"
+   "id": "calculus-of-variations",
+   "course": "phy622",
+   "page": "phy622/concepts/calculus-of-variations.md"
   },
   {
-   "id": "viscosity",
-   "course": "fluids",
-   "page": "fluids/concepts/viscosity.md"
+   "id": "cauchy-integral-formula",
+   "course": "phy622",
+   "page": "phy622/concepts/cauchy-integral-formula.md"
   },
   {
-   "id": "what-is-a-fluid",
-   "course": "fluids",
-   "page": "fluids/concepts/what-is-a-fluid.md"
+   "id": "cauchy-riemann",
+   "course": "phy622",
+   "page": "phy622/concepts/cauchy-riemann.md"
+  },
+  {
+   "id": "cauchy-theorem",
+   "course": "phy622",
+   "page": "phy622/concepts/cauchy-theorem.md"
+  },
+  {
+   "id": "complex-numbers",
+   "course": "phy622",
+   "page": "phy622/concepts/complex-numbers.md"
+  },
+  {
+   "id": "conformal-mapping",
+   "course": "phy622",
+   "page": "phy622/concepts/conformal-mapping.md"
+  },
+  {
+   "id": "contour-integration",
+   "course": "phy622",
+   "page": "phy622/concepts/contour-integration.md"
+  },
+  {
+   "id": "euler-lagrange-equation",
+   "course": "phy622",
+   "page": "phy622/concepts/euler-lagrange-equation.md"
+  },
+  {
+   "id": "geodesics",
+   "course": "phy622",
+   "page": "phy622/concepts/geodesics.md"
+  },
+  {
+   "id": "group-representations",
+   "course": "phy622",
+   "page": "phy622/concepts/group-representations.md"
+  },
+  {
+   "id": "hamilton-principle",
+   "course": "phy622",
+   "page": "phy622/concepts/hamilton-principle.md"
+  },
+  {
+   "id": "lagrange-multipliers",
+   "course": "phy622",
+   "page": "phy622/concepts/lagrange-multipliers.md"
+  },
+  {
+   "id": "lie-groups",
+   "course": "phy622",
+   "page": "phy622/concepts/lie-groups.md"
+  },
+  {
+   "id": "minimal-surfaces",
+   "course": "phy622",
+   "page": "phy622/concepts/minimal-surfaces.md"
+  },
+  {
+   "id": "residue-theorem",
+   "course": "phy622",
+   "page": "phy622/concepts/residue-theorem.md"
+  },
+  {
+   "id": "su2-so3",
+   "course": "phy622",
+   "page": "phy622/concepts/su2-so3.md"
+  },
+  {
+   "id": "symmetry-groups",
+   "course": "phy622",
+   "page": "phy622/concepts/symmetry-groups.md"
   },
   {
    "id": "backward-euler",
@@ -778,6 +1088,76 @@
    "page": "physics1/equations/work-energy-theorem.md"
   },
   {
+   "id": "coulombs-law-eq",
+   "course": "sc134",
+   "page": "sc134/equations/coulombs-law-eq.md"
+  },
+  {
+   "id": "electric-field-eq",
+   "course": "sc134",
+   "page": "sc134/equations/electric-field-eq.md"
+  },
+  {
+   "id": "electric-potential-eq",
+   "course": "sc134",
+   "page": "sc134/equations/electric-potential-eq.md"
+  },
+  {
+   "id": "faraday-law-eq",
+   "course": "sc134",
+   "page": "sc134/equations/faraday-law-eq.md"
+  },
+  {
+   "id": "gauss-law-eq",
+   "course": "sc134",
+   "page": "sc134/equations/gauss-law-eq.md"
+  },
+  {
+   "id": "bernoulli-equation",
+   "course": "fluids",
+   "page": "fluids/equations/bernoulli-equation.md"
+  },
+  {
+   "id": "continuity-equation",
+   "course": "fluids",
+   "page": "fluids/equations/continuity-equation.md"
+  },
+  {
+   "id": "euler-equation",
+   "course": "fluids",
+   "page": "fluids/equations/euler-equation.md"
+  },
+  {
+   "id": "interface-dispersion-relation",
+   "course": "fluids",
+   "page": "fluids/equations/interface-dispersion-relation.md"
+  },
+  {
+   "id": "laplace-equation",
+   "course": "fluids",
+   "page": "fluids/equations/laplace-equation.md"
+  },
+  {
+   "id": "navier-stokes-equation",
+   "course": "fluids",
+   "page": "fluids/equations/navier-stokes-equation.md"
+  },
+  {
+   "id": "newtons-law-of-viscosity",
+   "course": "fluids",
+   "page": "fluids/equations/newtons-law-of-viscosity.md"
+  },
+  {
+   "id": "rankine-hugoniot-conditions",
+   "course": "fluids",
+   "page": "fluids/equations/rankine-hugoniot-conditions.md"
+  },
+  {
+   "id": "tke-transport-equation",
+   "course": "fluids",
+   "page": "fluids/equations/tke-transport-equation.md"
+  },
+  {
    "id": "alfven-velocity",
    "course": "plasma",
    "page": "plasma/equations/alfven-velocity.md"
@@ -838,49 +1218,54 @@
    "page": "plasma/equations/vlasov-equation.md"
   },
   {
-   "id": "bernoulli-equation",
-   "course": "fluids",
-   "page": "fluids/equations/bernoulli-equation.md"
+   "id": "characteristic-equation",
+   "course": "phy621",
+   "page": "phy621/equations/characteristic-equation.md"
   },
   {
-   "id": "continuity-equation",
-   "course": "fluids",
-   "page": "fluids/equations/continuity-equation.md"
+   "id": "fourier-integral",
+   "course": "phy621",
+   "page": "phy621/equations/fourier-integral.md"
   },
   {
-   "id": "euler-equation",
-   "course": "fluids",
-   "page": "fluids/equations/euler-equation.md"
+   "id": "greens-ode",
+   "course": "phy621",
+   "page": "phy621/equations/greens-ode.md"
   },
   {
-   "id": "interface-dispersion-relation",
-   "course": "fluids",
-   "page": "fluids/equations/interface-dispersion-relation.md"
+   "id": "laplace-integral",
+   "course": "phy621",
+   "page": "phy621/equations/laplace-integral.md"
   },
   {
-   "id": "laplace-equation",
-   "course": "fluids",
-   "page": "fluids/equations/laplace-equation.md"
+   "id": "vector-calculus-operators",
+   "course": "phy621",
+   "page": "phy621/equations/vector-calculus-operators.md"
   },
   {
-   "id": "navier-stokes-equation",
-   "course": "fluids",
-   "page": "fluids/equations/navier-stokes-equation.md"
+   "id": "cauchy-riemann-eq",
+   "course": "phy622",
+   "page": "phy622/equations/cauchy-riemann-eq.md"
   },
   {
-   "id": "newtons-law-of-viscosity",
-   "course": "fluids",
-   "page": "fluids/equations/newtons-law-of-viscosity.md"
+   "id": "euler-lagrange-eq",
+   "course": "phy622",
+   "page": "phy622/equations/euler-lagrange-eq.md"
   },
   {
-   "id": "rankine-hugoniot-conditions",
-   "course": "fluids",
-   "page": "fluids/equations/rankine-hugoniot-conditions.md"
+   "id": "geodesic-curvature",
+   "course": "phy622",
+   "page": "phy622/equations/geodesic-curvature.md"
   },
   {
-   "id": "tke-transport-equation",
-   "course": "fluids",
-   "page": "fluids/equations/tke-transport-equation.md"
+   "id": "lie-bracket",
+   "course": "phy622",
+   "page": "phy622/equations/lie-bracket.md"
+  },
+  {
+   "id": "residue-formula",
+   "course": "phy622",
+   "page": "phy622/equations/residue-formula.md"
   },
   {
    "id": "cfl-condition",
@@ -924,150 +1309,6 @@
   }
  ],
  "glossary_terms": [
-  {
-   "term": "Adiabatic invariant",
-   "course": "plasma"
-  },
-  {
-   "term": "Alfvén speed",
-   "course": "plasma"
-  },
-  {
-   "term": "Boltzmann response",
-   "course": "plasma"
-  },
-  {
-   "term": "Bohm criterion",
-   "course": "plasma"
-  },
-  {
-   "term": "Buneman instability",
-   "course": "plasma"
-  },
-  {
-   "term": "Collective parameter",
-   "course": "plasma"
-  },
-  {
-   "term": "Continuity equation",
-   "course": "plasma"
-  },
-  {
-   "term": "Cold plasma",
-   "course": "plasma"
-  },
-  {
-   "term": "Debye length",
-   "course": "plasma"
-  },
-  {
-   "term": "Drift motion",
-   "course": "plasma"
-  },
-  {
-   "term": "Equation of state",
-   "course": "plasma"
-  },
-  {
-   "term": "Frozen-in theorem",
-   "course": "plasma"
-  },
-  {
-   "term": "Grad–Shafranov equation",
-   "course": "plasma"
-  },
-  {
-   "term": "Ideal plasma",
-   "course": "plasma"
-  },
-  {
-   "term": "Induction equation",
-   "course": "plasma"
-  },
-  {
-   "term": "Ion acoustic wave",
-   "course": "plasma"
-  },
-  {
-   "term": "Landau damping",
-   "course": "plasma"
-  },
-  {
-   "term": "Langmuir waves",
-   "course": "plasma"
-  },
-  {
-   "term": "Larmor radius",
-   "course": "plasma"
-  },
-  {
-   "term": "Loss cone",
-   "course": "plasma"
-  },
-  {
-   "term": "Lundquist number",
-   "course": "plasma"
-  },
-  {
-   "term": "Magnetic island",
-   "course": "plasma"
-  },
-  {
-   "term": "Magnetic mirror",
-   "course": "plasma"
-  },
-  {
-   "term": "Magnetohydrodynamics (MHD)",
-   "course": "plasma"
-  },
-  {
-   "term": "Magnetized wave",
-   "course": "plasma"
-  },
-  {
-   "term": "Plasma",
-   "course": "plasma"
-  },
-  {
-   "term": "Plasma approximation",
-   "course": "plasma"
-  },
-  {
-   "term": "Plasma frequency",
-   "course": "plasma"
-  },
-  {
-   "term": "Plasma parameter",
-   "course": "plasma"
-  },
-  {
-   "term": "Plasma wave",
-   "course": "plasma"
-  },
-  {
-   "term": "Poisson’s equation",
-   "course": "plasma"
-  },
-  {
-   "term": "Quasi-neutrality",
-   "course": "plasma"
-  },
-  {
-   "term": "Sound speed",
-   "course": "plasma"
-  },
-  {
-   "term": "Sweet–Parker model",
-   "course": "plasma"
-  },
-  {
-   "term": "Vlasov equation",
-   "course": "plasma"
-  },
-  {
-   "term": "Waves in plasmas",
-   "course": "plasma"
-  },
   {
    "term": "Absolute pressure",
    "course": "fluids"
@@ -1330,6 +1571,150 @@
   },
   {
    "term": "Adiabatic invariant",
+   "course": "plasma"
+  },
+  {
+   "term": "Alfvén speed",
+   "course": "plasma"
+  },
+  {
+   "term": "Boltzmann response",
+   "course": "plasma"
+  },
+  {
+   "term": "Bohm criterion",
+   "course": "plasma"
+  },
+  {
+   "term": "Buneman instability",
+   "course": "plasma"
+  },
+  {
+   "term": "Collective parameter",
+   "course": "plasma"
+  },
+  {
+   "term": "Continuity equation",
+   "course": "plasma"
+  },
+  {
+   "term": "Cold plasma",
+   "course": "plasma"
+  },
+  {
+   "term": "Debye length",
+   "course": "plasma"
+  },
+  {
+   "term": "Drift motion",
+   "course": "plasma"
+  },
+  {
+   "term": "Equation of state",
+   "course": "plasma"
+  },
+  {
+   "term": "Frozen-in theorem",
+   "course": "plasma"
+  },
+  {
+   "term": "Grad–Shafranov equation",
+   "course": "plasma"
+  },
+  {
+   "term": "Ideal plasma",
+   "course": "plasma"
+  },
+  {
+   "term": "Induction equation",
+   "course": "plasma"
+  },
+  {
+   "term": "Ion acoustic wave",
+   "course": "plasma"
+  },
+  {
+   "term": "Landau damping",
+   "course": "plasma"
+  },
+  {
+   "term": "Langmuir waves",
+   "course": "plasma"
+  },
+  {
+   "term": "Larmor radius",
+   "course": "plasma"
+  },
+  {
+   "term": "Loss cone",
+   "course": "plasma"
+  },
+  {
+   "term": "Lundquist number",
+   "course": "plasma"
+  },
+  {
+   "term": "Magnetic island",
+   "course": "plasma"
+  },
+  {
+   "term": "Magnetic mirror",
+   "course": "plasma"
+  },
+  {
+   "term": "Magnetohydrodynamics (MHD)",
+   "course": "plasma"
+  },
+  {
+   "term": "Magnetized wave",
+   "course": "plasma"
+  },
+  {
+   "term": "Plasma",
+   "course": "plasma"
+  },
+  {
+   "term": "Plasma approximation",
+   "course": "plasma"
+  },
+  {
+   "term": "Plasma frequency",
+   "course": "plasma"
+  },
+  {
+   "term": "Plasma parameter",
+   "course": "plasma"
+  },
+  {
+   "term": "Plasma wave",
+   "course": "plasma"
+  },
+  {
+   "term": "Poisson’s equation",
+   "course": "plasma"
+  },
+  {
+   "term": "Quasi-neutrality",
+   "course": "plasma"
+  },
+  {
+   "term": "Sound speed",
+   "course": "plasma"
+  },
+  {
+   "term": "Sweet–Parker model",
+   "course": "plasma"
+  },
+  {
+   "term": "Vlasov equation",
+   "course": "plasma"
+  },
+  {
+   "term": "Waves in plasmas",
+   "course": "plasma"
+  },
+  {
+   "term": "Adiabatic invariant",
    "course": "comp-plasma"
   },
   {
@@ -1538,6 +1923,16 @@
  ],
  "simulations": [
   {
+   "id": "em-field-explorer",
+   "course": "sc134",
+   "page": "sc134/simulations/em-field-explorer.md"
+  },
+  {
+   "id": "rc-rlc-lab",
+   "course": "sc134",
+   "page": "sc134/simulations/rc-rlc-lab.md"
+  },
+  {
    "id": "energy-cascade-sandbox",
    "course": "fluids",
    "page": "fluids/simulations/energy-cascade-sandbox.md"
@@ -1553,6 +1948,16 @@
    "page": "fluids/simulations/potential-flow-builder.md"
   },
   {
+   "id": "fourier-builder",
+   "course": "phy621",
+   "page": "phy621/simulations/fourier-builder.md"
+  },
+  {
+   "id": "conformal-explorer",
+   "course": "phy622",
+   "page": "phy622/simulations/conformal-explorer.md"
+  },
+  {
    "id": "integrator-arena",
    "course": "comp-plasma",
    "page": "comp-plasma/simulations/integrator-arena.md"
@@ -1563,7 +1968,7 @@
    "page": "comp-plasma/simulations/two-stream-viewer.md"
   }
  ],
- "cross_links": 1693,
+ "cross_links": 2320,
  "generated_pages": [
   "physics1/concept-graph.md",
   "physics1/concepts/acceleration.md",
@@ -1660,49 +2065,46 @@
   "physics1/equations.md",
   "physics1/glossary.md",
   "physics1/index.md",
+  "physics1/lectures.md",
   "physics1/quizzes.md",
-  "plasma/concept-graph.md",
-  "plasma/concepts/adiabatic-invariant.md",
-  "plasma/concepts/debye-shielding.md",
-  "plasma/concepts/drift-motion.md",
-  "plasma/concepts/frozen-in-theorem.md",
-  "plasma/concepts/ideal-plasma.md",
-  "plasma/concepts/ion-acoustic-wave.md",
-  "plasma/concepts/landau-damping.md",
-  "plasma/concepts/langmuir-waves.md",
-  "plasma/concepts/larmor-radius.md",
-  "plasma/concepts/magnetic-islands.md",
-  "plasma/concepts/magnetic-mirror.md",
-  "plasma/concepts/magnetic-reconnection.md",
-  "plasma/concepts/magnetized-waves.md",
-  "plasma/concepts/mhd-equilibrium.md",
-  "plasma/concepts/mhd-instability.md",
-  "plasma/concepts/mhd.md",
-  "plasma/concepts/plasma-frequency.md",
-  "plasma/concepts/plasma-sheath.md",
-  "plasma/concepts/plasma-waves.md",
-  "plasma/concepts/plasma.md",
-  "plasma/concepts/poisson-equation.md",
-  "plasma/concepts/quasi-neutrality.md",
-  "plasma/concepts/sound-speed.md",
-  "plasma/concepts/streaming-instability.md",
-  "plasma/concepts/sweet-parker-model.md",
-  "plasma/concepts/vlasov-equation.md",
-  "plasma/equations/alfven-velocity.md",
-  "plasma/equations/cold-plasma-dispersion.md",
-  "plasma/equations/continuity-equation.md",
-  "plasma/equations/debye-length.md",
-  "plasma/equations/grad-shafranov.md",
-  "plasma/equations/induction-equation.md",
-  "plasma/equations/landau-dispersion.md",
-  "plasma/equations/lundquist-number.md",
-  "plasma/equations/momentum-equation.md",
-  "plasma/equations/plasma-frequency.md",
-  "plasma/equations/sweet-parker-rate.md",
-  "plasma/equations/vlasov-equation.md",
-  "plasma/glossary.md",
-  "plasma/index.md",
-  "plasma/quizzes.md",
+  "sc134/concept-graph.md",
+  "sc134/concepts/amperes-law.md",
+  "sc134/concepts/biot-savart-law.md",
+  "sc134/concepts/capacitance.md",
+  "sc134/concepts/conductors-insulators.md",
+  "sc134/concepts/coulombs-law.md",
+  "sc134/concepts/current-resistance.md",
+  "sc134/concepts/dc-circuits.md",
+  "sc134/concepts/dielectrics.md",
+  "sc134/concepts/electric-charge.md",
+  "sc134/concepts/electric-current.md",
+  "sc134/concepts/electric-dipole.md",
+  "sc134/concepts/electric-field.md",
+  "sc134/concepts/electric-flux.md",
+  "sc134/concepts/electric-force.md",
+  "sc134/concepts/electric-potential.md",
+  "sc134/concepts/electromagnetic-waves.md",
+  "sc134/concepts/equipotential.md",
+  "sc134/concepts/faraday-law.md",
+  "sc134/concepts/gauss-law-magnetism.md",
+  "sc134/concepts/gauss-law.md",
+  "sc134/concepts/magnetic-field.md",
+  "sc134/concepts/magnetic-flux.md",
+  "sc134/concepts/magnetic-force.md",
+  "sc134/concepts/maxwell-equations.md",
+  "sc134/concepts/rc-circuits.md",
+  "sc134/equations/coulombs-law-eq.md",
+  "sc134/equations/electric-field-eq.md",
+  "sc134/equations/electric-potential-eq.md",
+  "sc134/equations/faraday-law-eq.md",
+  "sc134/equations/gauss-law-eq.md",
+  "sc134/glossary.md",
+  "sc134/index.md",
+  "sc134/lectures.md",
+  "sc134/quizzes.md",
+  "sc134/simulations/em-field-explorer.md",
+  "sc134/simulations/index.md",
+  "sc134/simulations/rc-rlc-lab.md",
   "fluids/concept-graph.md",
   "fluids/concepts/bernoulli-principle.md",
   "fluids/concepts/buckingham-pi-theorem.md",
@@ -1744,11 +2146,116 @@
   "fluids/examples/two-layer-incline.md",
   "fluids/glossary.md",
   "fluids/index.md",
+  "fluids/lectures.md",
   "fluids/quizzes.md",
   "fluids/simulations/energy-cascade-sandbox.md",
   "fluids/simulations/index.md",
   "fluids/simulations/kh-billow-tank.md",
   "fluids/simulations/potential-flow-builder.md",
+  "plasma/concept-graph.md",
+  "plasma/concepts/adiabatic-invariant.md",
+  "plasma/concepts/debye-shielding.md",
+  "plasma/concepts/drift-motion.md",
+  "plasma/concepts/frozen-in-theorem.md",
+  "plasma/concepts/ideal-plasma.md",
+  "plasma/concepts/ion-acoustic-wave.md",
+  "plasma/concepts/landau-damping.md",
+  "plasma/concepts/langmuir-waves.md",
+  "plasma/concepts/larmor-radius.md",
+  "plasma/concepts/magnetic-islands.md",
+  "plasma/concepts/magnetic-mirror.md",
+  "plasma/concepts/magnetic-reconnection.md",
+  "plasma/concepts/magnetized-waves.md",
+  "plasma/concepts/mhd-equilibrium.md",
+  "plasma/concepts/mhd-instability.md",
+  "plasma/concepts/mhd.md",
+  "plasma/concepts/plasma-frequency.md",
+  "plasma/concepts/plasma-sheath.md",
+  "plasma/concepts/plasma-waves.md",
+  "plasma/concepts/plasma.md",
+  "plasma/concepts/poisson-equation.md",
+  "plasma/concepts/quasi-neutrality.md",
+  "plasma/concepts/sound-speed.md",
+  "plasma/concepts/streaming-instability.md",
+  "plasma/concepts/sweet-parker-model.md",
+  "plasma/concepts/vlasov-equation.md",
+  "plasma/equations/alfven-velocity.md",
+  "plasma/equations/cold-plasma-dispersion.md",
+  "plasma/equations/continuity-equation.md",
+  "plasma/equations/debye-length.md",
+  "plasma/equations/grad-shafranov.md",
+  "plasma/equations/induction-equation.md",
+  "plasma/equations/landau-dispersion.md",
+  "plasma/equations/lundquist-number.md",
+  "plasma/equations/momentum-equation.md",
+  "plasma/equations/plasma-frequency.md",
+  "plasma/equations/sweet-parker-rate.md",
+  "plasma/equations/vlasov-equation.md",
+  "plasma/glossary.md",
+  "plasma/index.md",
+  "plasma/lectures.md",
+  "plasma/quizzes.md",
+  "phy621/concept-graph.md",
+  "phy621/concepts/convolution.md",
+  "phy621/concepts/coordinate-systems.md",
+  "phy621/concepts/diagonalization.md",
+  "phy621/concepts/divergence-theorem.md",
+  "phy621/concepts/eigenvalues-eigenvectors.md",
+  "phy621/concepts/fourier-series.md",
+  "phy621/concepts/fourier-transform.md",
+  "phy621/concepts/gradient-divergence-curl.md",
+  "phy621/concepts/greens-functions.md",
+  "phy621/concepts/hermitian-matrices.md",
+  "phy621/concepts/laplace-transform.md",
+  "phy621/concepts/matrices-determinants.md",
+  "phy621/concepts/ordinary-differential-equations.md",
+  "phy621/concepts/orthogonal-transformations.md",
+  "phy621/concepts/partial-differential-equations.md",
+  "phy621/concepts/special-functions.md",
+  "phy621/concepts/stokes-theorem.md",
+  "phy621/concepts/vector-operations.md",
+  "phy621/concepts/vector-triple-product.md",
+  "phy621/equations/characteristic-equation.md",
+  "phy621/equations/fourier-integral.md",
+  "phy621/equations/greens-ode.md",
+  "phy621/equations/laplace-integral.md",
+  "phy621/equations/vector-calculus-operators.md",
+  "phy621/glossary.md",
+  "phy621/index.md",
+  "phy621/lectures.md",
+  "phy621/quizzes.md",
+  "phy621/simulations/fourier-builder.md",
+  "phy621/simulations/index.md",
+  "phy622/concept-graph.md",
+  "phy622/concepts/analytic-functions.md",
+  "phy622/concepts/calculus-of-variations.md",
+  "phy622/concepts/cauchy-integral-formula.md",
+  "phy622/concepts/cauchy-riemann.md",
+  "phy622/concepts/cauchy-theorem.md",
+  "phy622/concepts/complex-numbers.md",
+  "phy622/concepts/conformal-mapping.md",
+  "phy622/concepts/contour-integration.md",
+  "phy622/concepts/euler-lagrange-equation.md",
+  "phy622/concepts/geodesics.md",
+  "phy622/concepts/group-representations.md",
+  "phy622/concepts/hamilton-principle.md",
+  "phy622/concepts/lagrange-multipliers.md",
+  "phy622/concepts/lie-groups.md",
+  "phy622/concepts/minimal-surfaces.md",
+  "phy622/concepts/residue-theorem.md",
+  "phy622/concepts/su2-so3.md",
+  "phy622/concepts/symmetry-groups.md",
+  "phy622/equations/cauchy-riemann-eq.md",
+  "phy622/equations/euler-lagrange-eq.md",
+  "phy622/equations/geodesic-curvature.md",
+  "phy622/equations/lie-bracket.md",
+  "phy622/equations/residue-formula.md",
+  "phy622/glossary.md",
+  "phy622/index.md",
+  "phy622/lectures.md",
+  "phy622/quizzes.md",
+  "phy622/simulations/conformal-explorer.md",
+  "phy622/simulations/index.md",
   "comp-plasma/concept-graph.md",
   "comp-plasma/concepts/backward-euler.md",
   "comp-plasma/concepts/convergence-and-error.md",
@@ -1781,18 +2288,19 @@
   "comp-plasma/examples/rutherford-scattering.md",
   "comp-plasma/glossary.md",
   "comp-plasma/index.md",
+  "comp-plasma/lectures.md",
   "comp-plasma/quizzes.md",
   "comp-plasma/simulations/index.md",
   "comp-plasma/simulations/integrator-arena.md",
   "comp-plasma/simulations/two-stream-viewer.md"
  ],
  "stats": {
-  "concepts": 147,
-  "equations": 37,
+  "concepts": 209,
+  "equations": 52,
   "glossary_terms": 141,
   "examples": 9,
-  "simulations": 5,
-  "cross_links": 1693,
-  "generated_pages": 220
+  "simulations": 9,
+  "cross_links": 2320,
+  "generated_pages": 323
  }
 }

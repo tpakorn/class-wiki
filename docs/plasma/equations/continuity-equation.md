@@ -2,7 +2,7 @@
 
 $$\frac{\partial \rho}{\partial t} + \nabla\cdot(\rho \mathbf{U}) = 0$$
 
-*Source lecture:* pc368_lec05_mhd
+*Source lecture(s):* [pc368_lec05_mhd](../lectures.md)
 
 ## Physical Meaning
 

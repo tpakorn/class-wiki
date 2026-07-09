@@ -1,6 +1,6 @@
 # Sweet–Parker Model
 
-*Source lecture:* pc368_lec17_sweetparker
+*Source lecture(s):* [pc368_lec17_sweetparker](../lectures.md)
 
 ## Intuition
 

@@ -2,7 +2,7 @@
 
 $$M_A = \frac{U_{\text{in}}}{v_A} \sim \frac{1}{\sqrt{S}}$$
 
-*Source lecture:* pc368_lec17_sweetparker
+*Source lecture(s):* [pc368_lec17_sweetparker](../lectures.md)
 
 ## Physical Meaning
 

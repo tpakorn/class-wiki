@@ -2,7 +2,7 @@
 
 $$\lambda_D = \sqrt{\frac{\varepsilon_0 k_B T_e}{n_e e^2}}$$
 
-*Source lecture:* pc368_lec01_intro, pc368_lec02_debye
+*Source lecture(s):* [pc368_lec01_intro, pc368_lec02_debye](../lectures.md)
 
 ## Physical Meaning
 

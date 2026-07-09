@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fourier Series Builder</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --sum:#c0392b; --target:#888; --bar:#2471a3; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --sum:#e74c3c; --target:#777; --bar:#5dade2; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; }
+  input[type=range] { width:220px; accent-color:var(--sum); }
+  select { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:3px 8px; font-size:13px; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>Waveform</label>
+      <select id="wave">
+        <option value="square">Square</option>
+        <option value="sawtooth">Sawtooth</option>
+        <option value="triangle">Triangle</option>
+        <option value="pulse">Rectangular pulse</option>
+      </select></div>
+    <div class="ctl"><label>Number of terms N</label>
+      <input type="range" id="N" min="1" max="60" step="1" value="5"><output id="oN">5</output></div>
+  </div>
+  <canvas id="cv" width="760" height="360"></canvas>
+  <canvas id="bars" width="760" height="120"></canvas>
+  <p class="note" id="cap"></p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const bc = document.getElementById('bars'), btx = bc.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const S = { wave: 'square', N: 5 };
+  document.getElementById('wave').onchange = e => { S.wave = e.target.value; draw(); };
+  document.getElementById('N').oninput = e => { S.N = +e.target.value;
+    document.getElementById('oN').value = S.N; draw(); };
+
+  // targets on [-π, π] and their Fourier coefficients
+  const defs = {
+    square: {
+      f: x => x >= 0 ? 1 : -1,
+      coef: n => n % 2 ? { b: 4/(Math.PI*n) } : {},
+      text: 'Square wave: only odd sines, b_n = 4/(πn). The ~9% overshoot at each jump (Gibbs phenomenon) never shrinks — it just narrows.'
+    },
+    sawtooth: {
+      f: x => x/Math.PI,
+      coef: n => ({ b: 2*((-1)**(n+1))/(Math.PI*n) }),
+      text: 'Sawtooth: all sines, b_n = 2(−1)^{n+1}/(πn). Slow 1/n decay — discontinuities cost convergence speed.'
+    },
+    triangle: {
+      f: x => 1 - 2*Math.abs(x)/Math.PI,
+      coef: n => n % 2 ? { a: 8/(Math.PI*Math.PI*n*n) } : {},
+      text: 'Triangle wave: only odd cosines, a_n = 8/(π²n²). Continuous function ⇒ 1/n² decay ⇒ fast, Gibbs-free convergence.'
+    },
+    pulse: {
+      f: x => Math.abs(x) < Math.PI/4 ? 1 : 0,
+      a0: 0.25,
+      coef: n => ({ a: (2/(Math.PI*n)) * Math.sin(n*Math.PI/4) }),
+      text: 'Rectangular pulse (width π/2): a_n = (2/πn)·sin(nπ/4) — a sampled sinc. Narrow in x ⇒ wide in n: the uncertainty principle in miniature.'
+    }
+  };
+  function partial(x) {
+    const d = defs[S.wave];
+    let s = d.a0 || 0;
+    for (let n = 1; n <= S.N; n++) {
+      const c = d.coef(n);
+      if (c.a) s += c.a * Math.cos(n*x);
+      if (c.b) s += c.b * Math.sin(n*x);
+    }
+    return s;
+  }
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim(); ctx.fillRect(0, 0, W, H);
+    const px = x => (x + Math.PI)/(2*Math.PI) * W;
+    const py = y => H/2 - y * H/3.2;
+    // axis
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim(); ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(0, py(0)); ctx.lineTo(W, py(0)); ctx.stroke();
+    // target
+    ctx.strokeStyle = css.getPropertyValue('--target').trim();
+    ctx.setLineDash([5,4]); ctx.lineWidth = 1.4; ctx.beginPath();
+    for (let i = 0; i <= 600; i++) {
+      const x = -Math.PI + 2*Math.PI*i/600, y = defs[S.wave].f(x);
+      i ? ctx.lineTo(px(x), py(y)) : ctx.moveTo(px(x), py(y));
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+    // partial sum
+    ctx.strokeStyle = css.getPropertyValue('--sum').trim(); ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= 1200; i++) {
+      const x = -Math.PI + 2*Math.PI*i/1200, y = partial(x);
+      i ? ctx.lineTo(px(x), py(y)) : ctx.moveTo(px(x), py(y));
+    }
+    ctx.stroke();
+
+    // spectrum bars
+    btx.fillStyle = css.getPropertyValue('--bg').trim(); btx.fillRect(0, 0, bc.width, bc.height);
+    btx.fillStyle = css.getPropertyValue('--muted').trim();
+    btx.font = '11px sans-serif'; btx.textAlign = 'left';
+    btx.fillText('|coefficient| vs n', 8, 14);
+    const nShow = 30, bw = bc.width/(nShow + 2);
+    let cmax = 0;
+    const mags = [];
+    for (let n = 1; n <= nShow; n++) {
+      const c = defs[S.wave].coef(n);
+      const m = Math.hypot(c.a || 0, c.b || 0);
+      mags.push(m); cmax = Math.max(cmax, m);
+    }
+    for (let n = 1; n <= nShow; n++) {
+      const h = cmax ? mags[n-1]/cmax * (bc.height - 30) : 0;
+      btx.fillStyle = n <= S.N
+        ? css.getPropertyValue('--bar').trim()
+        : css.getPropertyValue('--panel').trim();
+      btx.fillRect(n*bw, bc.height - 10 - h, bw*0.7, h);
+    }
+    document.getElementById('cap').textContent = defs[S.wave].text;
+  }
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

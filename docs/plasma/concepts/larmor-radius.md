@@ -1,6 +1,6 @@
 # Larmor Radius
 
-*Source lecture:* pc368_lec07_drift
+*Source lecture(s):* [pc368_lec07_drift](../lectures.md)
 
 ## Intuition
 

@@ -1,0 +1,146 @@
+{
+  "nodes": [
+    {
+      "id": "vector-operations",
+      "label": "Vector Operations"
+    },
+    {
+      "id": "vector-triple-product",
+      "label": "Vector Triple Product"
+    },
+    {
+      "id": "coordinate-systems",
+      "label": "Coordinate Systems"
+    },
+    {
+      "id": "gradient-divergence-curl",
+      "label": "Gradient, Divergence, and Curl"
+    },
+    {
+      "id": "divergence-theorem",
+      "label": "Divergence Theorem"
+    },
+    {
+      "id": "stokes-theorem",
+      "label": "Stokes' Theorem"
+    },
+    {
+      "id": "matrices-determinants",
+      "label": "Matrices and Determinants"
+    },
+    {
+      "id": "eigenvalues-eigenvectors",
+      "label": "Eigenvalues and Eigenvectors"
+    },
+    {
+      "id": "diagonalization",
+      "label": "Diagonalization"
+    },
+    {
+      "id": "hermitian-matrices",
+      "label": "Hermitian Matrices"
+    },
+    {
+      "id": "fourier-series",
+      "label": "Fourier Series"
+    },
+    {
+      "id": "fourier-transform",
+      "label": "Fourier Transform"
+    },
+    {
+      "id": "laplace-transform",
+      "label": "Laplace Transform"
+    },
+    {
+      "id": "convolution",
+      "label": "Convolution"
+    },
+    {
+      "id": "ordinary-differential-equations",
+      "label": "Ordinary Differential Equations"
+    },
+    {
+      "id": "special-functions",
+      "label": "Special Functions"
+    },
+    {
+      "id": "partial-differential-equations",
+      "label": "Partial Differential Equations"
+    },
+    {
+      "id": "greens-functions",
+      "label": "Green's Functions"
+    },
+    {
+      "id": "orthogonal-transformations",
+      "label": "Orthogonal Transformations"
+    }
+  ],
+  "edges": [
+    {
+      "source": "vector-operations",
+      "target": "vector-triple-product"
+    },
+    {
+      "source": "vector-operations",
+      "target": "coordinate-systems"
+    },
+    {
+      "source": "coordinate-systems",
+      "target": "gradient-divergence-curl"
+    },
+    {
+      "source": "gradient-divergence-curl",
+      "target": "divergence-theorem"
+    },
+    {
+      "source": "gradient-divergence-curl",
+      "target": "stokes-theorem"
+    },
+    {
+      "source": "matrices-determinants",
+      "target": "eigenvalues-eigenvectors"
+    },
+    {
+      "source": "eigenvalues-eigenvectors",
+      "target": "diagonalization"
+    },
+    {
+      "source": "diagonalization",
+      "target": "hermitian-matrices"
+    },
+    {
+      "source": "fourier-series",
+      "target": "fourier-transform"
+    },
+    {
+      "source": "fourier-transform",
+      "target": "laplace-transform"
+    },
+    {
+      "source": "fourier-transform",
+      "target": "convolution"
+    },
+    {
+      "source": "laplace-transform",
+      "target": "convolution"
+    },
+    {
+      "source": "ordinary-differential-equations",
+      "target": "special-functions"
+    },
+    {
+      "source": "ordinary-differential-equations",
+      "target": "partial-differential-equations"
+    },
+    {
+      "source": "partial-differential-equations",
+      "target": "greens-functions"
+    },
+    {
+      "source": "fourier-series",
+      "target": "special-functions"
+    }
+  ]
+}
