@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plasma Dispersion Visualizer</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #111; color: #e0e0e0; padding: 2rem; }
+  canvas { background: #000; border: 1px solid #333; display: block; margin: 1rem auto; }
+  .card { max-width: 800px; margin: auto; text-align: center; }
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Plasma Dispersion: ω vs k</h2>
+<canvas id="c" width="700" height="400"></canvas>
+<p>Blue: cold Langmuir ω = √(ω_pe² + c²k²). Red: light line ω = ck.</p>
+<script>
+const cvs = document.getElementById('c'), ctx = cvs.getContext('2d');
+const W = cvs.width, H = cvs.height;
+const ω_pe = 1, c = 1;
+function plot() {
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = '#0af'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let px=0; px<W; px++) {
+    const k = (px/W)*4;
+    const ω = Math.sqrt(ω_pe*ω_pe + c*c*k*k);
+    const py = H/2 - (ω/4)*(H/2);
+    px===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+  ctx.strokeStyle='#f44'; ctx.beginPath();
+  for (let px=0; px<W; px++) {
+    const k=(px/W)*4; const ω=c*k;
+    const py=H/2-(ω/4)*(H/2);
+    px===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+}
+plot();
+</script>
+</div>
+</body>
+</html>

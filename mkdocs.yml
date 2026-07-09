@@ -1,0 +1,303 @@
+site_name: Physics Class Wiki
+site_description: >-
+  Cross-linked knowledge wikis for SC133, PC368, PC316 and PHY653 —
+  physics courses at Thammasat University.
+site_author: Pakorn Wongwaitayakornkul
+repo_url: https://github.com/tpakorn/class-wiki
+repo_name: tpakorn/class-wiki
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: red
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: red
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font: false
+  icon:
+    logo: material/atom-variant
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.tabbed
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+
+extra:
+  generator: false
+
+nav:
+  - Home: index.md
+  - Knowledge Map: graph.md
+  - SC133 · Physics I:
+      - Overview: physics1/index.md
+      - Concept Graph: physics1/concept-graph.md
+      - Concepts:
+          - "Acceleration": physics1/concepts/acceleration.md
+          - "Angular Acceleration": physics1/concepts/angular-acceleration.md
+          - "Angular Momentum": physics1/concepts/angular-momentum.md
+          - "Angular Velocity": physics1/concepts/angular-velocity.md
+          - "Archimedes' Principle": physics1/concepts/archimedes-principle.md
+          - "Beats": physics1/concepts/beats.md
+          - "Bernoulli": physics1/concepts/bernoulli.md
+          - "Bernoulli'S Equation": physics1/concepts/bernoullis-equation.md
+          - "Center of Mass and Linear Momentum": physics1/concepts/center-of-mass.md
+          - "Circular Motion": physics1/concepts/circular-motion.md
+          - "Collision and Impulse": physics1/concepts/collision-and-impulse.md
+          - "Collision": physics1/concepts/collision.md
+          - "Conservation Of Energy": physics1/concepts/conservation-of-energy.md
+          - "Continuity Equation": physics1/concepts/continuity-equation.md
+          - "Damped and Forced Oscillations": physics1/concepts/damped-oscillations.md
+          - "Displacement": physics1/concepts/displacement.md
+          - "Drag": physics1/concepts/drag.md
+          - "Elasticity": physics1/concepts/elasticity.md
+          - "Entropy": physics1/concepts/entropy.md
+          - "Equilibrium and Elasticity": physics1/concepts/equilibrium.md
+          - "First Law of Thermodynamics": physics1/concepts/first-law-of-thermodynamics.md
+          - "Fluid": physics1/concepts/fluid.md
+          - "Fluids": physics1/concepts/fluids.md
+          - "Force": physics1/concepts/force.md
+          - "Friction and Drag": physics1/concepts/friction-and-drag.md
+          - "Friction": physics1/concepts/friction.md
+          - "Gravitation": physics1/concepts/gravitation.md
+          - "Heat": physics1/concepts/heat.md
+          - "Ideal Gas": physics1/concepts/ideal-gas.md
+          - "Impulse": physics1/concepts/impulse.md
+          - "Interference": physics1/concepts/interference.md
+          - "Internal Energy": physics1/concepts/internal-energy.md
+          - "Kepler'S Laws": physics1/concepts/keplers-laws.md
+          - "Kinematics": physics1/concepts/kinematics.md
+          - "Kinetic Energy and Work": physics1/concepts/kinetic-energy-and-work.md
+          - "Kinetic Energy": physics1/concepts/kinetic-energy.md
+          - "Linear Momentum": physics1/concepts/linear-momentum.md
+          - "Longitudinal Wave": physics1/concepts/longitudinal-wave.md
+          - "Measurement": physics1/concepts/measurement.md
+          - "Molecular Speed": physics1/concepts/molecular-speed.md
+          - "Moment Of Inertia": physics1/concepts/moment-of-inertia.md
+          - "Newton'S First Law": physics1/concepts/newtons-first-law.md
+          - "Newton’s Laws": physics1/concepts/newtons-laws.md
+          - "Newton'S Second Law": physics1/concepts/newtons-second-law.md
+          - "Newton'S Third Law": physics1/concepts/newtons-third-law.md
+          - "Normal Force": physics1/concepts/normal-force.md
+          - "Orbits": physics1/concepts/orbits.md
+          - "Oscillation": physics1/concepts/oscillation.md
+          - "Oscillations": physics1/concepts/oscillations.md
+          - "Pascal'S Principle": physics1/concepts/pascals-principle.md
+          - "Pendulum": physics1/concepts/pendulum.md
+          - "Potential Energy and Conservation of Energy": physics1/concepts/potential-energy.md
+          - "Power": physics1/concepts/power.md
+          - "Projectile Motion": physics1/concepts/projectile-motion.md
+          - "Relative Motion": physics1/concepts/relative-motion.md
+          - "Resonance": physics1/concepts/resonance.md
+          - "Rolling Motion": physics1/concepts/rolling-motion.md
+          - "Rolling, Torque, and Angular Momentum": physics1/concepts/rolling-torque-angular-momentum.md
+          - "Rotation": physics1/concepts/rotation.md
+          - "Scalar": physics1/concepts/scalar.md
+          - "Second Law of Thermodynamics": physics1/concepts/second-law-of-thermodynamics.md
+          - "Shock Wave": physics1/concepts/shock-wave.md
+          - "Simple Harmonic Motion": physics1/concepts/simple-harmonic-motion.md
+          - "Sound Wave": physics1/concepts/sound-wave.md
+          - "Sound Waves": physics1/concepts/sound-waves.md
+          - "Standing Wave": physics1/concepts/standing-wave.md
+          - "Standing Waves": physics1/concepts/standing-waves.md
+          - "Strain": physics1/concepts/strain.md
+          - "Stress": physics1/concepts/stress.md
+          - "Superposition": physics1/concepts/superposition.md
+          - "Temperature and Heat": physics1/concepts/temperature.md
+          - "Tension": physics1/concepts/tension.md
+          - "Thermal Expansion": physics1/concepts/thermal-expansion.md
+          - "Torque": physics1/concepts/torque.md
+          - "Transverse Wave": physics1/concepts/transverse-wave.md
+          - "Vector": physics1/concepts/vector.md
+          - "Vectors": physics1/concepts/vectors.md
+          - "Velocity": physics1/concepts/velocity.md
+          - "Wave Equation": physics1/concepts/wave-equation.md
+          - "Wave": physics1/concepts/wave.md
+          - "Waves": physics1/concepts/waves.md
+          - "Work": physics1/concepts/work.md
+      - Equations:
+          - "Bernoulli’s Equation": physics1/equations/bernoullis-equation.md
+          - "Hookes Law": physics1/equations/hookes-law.md
+          - "Ideal Gas Law": physics1/equations/ideal-gas-law.md
+          - "Kinematic Equations": physics1/equations/kinematic-equations.md
+          - "Newton’s Law of Gravitation": physics1/equations/newtons-law-of-gravitation.md
+          - "Newton’s Second Law": physics1/equations/newtons-second-law.md
+          - "Simple Harmonic Motion Equation": physics1/equations/shm-differential-equation.md
+          - "Work–Energy Theorem": physics1/equations/work-energy-theorem.md
+      - Quizzes: physics1/quizzes.md
+      - Glossary: physics1/glossary.md
+      - "Concepts": physics1/concepts.md
+      - "Equations": physics1/equations.md
+  - PC368 · Plasma:
+      - Overview: plasma/index.md
+      - Concept Graph: plasma/concept-graph.md
+      - Concepts:
+          - "Adiabatic Invariant": plasma/concepts/adiabatic-invariant.md
+          - "Debye Shielding": plasma/concepts/debye-shielding.md
+          - "Drift Motions": plasma/concepts/drift-motion.md
+          - "Frozen-in Theorem": plasma/concepts/frozen-in-theorem.md
+          - "Ideal Plasma": plasma/concepts/ideal-plasma.md
+          - "Ion Acoustic Wave": plasma/concepts/ion-acoustic-wave.md
+          - "Landau Damping": plasma/concepts/landau-damping.md
+          - "Langmuir Waves": plasma/concepts/langmuir-waves.md
+          - "Larmor Radius": plasma/concepts/larmor-radius.md
+          - "Magnetic Islands": plasma/concepts/magnetic-islands.md
+          - "Magnetic Mirror": plasma/concepts/magnetic-mirror.md
+          - "Magnetic Reconnection": plasma/concepts/magnetic-reconnection.md
+          - "Magnetized Waves": plasma/concepts/magnetized-waves.md
+          - "MHD Equilibrium": plasma/concepts/mhd-equilibrium.md
+          - "MHD Instability": plasma/concepts/mhd-instability.md
+          - "Magnetohydrodynamics (MHD)": plasma/concepts/mhd.md
+          - "Plasma Frequency": plasma/concepts/plasma-frequency.md
+          - "Plasma Sheath": plasma/concepts/plasma-sheath.md
+          - "Plasma Waves": plasma/concepts/plasma-waves.md
+          - "Plasma": plasma/concepts/plasma.md
+          - "Poisson’s Equation in Plasma": plasma/concepts/poisson-equation.md
+          - "Quasi-neutrality": plasma/concepts/quasi-neutrality.md
+          - "Sound Speed": plasma/concepts/sound-speed.md
+          - "Streaming Instability": plasma/concepts/streaming-instability.md
+          - "Sweet–Parker Model": plasma/concepts/sweet-parker-model.md
+          - "Vlasov Equation": plasma/concepts/vlasov-equation.md
+      - Equations:
+          - "Alfvén Speed": plasma/equations/alfven-velocity.md
+          - "Cold Plasma Dispersion Tensor": plasma/equations/cold-plasma-dispersion.md
+          - "Continuity Equation": plasma/equations/continuity-equation.md
+          - "Debye Length": plasma/equations/debye-length.md
+          - "Grad–Shafranov Equation": plasma/equations/grad-shafranov.md
+          - "Induction Equation": plasma/equations/induction-equation.md
+          - "Landau Dispersion Relation": plasma/equations/landau-dispersion.md
+          - "Lundquist Number": plasma/equations/lundquist-number.md
+          - "Momentum Equation": plasma/equations/momentum-equation.md
+          - "Plasma Frequency": plasma/equations/plasma-frequency.md
+          - "Sweet–Parker Reconnection Rate": plasma/equations/sweet-parker-rate.md
+          - "Vlasov Equation": plasma/equations/vlasov-equation.md
+      - Quizzes: plasma/quizzes.md
+      - Glossary: plasma/glossary.md
+  - PC316 · Fluids:
+      - Overview: fluids/index.md
+      - Concept Graph: fluids/concept-graph.md
+      - Concepts:
+          - "Bernoulli's Principle": fluids/concepts/bernoulli-principle.md
+          - "Buckingham Pi Theorem": fluids/concepts/buckingham-pi-theorem.md
+          - "Buoyancy": fluids/concepts/buoyancy.md
+          - "Conformal Mapping & the Complex Potential": fluids/concepts/conformal-mapping-and-images.md
+          - "Dimensional Analysis": fluids/concepts/dimensional-analysis.md
+          - "The Energy Cascade & Kolmogorov Scaling": fluids/concepts/energy-cascade.md
+          - "Eulerian vs Lagrangian Descriptions": fluids/concepts/eulerian-vs-lagrangian.md
+          - "Fluid in Rigid-Body Motion": fluids/concepts/fluid-in-rigid-body-motion.md
+          - "Hydrodynamic Stability": fluids/concepts/hydrodynamic-stability.md
+          - "Hydrostatic Equilibrium": fluids/concepts/hydrostatic-equilibrium.md
+          - "Hydrostatic Force on Submerged Surfaces": fluids/concepts/hydrostatic-force-on-surfaces.md
+          - "Kelvin–Helmholtz Instability": fluids/concepts/kelvin-helmholtz-instability.md
+          - "Material Derivative": fluids/concepts/material-derivative.md
+          - "Potential Flow": fluids/concepts/potential-flow.md
+          - "Pressure": fluids/concepts/pressure.md
+          - "Rayleigh–Taylor Instability": fluids/concepts/rayleigh-taylor-instability.md
+          - "Reynolds Averaging & the Closure Problem": fluids/concepts/reynolds-averaging.md
+          - "Reynolds Number": fluids/concepts/reynolds-number.md
+          - "Reynolds Transport Theorem": fluids/concepts/reynolds-transport-theorem.md
+          - "Shock Waves": fluids/concepts/shock-waves.md
+          - "Turbulence": fluids/concepts/turbulence.md
+          - "Viscosity": fluids/concepts/viscosity.md
+          - "What Is a Fluid?": fluids/concepts/what-is-a-fluid.md
+      - Equations:
+          - "Bernoulli's Equation": fluids/equations/bernoulli-equation.md
+          - "Continuity Equation": fluids/equations/continuity-equation.md
+          - "Euler's Equation": fluids/equations/euler-equation.md
+          - "Interface Dispersion Relation (KH / RT / Surface Waves)": fluids/equations/interface-dispersion-relation.md
+          - "Laplace's Equation (Potential Flow)": fluids/equations/laplace-equation.md
+          - "The Navier–Stokes Equation": fluids/equations/navier-stokes-equation.md
+          - "Newton's Law of Viscosity": fluids/equations/newtons-law-of-viscosity.md
+          - "Rankine–Hugoniot Conditions": fluids/equations/rankine-hugoniot-conditions.md
+          - "Turbulence Kinetic Energy Transport Equation": fluids/equations/tke-transport-equation.md
+      - Examples:
+          - "Overview": fluids/examples/index.md
+          - "Example · Couette Flow": fluids/examples/couette-flow.md
+          - "Example · Hagen–Poiseuille Flow": fluids/examples/hagen-poiseuille-flow.md
+          - "Example · Necking of a Falling Water Stream": fluids/examples/necking-stream.md
+          - "Example · The Trinity Blast Wave (Sedov–Taylor)": fluids/examples/trinity-blast-wave.md
+          - "Example · Two-Layer Flow Down an Inclined Plane": fluids/examples/two-layer-incline.md
+      - Simulations:
+          - "Overview": fluids/simulations/index.md
+          - "Proposal · Energy-Cascade Sandbox": fluids/simulations/energy-cascade-sandbox.md
+          - "Proposal · Kelvin–Helmholtz Billow Tank": fluids/simulations/kh-billow-tank.md
+          - "Potential-Flow Builder": fluids/simulations/potential-flow-builder.md
+      - Quizzes: fluids/quizzes.md
+      - Glossary: fluids/glossary.md
+  - PHY653 · Computational:
+      - Overview: comp-plasma/index.md
+      - Concept Graph: comp-plasma/concept-graph.md
+      - Concepts:
+          - "Backward Euler Method": comp-plasma/concepts/backward-euler.md
+          - "Convergence & Error Analysis": comp-plasma/concepts/convergence-and-error.md
+          - "The FDTD Method": comp-plasma/concepts/fdtd-method.md
+          - "Fermi Acceleration": comp-plasma/concepts/fermi-acceleration.md
+          - "Finite Difference Method": comp-plasma/concepts/finite-difference-method.md
+          - "Forward Euler Method": comp-plasma/concepts/forward-euler.md
+          - "Guiding Center & Drift Theory": comp-plasma/concepts/guiding-center-drifts.md
+          - "Leapfrog Method": comp-plasma/concepts/leapfrog-method.md
+          - "Magnetic Mirror": comp-plasma/concepts/magnetic-mirror.md
+          - "N-Body Simulation": comp-plasma/concepts/n-body-simulation.md
+          - "Time Integration of ODEs": comp-plasma/concepts/ode-integration.md
+          - "The Particle-In-Cell (PIC) Method": comp-plasma/concepts/pic-method.md
+          - "Poisson Solvers": comp-plasma/concepts/poisson-solvers.md
+          - "Runge–Kutta Methods": comp-plasma/concepts/runge-kutta-methods.md
+          - "Why Simulate Plasmas?": comp-plasma/concepts/simulation-driven-plasma-physics.md
+          - "Two-Stream Instability": comp-plasma/concepts/two-stream-instability.md
+      - Equations:
+          - "The CFL (Courant) Condition": comp-plasma/equations/cfl-condition.md
+          - "Cyclotron Motion & the Cross-Field Cycloid": comp-plasma/equations/cyclotron-motion.md
+          - "The Discrete Poisson Equation": comp-plasma/equations/discrete-poisson-equation.md
+          - "E×B Drift": comp-plasma/equations/exb-drift.md
+          - "Grad-B & Curvature Drifts": comp-plasma/equations/grad-b-curvature-drift.md
+          - "Leapfrog Update for the Lorentz Force": comp-plasma/equations/leapfrog-update.md
+          - "The Lorentz Force": comp-plasma/equations/lorentz-force.md
+          - "RK4 (and RK3) Schemes": comp-plasma/equations/rk4-scheme.md
+      - Examples:
+          - "Overview": comp-plasma/examples/index.md
+          - "Example · The Cross-Field Cycloid Benchmark": comp-plasma/examples/cross-field-benchmark.md
+          - "Example · Double-Slit Diffraction by FDTD": comp-plasma/examples/double-slit-fdtd.md
+          - "Example · Orbit in a Magnetic Mirror": comp-plasma/examples/magnetic-mirror-orbit.md
+          - "Example · Rutherford Scattering": comp-plasma/examples/rutherford-scattering.md
+      - Simulations:
+          - "Overview": comp-plasma/simulations/index.md
+          - "Integrator Arena": comp-plasma/simulations/integrator-arena.md
+          - "Proposal · Two-Stream Phase-Space Viewer": comp-plasma/simulations/two-stream-viewer.md
+      - Quizzes: comp-plasma/quizzes.md
+      - Glossary: comp-plasma/glossary.md

@@ -1,0 +1,142 @@
+{
+  "nodes": [
+    {
+      "id": "plasma",
+      "label": "Plasma"
+    },
+    {
+      "id": "debye-shielding",
+      "label": "Debye Shielding"
+    },
+    {
+      "id": "plasma-frequency",
+      "label": "Plasma Frequency"
+    },
+    {
+      "id": "vlasov-equation",
+      "label": "Vlasov Equation"
+    },
+    {
+      "id": "mhd",
+      "label": "Magnetohydrodynamics"
+    },
+    {
+      "id": "frozen-in-theorem",
+      "label": "Frozen-in Theorem"
+    },
+    {
+      "id": "plasma-sheath",
+      "label": "Plasma Sheath"
+    },
+    {
+      "id": "drift-motion",
+      "label": "Drift Motion"
+    },
+    {
+      "id": "adiabatic-invariant",
+      "label": "Adiabatic Invariant"
+    },
+    {
+      "id": "plasma-waves",
+      "label": "Plasma Waves"
+    },
+    {
+      "id": "streaming-instability",
+      "label": "Streaming Instability"
+    },
+    {
+      "id": "landau-damping",
+      "label": "Landau Damping"
+    },
+    {
+      "id": "magnetized-waves",
+      "label": "Magnetized Waves"
+    },
+    {
+      "id": "mhd-equilibrium",
+      "label": "MHD Equilibrium"
+    },
+    {
+      "id": "mhd-instability",
+      "label": "MHD Instability"
+    },
+    {
+      "id": "magnetic-reconnection",
+      "label": "Magnetic Reconnection"
+    },
+    {
+      "id": "sweet-parker-model",
+      "label": "Sweet\u2013Parker Model"
+    }
+  ],
+  "edges": [
+    {
+      "source": "plasma",
+      "target": "debye-shielding"
+    },
+    {
+      "source": "plasma",
+      "target": "plasma-frequency"
+    },
+    {
+      "source": "plasma",
+      "target": "mhd"
+    },
+    {
+      "source": "debye-shielding",
+      "target": "ideal-plasma"
+    },
+    {
+      "source": "plasma-frequency",
+      "target": "plasma-waves"
+    },
+    {
+      "source": "vlasov-equation",
+      "target": "landau-damping"
+    },
+    {
+      "source": "plasma-waves",
+      "target": "landau-damping"
+    },
+    {
+      "source": "plasma-waves",
+      "target": "streaming-instability"
+    },
+    {
+      "source": "mhd",
+      "target": "mhd-equilibrium"
+    },
+    {
+      "source": "mhd",
+      "target": "mhd-instability"
+    },
+    {
+      "source": "mhd-instability",
+      "target": "magnetic-reconnection"
+    },
+    {
+      "source": "magnetic-reconnection",
+      "target": "sweet-parker-model"
+    },
+    {
+      "source": "frozen-in-theorem",
+      "target": "magnetic-reconnection"
+    },
+    {
+      "source": "drift-motion",
+      "target": "adiabatic-invariant"
+    },
+    {
+      "source": "drift-motion",
+      "target": "magnetized-waves"
+    },
+    {
+      "source": "magnetized-waves",
+      "target": "mhd-equilibrium"
+    },
+    {
+      "source": "landau-damping",
+      "target": "streaming-instability"
+    }
+  ]
+}

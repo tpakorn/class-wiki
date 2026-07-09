@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debye Length Calculator</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #111; color: #e0e0e0; padding: 2rem; }
+  .card { background: #1e1e1e; padding: 1.5rem; border-radius: 8px; max-width: 500px; margin: auto; }
+  label { display: block; margin-top: 1rem; }
+  input { width: 100%; padding: .5rem; border-radius: 4px; border: 1px solid #444; background: #222; color: white; }
+  button { margin-top: 1rem; padding: .5rem 1rem; }
+  .result { margin-top: 1rem; font-weight: bold; }
+</style>
+<script>
+(function() {
+  const ωpe = (ne) => Math.sqrt(ne * 1.602e-19**2 / (9.109e-31 * 8.854e-12));
+  const vte = (Te) => Math.sqrt(2 * 1.602e-19 * Te / 9.109e-31);
+  const λD = (ne, Te) => vte(Te) / ωpe(ne);
+  const calc = () => {
+    const ne = parseFloat(document.getElementById('ne').value);
+    const Te = parseFloat(document.getElementById('Te').value);
+    const val = λD(ne, Te);
+    document.getElementById('out').textContent = val < 1e-6 ? (val*1e6).toFixed(2)+' μm'
+      : val < 1e-3 ? (val*1e3).toFixed(2)+' mm'
+      : val < 1 ? (val*1e2).toFixed(2)+' cm'
+      : val.toFixed(2)+' m';
+  };
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('btn').onclick = calc;
+    ['ne','Te'].forEach(id => document.getElementById(id).oninput = calc);
+  });
+})();
+</script>
+</head>
+<body>
+<div class="card">
+<h2>Debye Length Calculator</h2>
+<label>n_e (m⁻³): <input id="ne" value="1e18"></label>
+<label>T_e (eV): <input id="Te" value="1"></label>
+<button id="btn">Compute λ_D</button>
+<div class="result" id="out">—</div>
+</div>
+</body>
+</html>

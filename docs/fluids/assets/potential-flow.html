@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Potential-Flow Builder</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --accent:#b3542e; --line:#2a6f8e; --panel:#f4f2ee; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --accent:#e08a5c; --line:#6ab8d8; --panel:#1e2126; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .controls { display:flex; flex-wrap:wrap; gap:14px; padding:10px 2px; align-items:center; }
+  .ctl { display:flex; flex-direction:column; gap:2px; min-width:130px; }
+  .ctl label { font-size:12px; color:var(--muted); letter-spacing:.03em; }
+  .ctl output { font-variant-numeric:tabular-nums; font-size:12px; color:var(--accent); }
+  input[type=range] { accent-color:var(--accent); width:130px; }
+  .presets { display:flex; gap:6px; flex-wrap:wrap; padding-bottom:8px; }
+  button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:4px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--accent); color:var(--accent); }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="presets">
+    <button data-p="uniform">Uniform</button>
+    <button data-p="halfbody">Source + stream</button>
+    <button data-p="cylinder">Cylinder (doublet)</button>
+    <button data-p="lifting">Lifting cylinder (+ vortex)</button>
+    <button data-p="pair">Source–sink pair</button>
+  </div>
+  <div class="controls">
+    <div class="ctl"><label>Uniform flow U</label>
+      <input type="range" id="U" min="0" max="2" step="0.05" value="1"><output id="oU">1.00</output></div>
+    <div class="ctl"><label>Source strength Q</label>
+      <input type="range" id="Q" min="-3" max="3" step="0.1" value="0"><output id="oQ">0.0</output></div>
+    <div class="ctl"><label>Doublet strength K</label>
+      <input type="range" id="K" min="0" max="2" step="0.05" value="0"><output id="oK">0.00</output></div>
+    <div class="ctl"><label>Vortex circulation Γ</label>
+      <input type="range" id="G" min="-6" max="6" step="0.2" value="0"><output id="oG">0.0</output></div>
+  </div>
+  <canvas id="cv" width="760" height="480"></canvas>
+  <p class="note">Streamlines of φ = Ux + (Q/2π)ln r + (K/r)cosθ − (Γ/2π)θ, traced by
+  integrating the velocity field. Colors mark speed (slow → fast). Superposition works
+  because Laplace's equation is linear.</p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const S = { U:1, Q:0, K:0, G:0, pair:false };
+  const ids = ['U','Q','K','G'];
+  const fmt = { U:v=>v.toFixed(2), Q:v=>v.toFixed(1), K:v=>v.toFixed(2), G:v=>v.toFixed(1) };
+  ids.forEach(id => {
+    const el = document.getElementById(id), out = document.getElementById('o'+id);
+    el.addEventListener('input', () => { S[id] = +el.value; S.pair = false; out.value = fmt[id](S[id]); draw(); });
+  });
+  const presets = {
+    uniform:  {U:1, Q:0, K:0, G:0, pair:false},
+    halfbody: {U:1, Q:2, K:0, G:0, pair:false},
+    cylinder: {U:1, Q:0, K:0.8, G:0, pair:false},
+    lifting:  {U:1, Q:0, K:0.8, G:3, pair:false},
+    pair:     {U:1, Q:2, K:0, G:0, pair:true}
+  };
+  document.querySelectorAll('button[data-p]').forEach(b => b.addEventListener('click', () => {
+    Object.assign(S, presets[b.dataset.p]);
+    ids.forEach(id => { document.getElementById(id).value = S[id]; document.getElementById('o'+id).value = fmt[id](S[id]); });
+    draw();
+  }));
+
+  // world coords: x in [-4,4], y in [-2.5,2.5]
+  const W = cv.width, H = cv.height, X0 = -4, X1 = 4, Y0 = -2.5, Y1 = 2.5;
+  const px = x => (x - X0)/(X1 - X0)*W, py = y => H - (y - Y0)/(Y1 - Y0)*H;
+
+  function vel(x, y) {
+    let u = S.U, v = 0;
+    const sing = S.pair ? [[-1.2, S.Q], [1.2, -S.Q]] : [[0, S.Q]];
+    for (const [sx, q] of sing) {
+      const dx = x - sx, r2 = dx*dx + y*y + 1e-9;
+      u += q/(2*Math.PI) * dx/r2; v += q/(2*Math.PI) * y/r2;
+    }
+    if (S.K) { const r2 = x*x + y*y + 1e-9;               // doublet at origin
+      u += S.K * (y*y - x*x)/(r2*r2); v += -S.K * 2*x*y/(r2*r2); }
+    if (S.G) { const r2 = x*x + y*y + 1e-9;               // vortex at origin
+      u += S.G/(2*Math.PI) * y/r2; v += -S.G/(2*Math.PI) * x/r2; }
+    return [u, v];
+  }
+
+  function speedColor(s) {
+    const t = Math.min(1, s/2.5);
+    const c1 = [42,111,142], c2 = [224,138,92]; // line → accent
+    const c = c1.map((a,i) => Math.round(a + (c2[i]-a)*t));
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+  }
+
+  function trace(x, y, dir) {
+    ctx.beginPath(); ctx.moveTo(px(x), py(y));
+    const h = 0.02 * dir;
+    for (let i = 0; i < 900; i++) {
+      // RK2 midpoint
+      let [u1, v1] = vel(x, y);
+      let sp = Math.hypot(u1, v1); if (sp < 1e-4 || sp > 60) break;
+      let xm = x + h*u1/sp*0.5, ym = y + h*v1/sp*0.5;
+      let [u2, v2] = vel(xm, ym);
+      let sp2 = Math.hypot(u2, v2); if (sp2 < 1e-4) break;
+      x += h*u2/sp2; y += h*v2/sp2;
+      if (x < X0-0.2 || x > X1+0.2 || y < Y0-0.2 || y > Y1+0.2) break;
+      // stop inside cylinder body
+      if (S.K > 0 && Math.hypot(x,y) < Math.sqrt(S.K/Math.max(S.U,0.05))*0.98) break;
+      ctx.strokeStyle = speedColor(sp2);
+      ctx.lineTo(px(x), py(y));
+    }
+    ctx.stroke();
+  }
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim();
+    ctx.fillRect(0, 0, W, H);
+    ctx.lineWidth = 1.1;
+    const n = 26;
+    for (let i = 0; i <= n; i++) {
+      const y = Y0 + (Y1 - Y0)*i/n + 0.011; // offset avoids axis singularities
+      trace(X0 + 0.01, y, +1);
+      if (S.U <= 0.01) trace(X1 - 0.01, y, -1);
+    }
+    // seed radial lines around a pure source
+    if ((S.Q > 0.1 || S.pair) && S.U < 0.3) {
+      for (let a = 0; a < 16; a++) {
+        const th = a/16 * 2*Math.PI, sx = S.pair ? -1.2 : 0;
+        trace(sx + 0.05*Math.cos(th), 0.05*Math.sin(th), +1);
+      }
+    }
+    // cylinder body
+    if (S.K > 0) {
+      const a = Math.sqrt(S.K/Math.max(S.U, 0.05));
+      ctx.beginPath(); ctx.arc(px(0), py(0), a/(X1-X0)*W, 0, 2*Math.PI);
+      ctx.fillStyle = css.getPropertyValue('--panel').trim();
+      ctx.strokeStyle = css.getPropertyValue('--muted').trim();
+      ctx.fill(); ctx.stroke();
+    }
+  }
+  draw();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+})();
+</script>
+</body>
+</html>

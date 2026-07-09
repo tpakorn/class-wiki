@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrator Arena</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --euler:#c0392b; --back:#2471a3; --leap:#1e8449; --rk4:#b7950b; --exact:#888; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --euler:#e74c3c; --back:#5dade2; --leap:#58d68d; --rk4:#f4d03f; --exact:#777; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:16px; align-items:center; padding:10px 2px; }
+  .ctl { display:flex; flex-direction:column; min-width:150px; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; }
+  input[type=range] { width:150px; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; padding:4px 2px 8px; }
+  .legend span::before { content:"—— "; font-weight:bold; }
+  .l-euler { color:var(--euler); } .l-back { color:var(--back); }
+  .l-leap { color:var(--leap); } .l-rk4 { color:var(--rk4); } .l-exact { color:var(--exact); }
+  button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:4px 12px; cursor:pointer; }
+  .note { color:var(--muted); font-size:12px; }
+  label.cb { font-size:12px; display:flex; gap:4px; align-items:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>Steps per gyration period</label>
+      <input type="range" id="spp" min="8" max="200" step="1" value="40">
+      <output id="ospp">40</output></div>
+    <div class="ctl"><label>Gyration periods</label>
+      <input type="range" id="per" min="1" max="30" step="1" value="7">
+      <output id="oper">7</output></div>
+    <label class="cb"><input type="checkbox" id="cEuler" checked> <span class="l-euler">Forward Euler</span></label>
+    <label class="cb"><input type="checkbox" id="cBack" checked> <span class="l-back">Backward Euler</span></label>
+    <label class="cb"><input type="checkbox" id="cLeap" checked> <span class="l-leap">Leapfrog</span></label>
+    <label class="cb"><input type="checkbox" id="cRK4"> <span class="l-rk4">RK4</span></label>
+  </div>
+  <canvas id="cv" width="760" height="430"></canvas>
+  <div class="legend"><span class="l-exact">exact cycloid</span></div>
+  <p class="note">Charged particle in crossed fields E = ŷ, B = ẑ (q = m = 1), started at rest.
+  Exact solution: x = ωt − sin ωt, y = 1 − cos ωt. Forward Euler gains energy and spirals
+  outward; backward Euler loses energy; leapfrog stays on the cycloid. Drop the steps-per-period
+  slider and watch who survives.</p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const q_m = 1, E = 1, B = 1, omega = 1;
+
+  function deriv(s) { // s = [x, y, vx, vy]; E along ŷ, B along ẑ
+    return [s[2], s[3], q_m*(s[3]*B), q_m*(E - s[2]*B)];
+  }
+  const add = (a, b, f) => a.map((v, i) => v + f*b[i]);
+
+  function run(stepFn, dt, n) {
+    let s = [0, 0, 0, 0]; const pts = [[0, 0]];
+    for (let i = 0; i < n; i++) { s = stepFn(s, dt); pts.push([s[0], s[1]]); }
+    return pts;
+  }
+  const eulerStep = (s, h) => add(s, deriv(s), h);
+  const backStep = (s, h) => add(s, deriv(add(s, deriv(s), h)), h);
+  function leapStep(s, h) {
+    // exact closed-form implicit leapfrog for E=ŷ, B=ẑ
+    // v' = (C + A(A·C) − A×C)/(1+A²) with A = (Ωh/2)ẑ reduces to:
+    const a = omega*h/2, den = 1 + a*a;
+    const vx = ((1 - a*a)*s[2] + 2*a*s[3] + a*q_m*E*h) / den;
+    const vy = ((1 - a*a)*s[3] - 2*a*s[2] + q_m*E*h) / den;
+    return [s[0] + vx*h, s[1] + vy*h, vx, vy];
+  }
+  function rk4Step(s, h) {
+    const k1 = deriv(s), k2 = deriv(add(s, k1, h/2)),
+          k3 = deriv(add(s, k2, h/2)), k4 = deriv(add(s, k3, h));
+    return s.map((v, i) => v + h*(k1[i] + 2*k2[i] + 2*k3[i] + k4[i])/6);
+  }
+
+  const ids = { spp:'ospp', per:'oper' };
+  const S = { spp:40, per:7 };
+  Object.keys(ids).forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById(ids[id]).value = el.value; draw(); });
+  });
+  ['cEuler','cBack','cLeap','cRK4'].forEach(id =>
+    document.getElementById(id).addEventListener('change', draw));
+
+  function draw() {
+    const css = getComputedStyle(document.documentElement);
+    const W = cv.width, H = cv.height;
+    ctx.fillStyle = css.getPropertyValue('--bg').trim();
+    ctx.fillRect(0, 0, W, H);
+
+    const T = S.per * 2*Math.PI, n = S.per * S.spp, dt = T/n;
+    // exact cycloid
+    const exact = [];
+    for (let i = 0; i <= 400; i++) {
+      const t = T*i/400; exact.push([t - Math.sin(t), 1 - Math.cos(t)]);
+    }
+    // runs
+    const runs = [];
+    if (document.getElementById('cEuler').checked) runs.push([run(eulerStep, dt, n), '--euler']);
+    if (document.getElementById('cBack').checked)  runs.push([run(backStep, dt, n), '--back']);
+    if (document.getElementById('cLeap').checked)  runs.push([run(leapStep, dt, n), '--leap']);
+    if (document.getElementById('cRK4').checked)   runs.push([run(rk4Step, dt, n), '--rk4']);
+
+    // bounds from exact + clamp wild trajectories
+    let xmax = T + 1, ymin = -1.5, ymax = 3.5;
+    for (const [pts] of runs) for (const p of pts) {
+      if (isFinite(p[1])) { ymax = Math.min(8, Math.max(ymax, p[1] + 0.3));
+                            ymin = Math.max(-6, Math.min(ymin, p[1] - 0.3)); } }
+    const px = x => 40 + (x/xmax)*(W - 55);
+    const py = y => H - 25 - ((y - ymin)/(ymax - ymin))*(H - 45);
+
+    // axes
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim(); ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(px(0), py(0)); ctx.lineTo(px(xmax), py(0)); ctx.stroke();
+
+    function plot(pts, color, dash) {
+      ctx.strokeStyle = css.getPropertyValue(color).trim();
+      ctx.setLineDash(dash || []); ctx.lineWidth = 1.4;
+      ctx.beginPath(); let started = false;
+      for (const p of pts) {
+        if (!isFinite(p[0]) || !isFinite(p[1]) || Math.abs(p[1]) > 50) break;
+        const X = px(p[0]), Y = py(p[1]);
+        if (!started) { ctx.moveTo(X, Y); started = true; } else ctx.lineTo(X, Y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+    }
+    plot(exact, '--exact', [5, 4]);
+    for (const [pts, color] of runs) plot(pts, color);
+  }
+  draw();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet–Parker Playground</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #111; color: #e0e0e0; padding: 2rem; }
+  .card { background: #1e1e1e; padding: 1.5rem; border-radius: 8px; max-width: 600px; margin: auto; }
+  label { display: block; margin-top: 1rem; }
+  input { width: 100%; padding: .5rem; border-radius: 4px; border: 1px solid #444; background: #222; color: white; }
+  button { margin-top: 1rem; padding: .5rem 1rem; }
+  .result { margin-top: 1rem; }
+</style>
+<script>
+(function() {
+  const μ0 = 4*Math.PI*1e-7;
+  const calc = () => {
+    const vA = parseFloat(document.getElementById('vA').value);
+    const L = parseFloat(document.getElementById('L').value);
+    const η = parseFloat(document.getElementById('eta').value);
+    const S = μ0 * vA * L / η;
+    const M = 1/Math.sqrt(S);
+    const δ = L * M;
+    const out = `S = ${S.toExponential(2)}<br>M_A = ${M.toExponential(2)}<br>δ = ${(δ).toExponential(2)} m`;
+    document.getElementById('out').innerHTML = out;
+  };
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('btn').onclick = calc;
+    ['vA','L','eta'].forEach(id => document.getElementById(id).oninput = calc);
+    calc();
+  });
+})();
+</script>
+</head>
+<body>
+<div class="card">
+<h2>Sweet–Parker Playground</h2>
+<label>v_A (m/s): <input id="vA" value="1e6"></label>
+<label>L (m): <input id="L" value="1e7"></label>
+<label>η (m²/s): <input id="eta" value="1"></label>
+<button id="btn">Compute</button>
+<div class="result" id="out"></div>
+</div>
+</body>
+</html>

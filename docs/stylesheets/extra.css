@@ -1,0 +1,144 @@
+/* ── class-wiki · editorial theme ─────────────────────────────
+   Minimal, typographic, fast. Inspired by editorial technical
+   sites: restrained color, strong hierarchy, generous whitespace. */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --cw-serif: "Newsreader", Georgia, serif;
+  --cw-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --cw-mono: "JetBrains Mono", ui-monospace, monospace;
+  --cw-accent: #9d1c20;          /* TU red, muted */
+  --cw-accent-bright: #c73a3e;
+}
+
+/* palette fine-tuning */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #16181d;
+  --md-accent-fg-color: var(--cw-accent);
+  --md-typeset-a-color: var(--cw-accent);
+  --md-default-bg-color: #fdfcfa;
+  --md-code-bg-color: #f3f1ec;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #16181d;
+  --md-accent-fg-color: var(--cw-accent-bright);
+  --md-typeset-a-color: #e08a8d;
+  --md-default-bg-color: #16181d;
+  --md-code-bg-color: #21242b;
+  --md-typeset-color: #d9d7d2;
+}
+
+/* typography */
+.md-typeset {
+  font-family: var(--cw-sans);
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+.md-typeset h1, .md-typeset h2 {
+  font-family: var(--cw-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.md-typeset h1 {
+  font-size: 2em;
+  color: var(--md-typeset-color);
+  margin-bottom: 0.6em;
+}
+.md-typeset h1::after {
+  content: "";
+  display: block;
+  width: 2.2rem;
+  height: 2px;
+  margin-top: 0.35em;
+  background: var(--cw-accent-bright);
+}
+.md-typeset h2 {
+  font-size: 1.4em;
+  margin-top: 1.6em;
+}
+.md-typeset h3 { font-weight: 600; font-size: 1.05em; }
+.md-typeset code, .md-typeset pre { font-family: var(--cw-mono); }
+
+/* header & tabs — quiet, typographic */
+.md-header { background: var(--md-primary-fg-color); }
+.md-header__title { font-family: var(--cw-serif); font-weight: 500; }
+.md-tabs { background: var(--md-primary-fg-color); }
+.md-tabs__link {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.md-tabs__link--active, .md-tabs__link:hover { opacity: 1; }
+
+/* links: underline on hover only, accent color */
+.md-typeset a { text-decoration: none; border-bottom: 1px solid transparent; }
+.md-typeset a:hover { border-bottom-color: currentColor; }
+
+/* tables: editorial rules instead of boxes */
+.md-typeset table:not([class]) {
+  border: none;
+  box-shadow: none;
+  font-size: 0.95em;
+}
+.md-typeset table:not([class]) th {
+  background: transparent;
+  border-bottom: 2px solid var(--cw-accent-bright);
+  font-weight: 600;
+}
+.md-typeset table:not([class]) td { border-top: 1px solid var(--md-default-fg-color--lightest); }
+
+/* admonitions: slimmer */
+.md-typeset .admonition, .md-typeset details {
+  border-width: 0 0 0 3px;
+  box-shadow: none;
+  background: var(--md-code-bg-color);
+  font-size: 0.95em;
+}
+
+/* boxed equations breathing room */
+.md-typeset .arithmatex { overflow-x: auto; }
+
+/* course cards on the home page */
+.cw-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+.cw-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 3px solid var(--cw-accent-bright);
+  border-radius: 4px;
+  padding: 0.9rem 1rem 0.8rem;
+  background: var(--md-default-bg-color);
+  transition: border-color 0.15s;
+}
+.cw-card:hover { border-color: var(--cw-accent-bright); }
+.cw-card .cw-code {
+  font-family: var(--cw-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cw-accent-bright);
+}
+.cw-card h3 {
+  font-family: var(--cw-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0.2rem 0 0.35rem !important;
+}
+.cw-card h3 a { color: var(--md-typeset-color) !important; }
+.cw-card p { font-size: 0.66rem; margin: 0 0 0.4rem; color: var(--md-default-fg-color--light); }
+.cw-card .cw-meta { font-size: 0.58rem; color: var(--md-default-fg-color--light); }
+
+/* mermaid: nodes use light pastel fills — keep label text dark in both schemes */
+.md-typeset .mermaid .nodeLabel,
+.md-typeset .mermaid .nodeLabel p { color: #1f2328 !important; }
+
+/* footer minimal */
+.md-footer-meta { background: var(--md-primary-fg-color); }
+
+/* keep content column readable */
+.md-grid { max-width: 76rem; }
