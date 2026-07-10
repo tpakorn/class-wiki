@@ -11,6 +11,11 @@
     :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
             --traj:#e74c3c; --old:#644; --env:#5dade2; --gnd:#777; }
   }
+  /* explicit overrides win regardless of OS preference — follows the site's toggle */
+  :root[data-theme="light"] { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --traj:#c0392b; --old:#caa; --env:#2471a3; --gnd:#999; }
+  :root[data-theme="dark"] { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --traj:#e74c3c; --old:#644; --env:#5dade2; --gnd:#777; }
   body { margin:0; background:var(--bg); color:var(--fg);
          font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
   .wrap { max-width:760px; margin:0 auto; padding:12px; }
@@ -132,7 +137,22 @@
   document.getElementById('clear').onclick = () => { shots = []; drawAll();
     document.getElementById('stats').textContent = ''; };
   document.getElementById('env').onchange = () => drawAll();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => drawAll());
+
+  // Follow the site's manual dark/light toggle (data-md-color-scheme on the
+  // parent frame), not just the OS-level prefers-color-scheme.
+  function applyTheme() {
+    let scheme = null;
+    try { scheme = window.parent.document.body.getAttribute('data-md-color-scheme'); } catch (e) {}
+    const dark = scheme ? scheme === 'slate' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  }
+  applyTheme();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { applyTheme(); drawAll(); });
+  try {
+    new MutationObserver(() => { applyTheme(); drawAll(); })
+      .observe(window.parent.document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+  } catch (e) {}
+
   drawAll();
 })();
 </script>

@@ -9,6 +9,9 @@
   @media (prefers-color-scheme: dark) {
     :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --accent:#e08a5c; --line:#6ab8d8; --panel:#1e2126; }
   }
+  /* explicit overrides win regardless of OS preference — follows the site's toggle */
+  :root[data-theme="light"] { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --accent:#b3542e; --line:#2a6f8e; --panel:#f4f2ee; }
+  :root[data-theme="dark"] { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --accent:#e08a5c; --line:#6ab8d8; --panel:#1e2126; }
   body { margin:0; background:var(--bg); color:var(--fg);
          font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
   .wrap { max-width:760px; margin:0 auto; padding:12px; }
@@ -144,8 +147,22 @@
       ctx.fill(); ctx.stroke();
     }
   }
+  // Follow the site's manual dark/light toggle (data-md-color-scheme on the
+  // parent frame's <body>), not just the OS-level prefers-color-scheme.
+  function applyTheme() {
+    let scheme = null;
+    try { scheme = window.parent.document.body.getAttribute('data-md-color-scheme'); } catch (e) {}
+    const dark = scheme ? scheme === 'slate' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  }
+  applyTheme();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { applyTheme(); draw(); });
+  try {
+    new MutationObserver(() => { applyTheme(); draw(); })
+      .observe(window.parent.document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+  } catch (e) {}
+
   draw();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
 })();
 </script>
 </body>
