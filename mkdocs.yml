@@ -1,7 +1,7 @@
 site_name: Physics Class Wiki
 site_description: >-
-  Cross-linked knowledge wikis for SC133, PC368, PC316 and PHY653 —
-  physics courses at Thammasat University.
+  Cross-linked knowledge wikis for seven physics courses at Thammasat
+  University — SC133, SC134, PC316, PC368, PHY621, PHY622, PHY653.
 site_author: Pakorn Wongwaitayakornkul
 repo_url: https://github.com/tpakorn/class-wiki
 repo_name: tpakorn/class-wiki
@@ -70,88 +70,42 @@ nav:
       - Lecture Timeline: physics1/lectures.md
       - Concept Graph: physics1/concept-graph.md
       - Concepts:
-          - "Acceleration": physics1/concepts/acceleration.md
-          - "Angular Acceleration": physics1/concepts/angular-acceleration.md
-          - "Angular Momentum": physics1/concepts/angular-momentum.md
-          - "Angular Velocity": physics1/concepts/angular-velocity.md
-          - "Archimedes' Principle": physics1/concepts/archimedes-principle.md
           - "Beats": physics1/concepts/beats.md
-          - "Bernoulli": physics1/concepts/bernoulli.md
-          - "Bernoulli'S Equation": physics1/concepts/bernoullis-equation.md
-          - "Center of Mass and Linear Momentum": physics1/concepts/center-of-mass.md
+          - "Fluids in Motion: Continuity & Bernoulli": physics1/concepts/bernoulli.md
+          - "Center of Mass & Linear Momentum": physics1/concepts/center-of-mass.md
           - "Circular Motion": physics1/concepts/circular-motion.md
-          - "Collision and Impulse": physics1/concepts/collision-and-impulse.md
-          - "Collision": physics1/concepts/collision.md
-          - "Conservation Of Energy": physics1/concepts/conservation-of-energy.md
-          - "Continuity Equation": physics1/concepts/continuity-equation.md
-          - "Damped and Forced Oscillations": physics1/concepts/damped-oscillations.md
-          - "Displacement": physics1/concepts/displacement.md
-          - "Drag": physics1/concepts/drag.md
-          - "Elasticity": physics1/concepts/elasticity.md
-          - "Entropy": physics1/concepts/entropy.md
-          - "Equilibrium and Elasticity": physics1/concepts/equilibrium.md
-          - "First Law of Thermodynamics": physics1/concepts/first-law-of-thermodynamics.md
-          - "Fluid": physics1/concepts/fluid.md
-          - "Fluids": physics1/concepts/fluids.md
-          - "Force": physics1/concepts/force.md
-          - "Friction and Drag": physics1/concepts/friction-and-drag.md
-          - "Friction": physics1/concepts/friction.md
+          - "Collisions & Impulse": physics1/concepts/collision-and-impulse.md
+          - "Conservation of Energy": physics1/concepts/conservation-of-energy.md
+          - "Damped & Driven Oscillations, Resonance": physics1/concepts/damped-oscillations.md
+          - "Equilibrium & Elasticity": physics1/concepts/equilibrium.md
+          - "The First Law of Thermodynamics": physics1/concepts/first-law-of-thermodynamics.md
+          - "Fluid Statics: Pressure, Pascal & Archimedes": physics1/concepts/fluids.md
+          - "Friction & Drag": physics1/concepts/friction-and-drag.md
           - "Gravitation": physics1/concepts/gravitation.md
-          - "Heat": physics1/concepts/heat.md
-          - "Ideal Gas": physics1/concepts/ideal-gas.md
-          - "Impulse": physics1/concepts/impulse.md
-          - "Interference": physics1/concepts/interference.md
-          - "Internal Energy": physics1/concepts/internal-energy.md
-          - "Kepler'S Laws": physics1/concepts/keplers-laws.md
-          - "Kinematics": physics1/concepts/kinematics.md
-          - "Kinetic Energy and Work": physics1/concepts/kinetic-energy-and-work.md
-          - "Kinetic Energy": physics1/concepts/kinetic-energy.md
+          - "The Ideal Gas": physics1/concepts/ideal-gas.md
+          - "Kepler's Laws & Orbits": physics1/concepts/keplers-laws.md
+          - "Motion in One Dimension (Kinematics)": physics1/concepts/kinematics.md
+          - "Work & Kinetic Energy": physics1/concepts/kinetic-energy-and-work.md
           - "Linear Momentum": physics1/concepts/linear-momentum.md
-          - "Longitudinal Wave": physics1/concepts/longitudinal-wave.md
-          - "Measurement": physics1/concepts/measurement.md
-          - "Molecular Speed": physics1/concepts/molecular-speed.md
-          - "Moment Of Inertia": physics1/concepts/moment-of-inertia.md
-          - "Newton'S First Law": physics1/concepts/newtons-first-law.md
-          - "Newton’s Laws": physics1/concepts/newtons-laws.md
-          - "Newton'S Second Law": physics1/concepts/newtons-second-law.md
-          - "Newton'S Third Law": physics1/concepts/newtons-third-law.md
-          - "Normal Force": physics1/concepts/normal-force.md
-          - "Orbits": physics1/concepts/orbits.md
-          - "Oscillation": physics1/concepts/oscillation.md
-          - "Oscillations": physics1/concepts/oscillations.md
-          - "Pascal'S Principle": physics1/concepts/pascals-principle.md
-          - "Pendulum": physics1/concepts/pendulum.md
-          - "Potential Energy and Conservation of Energy": physics1/concepts/potential-energy.md
-          - "Power": physics1/concepts/power.md
+          - "Measurement & Units": physics1/concepts/measurement.md
+          - "The Distribution of Molecular Speeds": physics1/concepts/molecular-speed.md
+          - "Moment of Inertia": physics1/concepts/moment-of-inertia.md
+          - "Newton's Laws of Motion": physics1/concepts/newtons-laws.md
+          - "The Pendulum": physics1/concepts/pendulum.md
+          - "Potential Energy": physics1/concepts/potential-energy.md
           - "Projectile Motion": physics1/concepts/projectile-motion.md
           - "Relative Motion": physics1/concepts/relative-motion.md
-          - "Resonance": physics1/concepts/resonance.md
-          - "Rolling Motion": physics1/concepts/rolling-motion.md
-          - "Rolling, Torque, and Angular Momentum": physics1/concepts/rolling-torque-angular-momentum.md
+          - "Rolling & Angular Momentum": physics1/concepts/rolling-torque-angular-momentum.md
           - "Rotation": physics1/concepts/rotation.md
-          - "Scalar": physics1/concepts/scalar.md
-          - "Second Law of Thermodynamics": physics1/concepts/second-law-of-thermodynamics.md
-          - "Shock Wave": physics1/concepts/shock-wave.md
+          - "The Second Law & Entropy": physics1/concepts/second-law-of-thermodynamics.md
+          - "Shock Waves & the Sonic Boom": physics1/concepts/shock-wave.md
           - "Simple Harmonic Motion": physics1/concepts/simple-harmonic-motion.md
-          - "Sound Wave": physics1/concepts/sound-wave.md
           - "Sound Waves": physics1/concepts/sound-waves.md
-          - "Standing Wave": physics1/concepts/standing-wave.md
-          - "Standing Waves": physics1/concepts/standing-waves.md
-          - "Strain": physics1/concepts/strain.md
-          - "Stress": physics1/concepts/stress.md
-          - "Superposition": physics1/concepts/superposition.md
-          - "Temperature and Heat": physics1/concepts/temperature.md
-          - "Tension": physics1/concepts/tension.md
-          - "Thermal Expansion": physics1/concepts/thermal-expansion.md
+          - "Superposition, Interference & Standing Waves": physics1/concepts/superposition.md
+          - "Temperature, Heat & Thermal Expansion": physics1/concepts/temperature.md
           - "Torque": physics1/concepts/torque.md
-          - "Transverse Wave": physics1/concepts/transverse-wave.md
-          - "Vector": physics1/concepts/vector.md
           - "Vectors": physics1/concepts/vectors.md
-          - "Velocity": physics1/concepts/velocity.md
-          - "Wave Equation": physics1/concepts/wave-equation.md
-          - "Wave": physics1/concepts/wave.md
-          - "Waves": physics1/concepts/waves.md
-          - "Work": physics1/concepts/work.md
+          - "Traveling Waves": physics1/concepts/waves.md
       - Equations:
           - "Bernoulli’s Equation": physics1/equations/bernoullis-equation.md
           - "Hookes Law": physics1/equations/hookes-law.md
@@ -161,6 +115,12 @@ nav:
           - "Newton’s Second Law": physics1/equations/newtons-second-law.md
           - "Simple Harmonic Motion Equation": physics1/equations/shm-differential-equation.md
           - "Work–Energy Theorem": physics1/equations/work-energy-theorem.md
+      - Simulations:
+          - "Overview": physics1/simulations/index.md
+          - "Collision Lab": physics1/simulations/collision-lab.md
+          - "Projectile Playground": physics1/simulations/projectile-playground.md
+          - "Oscillator Lab": physics1/simulations/shm-lab.md
+          - "Wave Studio": physics1/simulations/wave-studio.md
       - Quizzes: physics1/quizzes.md
       - Glossary: physics1/glossary.md
       - "Concepts": physics1/concepts.md

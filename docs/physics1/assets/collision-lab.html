@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collision Lab</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --m1:#c0392b; --m2:#2471a3; --p:#1e8449; --k:#b7950b; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --m1:#e74c3c; --m2:#5dade2; --p:#58d68d; --k:#f4d03f; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; font-variant-numeric:tabular-nums; }
+  input[type=range] { width:110px; accent-color:var(--m1); }
+  button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:4px 12px; font-size:12px; cursor:pointer; }
+  .stats { font-size:12px; color:var(--muted); padding:6px 2px;
+           font-variant-numeric:tabular-nums; white-space:pre; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>m₁ (kg)</label>
+      <input type="range" id="m1" min="0.5" max="5" step="0.5" value="2"><output id="om1">2.0</output></div>
+    <div class="ctl"><label>v₁ (m/s)</label>
+      <input type="range" id="v1" min="-5" max="5" step="0.5" value="3"><output id="ov1">3.0</output></div>
+    <div class="ctl"><label>m₂ (kg)</label>
+      <input type="range" id="m2" min="0.5" max="5" step="0.5" value="1"><output id="om2">1.0</output></div>
+    <div class="ctl"><label>v₂ (m/s)</label>
+      <input type="range" id="v2" min="-5" max="5" step="0.5" value="0"><output id="ov2">0.0</output></div>
+    <div class="ctl"><label>Elasticity e (0 = stick, 1 = elastic)</label>
+      <input type="range" id="e" min="0" max="1" step="0.05" value="1"><output id="oe">1.00</output></div>
+    <button id="run">Run</button>
+  </div>
+  <canvas id="cv" width="760" height="300"></canvas>
+  <div class="stats" id="stats"></div>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, TRACK = H*0.42;
+  const S = { m1: 2, v1: 3, m2: 1, v2: 0, e: 1 };
+  const fmts = { m1: v=>v.toFixed(1), v1: v=>v.toFixed(1), m2: v=>v.toFixed(1),
+                 v2: v=>v.toFixed(1), e: v=>v.toFixed(2) };
+  for (const id of Object.keys(S)) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById('o'+id).value = fmts[id](S[id]); reset(); });
+  }
+
+  // world: x in metres [0, 12]
+  const px = x => x/12*W;
+  let sim = null;
+
+  function outcome() {
+    const { m1, v1, m2, v2, e } = S;
+    // 1-D collision with restitution e
+    const u1 = (m1*v1 + m2*v2 + m2*e*(v2 - v1)) / (m1 + m2);
+    const u2 = (m1*v1 + m2*v2 + m1*e*(v1 - v2)) / (m1 + m2);
+    return { u1, u2 };
+  }
+
+  function reset() {
+    sim = { x1: 3, x2: 8, v1: S.v1, v2: S.v2, collided: false, t: 0 };
+    drawFrame(true);
+    stats(false);
+  }
+
+  function radius(m) { return 12 + m*4; }
+
+  function stats(after) {
+    const { m1, m2 } = S;
+    const p0 = m1*S.v1 + m2*S.v2, k0 = 0.5*m1*S.v1**2 + 0.5*m2*S.v2**2;
+    const { u1, u2 } = outcome();
+    const p1 = m1*u1 + m2*u2, k1 = 0.5*m1*u1**2 + 0.5*m2*u2**2;
+    document.getElementById('stats').textContent =
+      `before:  p = ${p0.toFixed(2)} kg·m/s   K = ${k0.toFixed(2)} J\n` +
+      `after:   p = ${p1.toFixed(2)} kg·m/s   K = ${k1.toFixed(2)} J   ` +
+      `(ΔK = ${(k1 - k0).toFixed(2)} J${S.e < 1 ? ' → heat/deformation' : ''})\n` +
+      `v₁' = ${u1.toFixed(2)} m/s   v₂' = ${u2.toFixed(2)} m/s`;
+  }
+
+  function drawFrame() {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim(); ctx.fillRect(0, 0, W, H);
+    // track
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim(); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, TRACK + 22); ctx.lineTo(W, TRACK + 22); ctx.stroke();
+    // bodies
+    for (const [x, m, cvar, v] of [[sim.x1, S.m1, '--m1', sim.v1], [sim.x2, S.m2, '--m2', sim.v2]]) {
+      const r = radius(m);
+      ctx.fillStyle = css.getPropertyValue(cvar).trim();
+      ctx.beginPath(); ctx.arc(px(x), TRACK + 22 - r, r, 0, 2*Math.PI); ctx.fill();
+      // velocity arrow
+      if (Math.abs(v) > 0.01) {
+        const y = TRACK + 22 - r;
+        ctx.strokeStyle = css.getPropertyValue(cvar).trim(); ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(px(x), y);
+        ctx.lineTo(px(x) + v*14, y); ctx.stroke();
+        ctx.beginPath();
+        const tip = px(x) + v*14, s = Math.sign(v)*6;
+        ctx.moveTo(tip, y); ctx.lineTo(tip - s, y - 4); ctx.lineTo(tip - s, y + 4);
+        ctx.fill();
+      }
+    }
+    // momentum / KE bars
+    const { m1, m2 } = S;
+    const p = m1*sim.v1 + m2*sim.v2;
+    const k = 0.5*m1*sim.v1**2 + 0.5*m2*sim.v2**2;
+    const k0 = 0.5*m1*S.v1**2 + 0.5*m2*S.v2**2 || 1;
+    const pMax = Math.max(Math.abs(m1*S.v1) + Math.abs(m2*S.v2), 0.1);
+    const bx = 40, bw = W - 80, y1 = H - 62, y2 = H - 30;
+    ctx.fillStyle = css.getPropertyValue('--muted').trim(); ctx.font = '11px sans-serif';
+    ctx.fillText('momentum', bx, y1 - 6);
+    ctx.fillText('kinetic energy', bx, y2 - 6);
+    ctx.fillStyle = css.getPropertyValue('--panel').trim();
+    ctx.fillRect(bx, y1, bw, 12); ctx.fillRect(bx, y2, bw, 12);
+    ctx.fillStyle = css.getPropertyValue('--p').trim();
+    const pw = (p/(2*pMax))*bw;
+    ctx.fillRect(bx + bw/2, y1, pw, 12);
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim();
+    ctx.beginPath(); ctx.moveTo(bx + bw/2, y1 - 2); ctx.lineTo(bx + bw/2, y1 + 14); ctx.stroke();
+    ctx.fillStyle = css.getPropertyValue('--k').trim();
+    ctx.fillRect(bx, y2, Math.min(1, k/k0)*bw, 12);
+  }
+
+  function tick() {
+    const dt = 1/60;
+    sim.x1 += sim.v1*dt; sim.x2 += sim.v2*dt;
+    // collision check
+    const gap = (sim.x2 - sim.x1) - (radius(S.m1) + radius(S.m2))*12/W;
+    if (!sim.collided && gap <= 0 && sim.v1 > sim.v2) {
+      const { u1, u2 } = outcome();
+      sim.v1 = u1; sim.v2 = u2; sim.collided = true;
+      stats(true);
+    }
+    drawFrame();
+    if (sim.x1 > -1 && sim.x2 < 13 && sim.t < 12) {
+      sim.t += dt;
+      requestAnimationFrame(tick);
+    }
+  }
+
+  document.getElementById('run').onclick = () => { reset(); requestAnimationFrame(tick); };
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => drawFrame());
+  reset();
+})();
+</script>
+</body>
+</html>

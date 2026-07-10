@@ -53,7 +53,8 @@ def section_nav(course: str, entry: str, label: str):
     if p.is_file():
         return f"{course}/{entry}", label, None
     if p.is_dir():
-        files = sorted(p.glob("*.md"))
+        files = sorted(f for f in p.glob("*.md")
+                       if "<!-- stub -->" not in f.read_text()[:40])
         idx = [f for f in files if f.name == "index.md"]
         rest = [f for f in files if f.name != "index.md"]
         items = []

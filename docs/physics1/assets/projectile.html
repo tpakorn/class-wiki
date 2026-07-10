@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projectile Playground</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --traj:#c0392b; --old:#caa; --env:#2471a3; --gnd:#999; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --traj:#e74c3c; --old:#644; --env:#5dade2; --gnd:#777; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; font-variant-numeric:tabular-nums; }
+  input[type=range] { width:170px; accent-color:var(--traj); }
+  button { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:4px 10px; font-size:12px; cursor:pointer; }
+  label.cb { font-size:12px; display:flex; gap:4px; align-items:center; }
+  .stats { font-size:12px; color:var(--muted); padding:4px 2px;
+           font-variant-numeric:tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>Launch angle θ</label>
+      <input type="range" id="ang" min="5" max="85" step="1" value="45">
+      <output id="oang">45°</output></div>
+    <div class="ctl"><label>Launch speed v₀</label>
+      <input type="range" id="spd" min="10" max="50" step="1" value="30">
+      <output id="ospd">30 m/s</output></div>
+    <button id="fire">Fire!</button>
+    <button id="clear">Clear shots</button>
+    <label class="cb"><input type="checkbox" id="env"> parabola of safety</label>
+  </div>
+  <canvas id="cv" width="760" height="420"></canvas>
+  <div class="stats" id="stats"></div>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, g = 9.8;
+  const XMAX = 280, YMAX = 140;   // metres shown
+  const px = x => 30 + x/XMAX*(W - 40), py = y => H - 25 - y/YMAX*(H - 40);
+  let shots = [];      // {th, v0, done:[x,y pts]}
+  let anim = null;
+
+  const S = { ang: 45, spd: 30 };
+  for (const [id, out, fmt] of [["ang","oang",v=>v+"°"],["spd","ospd",v=>v+" m/s"]]) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById(out).value = fmt(el.value); drawAll(); });
+  }
+
+  function traj(th, v0) {
+    const r = th*Math.PI/180, vx = v0*Math.cos(r), vy = v0*Math.sin(r);
+    const T = 2*vy/g, pts = [];
+    for (let i = 0; i <= 120; i++) {
+      const t = T*i/120;
+      pts.push([vx*t, vy*t - 0.5*g*t*t]);
+    }
+    return { pts, R: vx*T, Hmax: vy*vy/(2*g), T };
+  }
+
+  function drawAll(progress = null) {
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim(); ctx.fillRect(0, 0, W, H);
+    // ground + scale
+    ctx.strokeStyle = css.getPropertyValue('--gnd').trim(); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px(0), py(0)); ctx.lineTo(px(XMAX), py(0)); ctx.stroke();
+    ctx.fillStyle = css.getPropertyValue('--muted').trim(); ctx.font = '11px sans-serif';
+    for (let m = 0; m <= XMAX; m += 50) { ctx.fillText(m + ' m', px(m) - 8, H - 8); }
+    // envelope
+    if (document.getElementById('env').checked) {
+      const v0 = S.spd;
+      ctx.strokeStyle = css.getPropertyValue('--env').trim();
+      ctx.setLineDash([6,4]); ctx.lineWidth = 1.5; ctx.beginPath();
+      let started = false;
+      for (let x = 0; x <= XMAX; x += 2) {
+        const y = v0*v0/(2*g) - g*x*x/(2*v0*v0);
+        if (y < 0) break;
+        const X = px(x), Y = py(y);
+        if (!started) { ctx.moveTo(X, Y); started = true; } else ctx.lineTo(X, Y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = css.getPropertyValue('--env').trim();
+      ctx.fillText('parabola of safety (v₀ = ' + v0 + ' m/s)', px(10), py(v0*v0/(2*g)) - 6);
+    }
+    // old shots
+    for (const s of shots.slice(0, -1)) plot(s.pts, css.getPropertyValue('--old').trim(), 1.2);
+    // latest shot (maybe partially, when animating)
+    const last = shots[shots.length - 1];
+    if (last) {
+      const n = progress === null ? last.pts.length : Math.floor(progress*last.pts.length);
+      plot(last.pts.slice(0, Math.max(2, n)), css.getPropertyValue('--traj').trim(), 2);
+      if (progress !== null && n < last.pts.length) {
+        const [x, y] = last.pts[n];
+        ctx.fillStyle = css.getPropertyValue('--traj').trim();
+        ctx.beginPath(); ctx.arc(px(x), py(y), 5, 0, 2*Math.PI); ctx.fill();
+      }
+    }
+  }
+
+  function plot(pts, color, w) {
+    ctx.strokeStyle = color; ctx.lineWidth = w; ctx.beginPath();
+    pts.forEach(([x, y], i) => i ? ctx.lineTo(px(x), py(y)) : ctx.moveTo(px(x), py(y)));
+    ctx.stroke();
+  }
+
+  document.getElementById('fire').onclick = () => {
+    const t = traj(S.ang, S.spd);
+    shots.push(t);
+    if (shots.length > 12) shots.shift();
+    document.getElementById('stats').textContent =
+      `θ = ${S.ang}°, v₀ = ${S.spd} m/s  →  range ${t.R.toFixed(1)} m · ` +
+      `max height ${t.Hmax.toFixed(1)} m · flight time ${t.T.toFixed(2)} s`;
+    if (anim) cancelAnimationFrame(anim);
+    const t0 = performance.now(), dur = 900;
+    (function step(now) {
+      const p = Math.min(1, (now - t0)/dur);
+      drawAll(p);
+      if (p < 1) anim = requestAnimationFrame(step); else { anim = null; drawAll(); }
+    })(t0);
+  };
+  document.getElementById('clear').onclick = () => { shots = []; drawAll();
+    document.getElementById('stats').textContent = ''; };
+  document.getElementById('env').onchange = () => drawAll();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => drawAll());
+  drawAll();
+})();
+</script>
+</body>
+</html>

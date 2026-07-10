@@ -1,216 +1,124 @@
-# Conservation Of Energy
+# Conservation of Energy
 
-> Conservation Of Energy
+*Source lecture(s):* [SC133 Lec 9](../lectures.md)
 
 ## Intuition
 
-Conservation Of Energy is introduced in lecture19_fluids_continuity_bernoulli, lecture14_review_midterm, lecture16_gravitation_newton_superposition, lecture09_potential_energy_and_conservation_of_energy. The formulation helps bridge intuitive motion and mathematical description.
+Energy is the universe's strictest accountant. It changes form constantly — motion to
+height, height to spring compression, everything eventually to heat — but the total
+never budges. In mechanics this gives a superpower: compare any two moments of a
+process without solving for anything in between. Roller coaster, pendulum, planet —
+if you know the energy budget, you know the speeds.
 
-## Formal Definition
+## The statement
 
-Conservation Of Energy
+For a system where only **conservative forces** do work:
 
-## Mathematical Formulation
+$$\boxed{\,E = K + U = \text{constant}\,}
+\qquad
+\tfrac12 mv_i^2 + U_i = \tfrac12 mv_f^2 + U_f$$
 
-See related equations: 
+With non-conservative forces (friction, drag) the mechanical energy leaks into
+thermal energy, but the *total* still balances:
 
+$$K_i + U_i = K_f + U_f + E_\text{thermal}, \qquad E_\text{thermal} = f_k\, d$$
 
+Energy conservation isn't broken by friction — mechanical energy just stops being the
+whole story.
 
-## Derivation
+## Where it comes from
 
-Derivation varies across lectures. Core steps are scattered across lecture19_fluids_continuity_bernoulli, lecture14_review_midterm, lecture16_gravitation_newton_superposition, lecture09_potential_energy_and_conservation_of_energy.
+Mechanical energy conservation is the
+[work–energy theorem](../equations/work-energy-theorem.md) plus the definition of
+[potential energy](potential-energy.md): $W_\text{cons} = -\Delta U$ and
+$W_\text{net} = \Delta K$ combine into $\Delta(K + U) = W_\text{non-cons}$. Deeper
+still (Noether's theorem, for later courses): energy conservation is the consequence
+of physics being the same today as tomorrow — time-translation symmetry.
 
+## Worked example: roller coaster loop
 
+A cart starts from rest at height $h$ and must maintain contact at the top of a loop
+of radius $R$. Minimum $h$?
 
-## Worked Example
+At the loop top, gravity alone must supply the
+[centripetal force](circular-motion.md): $mg = mv^2/R \Rightarrow v^2 = gR$.
+Energy from start to loop top (height $2R$):
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture9
-Potential Energy and Conservation of Energy
-SC133 - Lecture 9
-Lecturer: Pakorn Wongwaitayakornkul
+$$mgh = \tfrac12 mv^2 + mg(2R) = \tfrac12 mgR + 2mgR
+\;\Rightarrow\; \boxed{h = \tfrac52 R}$$
 
-Potential Energy
-Example: A bungee-cord jumper plunges from a
-staging platform
-gravitational potential energy U
-kinetic energy K
-elastic potential energy U
-Rough Guides/Greg Roden/Getty Images, Inc.
+No forces along the track ever entered the calculation — that's the power of the
+method.
 
-Work and Potential Energy
-Negative
-Positive
- As the tomato rises, the work W, done on the
-work done
-work done
-by the
-by the
-gravitational
-gravitational
-force
-force
-During the fall, the transfer is reversed.
-U = -W.
+## Worked example: friction included
 
-Work and Potential Energy
- Also applies to a block-spring system
-As the block moves rightward, the spring force does negative work on it.
-Then, as the block moves back toward x = 0, the spring force does
-positive work on it.
-△U= -W
-X
+A 2 kg block slides from rest down a ramp of height 1.5 m, arriving at the bottom at
+4 m/s. How much energy went to heat?
 
-Conservative and Nonconservative Forces
-Key elements
-1. The system consists of two or more objects.
-2. 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 14
-Review — Midterm
-SC133 - Lecture 14
-Lecturer: Pakorn Wongwaitayakornkul
+$E_\text{thermal} = mgh - \tfrac12 mv^2 = 2(9.8)(1.5) - \tfrac12(2)(16)
+= 29.4 - 16 = 13.4\,\text{J}$ — the books always balance.
 
-Outline
-First Half
-1. Measurement
-7. Potential Energy and
-2. Motion Along a Straight Line
-Conservation of Energy
-3.Vectors
-8. Center of Mass and Linear
-4. Motion in Two and Three
-Momentum
-Dimensions
-9.Rotation
-5. Force and Motion
-10. Rolling, Torque, and Angular
-6. Kinetic Energy and Work
-Momentum
+## When to use energy vs Newton
 
-Measurement
-Measurement in Physics
-Physics is based on measurement
-successively by conversion factors written as unity and the units
-of physical quantities. Certain physical quantities have been cho-
-are manipulated like algebraic quantities until only the desired
-sen as base quantities (such as length, time, and mass); each has
-units remain.
-been defined in terms of a standard and given a unit of measure
-(such as meter, second, and kilogram). Other physical quantities
-Leng
-SC133
-Physics for Engineering 1
-SC133
-Lecture 16
-GravitationNewton and Superposition
-SC133 - Lecture 16
-Lecturer: Pakorn Wongwaitayakornkul
+| Question asks about... | Best tool |
+|---|---|
+| speed at a position | **energy** (path-independent) |
+| time, or force at an instant | Newton / [kinematics](kinematics.md) |
+| direction of motion at a point | Newton (energy is a scalar — it forgot direction) |
+| systems with friction over known distance | energy with $f_k d$ term |
 
-Newton's Law of Gravitation
- In 1665, the 23-year-old Isaac Newton recognized
-that the force pulling downward is also
-responsible for holding the Moon in its orbit.
-Every body in the universe attracts every other
-body.
-mm2
-F = G
-r2
-The Andromeda Galaxy.
+## Common mistakes
 
-Newton's Law of Gravitation
-This is the pull on
-mm2
-particle 1 due to
-F =G
-particle 2.
-r2
-G is the gravitational constant:
-Draw the vector with
-G = 6.67 X 10-11 N ·m2/kg2
-its tail on particle 1 
-to show the pulling.
-= 6.67 X 10-11 m3/kg ·s2.
-Attractive force
-A unit vector points
-mm2r.
-along the radial axis.
-F =G
-r2
+- **Using $E$ conservation across friction without the heat term.** Check for
+  non-conservative forces *before* writing $K_i + U_i = K_f + U_f$.
+- **Expecting energy methods to give direction or time.** Energy is a scalar; it
+  yields speeds, not velocity vectors or durations.
+- **Double counting**: if you include a force via potential energy, don't also add
+  its work.
+- **Mixing zero-points mid-problem.** Choose where $U = 0$ once.
 
-Newton's Law of Gravitation
-Nonparticles.Apply shell theorem
-A uniform spherical shell of matter attracts a particle that is outside the
-shell as if all the shell's mass were concentrate
-SC133
-Physics for Engineering 1
-SC133
-Lecture 19
-Fluids—Continuity and Bernoulli's Equation
-SC133 - Lecture 19
-Lecturer: Pakorn Wongwaitayakornkul
+## Related concepts
 
-Ideal Fluids in Motion
-Real fluids is very complicated, we discuss ideal fluid
-1. Steady flow (laminar) — v = O; velocity does not change with time
-2。
-Incompressible flow — V · v = O; constant density
-3. Nonviscous flow — v = O; no ‘friction'to resist fluid flow
-4. Irrotational flow — V x v = O; no rotation about an axis through com
+- [Potential energy](potential-energy.md) & [work–KE theorem](kinetic-energy-and-work.md) — the ingredients
+- [Collisions](collision-and-impulse.md) — where kinetic energy may vanish but [momentum](linear-momentum.md) survives
+- [First law of thermodynamics](first-law-of-thermodynamics.md) — energy conservation with heat promoted to a first-class citizen
+- [Bernoulli's equation (fluids)](bernoulli.md) — energy conservation per unit volume of fluid
 
-Ideal Fluids in Motion
-The steady flow of a fluid around
-a cylinder
-Revealed by a dye tracer
-Injected into the fluid upstream
-Each tracer follows a streamline
-Streamline
-Courtesy D. H. Peregrine, University of Bristol
--Fluid
-element
+## Knowledge graph position
 
-TheEquation of Continuity
-Example: increase the speed of the water emerging from a garden hose
-by partially closing the hose opening
-v depends on A
-Derive by considering a tube with 
+**Prerequisites:** [Work & kinetic energy](kinetic-energy-and-work.md), [Potential energy](potential-energy.md).
+**Leads to:** [Collisions](collision-and-impulse.md), [SHM](simple-harmonic-motion.md), [thermodynamics](first-law-of-thermodynamics.md), [Bernoulli](bernoulli.md).
 
+## Quiz
 
+**Q1 (computational).** A pendulum is released from rest with the string horizontal
+(length $L$). Speed at the bottom?
 
-## Common Mistakes
+??? success "Answer"
+    Drop height $= L$: $v = \sqrt{2gL}$. The string tension does no work
+    (⊥ motion), so pure energy conservation applies.
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+**Q2 (conceptual).** A ball bounces, each bounce reaching 80% of the previous height.
+Where does the energy go?
 
+??? success "Answer"
+    Into thermal energy and sound during each inelastic contact (deforming the ball
+    and floor). Mechanical energy shrinks by 20% per bounce; total energy is
+    conserved throughout.
 
+**Q3 (multiple choice).** Two ramps, one steep and one gentle, connect the same two
+heights (frictionless). A block slides down each. At the bottom:
+(a) steep ramp gives higher speed (b) equal speeds, different times (c) equal speeds
+and equal times
 
-## Related Concepts
+??? success "Answer"
+    **(b).** Same $\Delta U$ ⇒ same speed. The steep ramp is *quicker*, though —
+    time is Newton's department, not energy's.
 
-- [acceleration](acceleration.md)
-- [angular-acceleration](angular-acceleration.md)
-- [angular-momentum](angular-momentum.md)
-- [angular-velocity](angular-velocity.md)
-- [bernoullis-equation](bernoullis-equation.md)
-- [center-of-mass](center-of-mass.md)
-- [circular-motion](circular-motion.md)
-- [collision](collision.md)
+**Q4 (conceptual).** Why does the loop-the-loop answer $h = \frac52 R$ not depend on
+the cart's mass?
 
-
-## Further Reading
-
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture19_fluids_continuity_bernoulli, lecture14_review_midterm, lecture16_gravitation_newton_superposition, lecture09_potential_energy_and_conservation_of_energy)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    Every term in the budget ($mgh$, $\frac12 mv^2$, $mgR$) is proportional to $m$ —
+    gravity accelerates all masses alike, so $m$ cancels. The same cancellation
+    behind Galileo's tower experiment.

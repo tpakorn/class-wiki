@@ -1,98 +1,101 @@
 # Linear Momentum
 
-> Linear Momentum
+*Source lecture(s):* [SC133 Lec 10](../lectures.md)
 
 ## Intuition
 
-Linear Momentum is introduced in lecture13_rolling_torque_angular_momentum, lecture10_center_of_mass_and_linear_momentum, lecture11_collision_and_impulse, lecture14_review_midterm. The formulation helps bridge intuitive motion and mathematical description.
+Which is harder to stop: a bicycle at 30 km/h or a truck at 30 km/h? Same velocity,
+very different "quantity of motion." Momentum $\vec p = m\vec v$ is that quantity —
+mass times velocity, the measure of how much *oomph* a moving body carries and how
+much force-time it takes to change it. Newton wrote his second law in terms of it,
+and unlike velocity or kinetic energy, total momentum survives even the most violent
+collisions.
 
-## Formal Definition
+## Definition and Newton's second law, properly
 
-Linear Momentum
+$$\vec p = m\vec v \qquad\qquad \boxed{\;\sum\vec F = \frac{d\vec p}{dt}\;}$$
 
-## Mathematical Formulation
+For constant mass this reduces to $\sum\vec F = m\vec a$; the momentum form is more
+general (rockets shed mass; relativity redefines $p$ but keeps this law).
 
-See related equations: 
+## Conservation of momentum
 
+For a system with **zero net external force**:
 
+$$\vec P_\text{total} = \sum_i m_i \vec v_i = \text{constant}$$
 
-## Derivation
+The proof is [Newton's third law](newtons-laws.md): internal forces come in canceling
+pairs, so they can redistribute momentum among parts but never change the total.
+This is the workhorse of [collision analysis](collision-and-impulse.md) — during the
+brief violence of impact, external forces (gravity, friction) are negligible next to
+the enormous internal ones, so momentum passes through the collision *unchanged* even
+when kinetic energy does not.
 
-Derivation varies across lectures. Core steps are scattered across lecture13_rolling_torque_angular_momentum, lecture10_center_of_mass_and_linear_momentum, lecture11_collision_and_impulse, lecture14_review_midterm.
+Deeper view (for later courses): momentum conservation follows from the homogeneity
+of space — physics doesn't care *where* the experiment happens.
 
+## Momentum vs kinetic energy
 
+| | Momentum $\vec p$ | Kinetic energy $K$ |
+|---|---|---|
+| Type | vector | scalar |
+| Formula | $mv$ | $\tfrac12 mv^2 = p^2/2m$ |
+| In collisions | always conserved (isolated) | conserved only if elastic |
+| Can cancel between bodies? | yes (opposite directions) | never (always ≥ 0) |
 
-## Worked Example
+Two identical cars in a head-on crash: total momentum zero *before and after*; total
+kinetic energy large before, mangled metal after.
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 14
-Review — Midterm
-SC133 - Lecture 14
-Lecturer: Pakorn Wongwaitayakornkul
+## Worked example: recoil
 
-Outline
-First Half
-1. Measurement
-7. Potential Energy and
-2. Motion Along a Straight Line
-Conservation of Energy
-3.Vectors
-8. Center of Mass and Linear
-4. Motion in Two and Three
-Momentum
-Dimensions
-9.Rotation
-5. Force and Motion
-10. Rolling, Torque, and Angular
-6. Kinetic Energy and Work
-Momentum
+A 4 kg rifle fires a 10 g bullet at 500 m/s. Recoil speed?
 
-Measurement
-Measurement in Physics
-Physics is based on measurement
-successively by conversion factors written as unity and the units
-of physical quantities. Certain physical quantities have been cho-
-are manipulated like algebraic quantities until only the desired
-sen as base quantities (such as length, time, and mass); each has
-units remain.
-been defined in terms of a standard and given a unit of measure
-(such as meter, second, and kilogram). Other physical quantities
-Leng
+$$0 = m_b v_b + m_r v_r \Rightarrow v_r = -\frac{0.01 \times 500}{4} = -1.25\,\text{m/s}$$
 
+Momenta are equal and opposite; kinetic energies are *not* — the bullet carries
+$K_b/K_r = m_r/m_b = 400$ times more. (Same split powers rockets and explains why
+[the lighter fragment always gets the energy](collision-and-impulse.md).)
 
+## Common mistakes
 
-## Common Mistakes
+- **Conserving momentum with external forces present.** A ball bouncing off the floor
+  does *not* conserve its momentum — Earth intervenes. Choose the system so external
+  forces vanish (or act negligibly during the event).
+- **Treating momentum as a scalar.** Head-on momenta subtract; perpendicular momenta
+  combine as [vectors](vectors.md), component by component.
+- **Assuming KE conservation because momentum is conserved.** Independent claims —
+  see [collisions](collision-and-impulse.md).
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+## Related concepts
 
+- [Center of mass](center-of-mass.md) — $\vec P = M\vec v_\text{cm}$
+- [Collisions & impulse](collision-and-impulse.md) — the applications
+- [Kinetic energy](kinetic-energy-and-work.md) — the contrasting scalar
+- [Momentum of fluids (PC316)](../../fluids/concepts/reynolds-transport-theorem.md) — the same conservation, control-volume style
 
+## Knowledge graph position
 
-## Related Concepts
+**Prerequisites:** [Newton's laws](newtons-laws.md).
+**Leads to:** [Collisions & impulse](collision-and-impulse.md), [rocket propulsion], [angular momentum](rolling-torque-angular-momentum.md) (the rotational analogue).
 
-- [acceleration](acceleration.md)
-- [angular-acceleration](angular-acceleration.md)
-- [angular-momentum](angular-momentum.md)
-- [angular-velocity](angular-velocity.md)
-- [center-of-mass](center-of-mass.md)
-- [circular-motion](circular-motion.md)
-- [collision](collision.md)
-- [conservation-of-energy](conservation-of-energy.md)
+## Quiz
 
+**Q1 (computational).** A 0.15 kg ball at 40 m/s is caught and stopped. Magnitude of
+the momentum change?
 
-## Further Reading
+??? success "Answer"
+    $|\Delta p| = 0.15 \times 40 = 6\,\text{kg·m/s}$ — delivered to the catcher's
+    hand over the stopping time (see [impulse](collision-and-impulse.md)).
 
-Additional examples and exercises can be found in the lecture PDFs.
+**Q2 (conceptual).** Can a system have zero total momentum but large kinetic energy?
 
-<details><summary><strong>Quiz Questions</strong></summary>
+??? success "Answer"
+    Yes — two equal masses moving oppositely, a spinning object, a hot gas. Momenta
+    cancel as vectors; kinetic energies add as positive scalars.
 
+**Q3 (multiple choice).** A heavy truck and light car have equal kinetic energy.
+Which has more momentum? (a) truck (b) car (c) equal
 
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture13_rolling_torque_angular_momentum, lecture10_center_of_mass_and_linear_momentum, lecture11_collision_and_impulse, lecture14_review_midterm)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(a).** $p = \sqrt{2mK}$: at fixed $K$, momentum grows with mass — the mirror
+    image of the equal-momentum quiz on the [work–energy page](kinetic-energy-and-work.md).

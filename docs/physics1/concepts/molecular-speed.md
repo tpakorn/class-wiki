@@ -1,133 +1,109 @@
-# Molecular Speed
+# The Distribution of Molecular Speeds
 
-> Molecular Speed
+*Source lecture(s):* [SC133 Lec 29](../lectures.md)
 
 ## Intuition
 
-Molecular Speed is introduced in lecture29_distribution_of_molecular_speed. The formulation helps bridge intuitive motion and mathematical description.
+At 300 K, air molecules average ~500 m/s — but that's an *average* over anarchy. Any
+instant, some molecules crawl and a lucky few streak at several kilometres per
+second, their speeds constantly reshuffled by ~10⁹ collisions per second each.
+Maxwell's great insight (1860): despite the chaos, the *distribution* of speeds is
+fixed, universal, and calculable — statistical order emerging from molecular mayhem.
+It was physics' first probability distribution, and the door to statistical
+mechanics.
 
-## Formal Definition
+## The Maxwell–Boltzmann distribution
 
-Molecular Speed
+The fraction of molecules with speed near $v$:
 
-## Mathematical Formulation
+$$f(v) = 4\pi N\left(\frac{m}{2\pi k_B T}\right)^{3/2} v^2\, e^{-mv^2/2k_BT}$$
 
-See related equations: 
+Two competing factors sculpt the famous skewed bell:
 
+- $v^2$ — more directions available at higher speed (phase-space volume) — kills the
+  distribution at $v = 0$
+- $e^{-mv^2/2k_BT}$ — the Boltzmann energy penalty — kills it at high $v$
 
+Heat the gas and the peak shifts right and flattens; the area (total count) stays
+fixed. The exponential *tail* never quite dies — and much of nature lives in that
+tail.
 
-## Derivation
+## Three landmark speeds
 
-Derivation varies across lectures. Core steps are scattered across lecture29_distribution_of_molecular_speed.
+$$v_p = \sqrt{\frac{2k_BT}{m}} \;<\;
+\bar v = \sqrt{\frac{8k_BT}{\pi m}} \;<\;
+v_\text{rms} = \sqrt{\frac{3k_BT}{m}}$$
 
+(most probable : mean : root-mean-square = $\sqrt2 : \sqrt{8/\pi} : \sqrt3$ ≈
+1 : 1.13 : 1.22). The rms speed is the one tied to
+[temperature and pressure](ideal-gas.md) ($\overline{K} = \tfrac32 k_BT$); the
+distribution's skew is why they differ.
 
+## The tail runs the world
 
-## Worked Example
+- **Evaporative cooling:** only the fastest molecules escape a liquid's surface;
+  the remainder is cooler — sweating, and the trick behind Bose–Einstein-condensate
+  experiments.
+- **Atmospheric escape:** a tiny hydrogen/helium tail exceeds Earth's
+  [escape velocity](gravitation.md) (11.2 km/s); over eons those gases leaked away —
+  while the Moon (2.4 km/s) lost *everything*. N₂ and O₂, 14–16× heavier, have
+  effectively no escaping tail: that's why Earth kept *this* atmosphere.
+- **Chemical reactions & fusion:** reactions need collisions above an activation
+  energy — rates track the tail population, hence the exponential temperature
+  sensitivity (Arrhenius), and why
+  [fusion plasmas](../../plasma/index.md) fixate on temperature.
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 29
-Distribution of Molecular Speed
-SC133 - Lecture 29
-Lecturer: Pakorn Wongwaitayakornkul
+## Worked example: hydrogen vs nitrogen at 300 K
 
-The Distribution of Molecular Speeds
-speeds in a gas at a given temperature. We want to know more.
- In 1852, Maxwell first find the speed distribution of gas molecules,
-known as Maxwell's speed distribution law,
-M
-3/2
-P(v)
-)= 4πT
-v2e-Mv2/2RT
-2TRT
+$$v_\text{rms}^{H_2} = \sqrt{\frac{3k_BT}{m_{H_2}}} \approx 1930\,\text{m/s}
+\qquad
+v_\text{rms}^{N_2} \approx 517\,\text{m/s}$$
 
-The Distribution of Molecular Speeds
-M
-3/2
-P(v) = 4π(
-v2e-Mv2/2RT
-2πRT
-M is the molar mass
-2.0
- R is the gas constant
-T is the gas temperature
-Area =P(v) dv
-avg
-1.0
-v is the molecular speed.
-VP
-Vrms
-Ap
-200
-400
-600
-800
-1000
-1200
-Speed (m/s)
+Same temperature, same average *energy* — but H₂ is 14× lighter, hence
+$\sqrt{14} \approx 3.7×$ faster, with a far fatter high-speed tail relative to escape
+velocity. Geology by statistics.
 
-The Distribution of Molecular Speeds
-M
-3/2
-P(v) = 4π(
-v2 e -Mv2/2RT
-2πRT
-P(v) is a probability
-distributionfunction
-2.0
-P(v) dv is the fraction of
-Area =P(v) dv
-avg
-molecules with speeds in
-1.0
-VP
-(v, v+dv)
-Vrms
-Ap
-200
-400
-600
-800
-1000
-1200
-Speed (m/s)
+## Common mistakes
 
-The Distribution of 
+- **"All molecules move at $v_\text{rms}$."** The spread is comparable to the mean —
+  the distribution *is* the physics.
+- **Peak = mean.** The skew puts $\bar v$ and $v_\text{rms}$ to the right of the
+  peak $v_p$.
+- **Doubling $T$ doubles speeds.** Speeds scale as $\sqrt T$ — doubling 300 K → 600 K
+  raises speeds by 41%.
+- **Using Celsius anywhere near these formulas.** Kelvin only.
 
+## Related concepts
 
+- [Ideal gas](ideal-gas.md) — where $v_\text{rms}$ comes from
+- [Temperature](temperature.md) — the parameter that shapes the curve
+- [Escape velocity](gravitation.md) — the bar the tail must clear
+- [Velocity distributions in plasmas (PC368)](../../plasma/concepts/vlasov-equation.md) — $f(v)$ promoted to the main character; its slope even [damps waves](../../plasma/concepts/landau-damping.md)
 
-## Common Mistakes
+## Knowledge graph position
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+**Prerequisites:** [Ideal gas](ideal-gas.md).
+**Leads to:** [Second law](second-law-of-thermodynamics.md) (statistics → entropy), kinetic theory, [Vlasov theory](../../plasma/concepts/vlasov-equation.md).
 
+## Quiz
 
+**Q1 (computational).** At what temperature does H₂'s rms speed equal N₂'s at 300 K?
 
-## Related Concepts
+??? success "Answer"
+    $v_\text{rms} \propto \sqrt{T/m}$: need $T_{H_2}/m_{H_2} = 300/m_{N_2}$, so
+    $T = 300\times(2/28) \approx 21\,\text{K}$ — hydrogen at liquid-helium-ish
+    temperatures still moves like room-temperature nitrogen.
 
-- [first-law-of-thermodynamics](first-law-of-thermodynamics.md)
-- [heat](heat.md)
-- [ideal-gas](ideal-gas.md)
-- [internal-energy](internal-energy.md)
-- [kinetic-energy](kinetic-energy.md)
-- [oscillation](oscillation.md)
-- [rotation](rotation.md)
-- [temperature](temperature.md)
+**Q2 (conceptual).** Why does a puddle evaporate at 25 °C when water "boils at 100 °C"?
 
+??? success "Answer"
+    The Maxwell tail: even at 25 °C some surface molecules carry enough KE to break
+    free. Boiling is bulk vapor formation; evaporation is the tail deserting one
+    molecule at a time — cooling what remains.
 
-## Further Reading
+**Q3 (multiple choice).** For a gas at temperature $T$, the ordering is:
+(a) $v_p < \bar v < v_\text{rms}$ (b) $v_\text{rms} < \bar v < v_p$ (c) all equal
 
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture29_distribution_of_molecular_speed)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(a)** — the high-speed skew drags the averages (especially the squared one)
+    above the peak.

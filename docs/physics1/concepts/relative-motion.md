@@ -1,129 +1,98 @@
 # Relative Motion
 
-> Relative Motion
+*Source lecture(s):* [SC133 Lec 5](../lectures.md)
 
 ## Intuition
 
-Relative Motion is introduced in lecture25_waves_beats_shock, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion. The formulation helps bridge intuitive motion and mathematical description.
+Velocity is always *relative to something*. Walk forward at $1\,\text{m/s}$ inside a
+train doing $30\,\text{m/s}$: the ground sees you at $31\,\text{m/s}$; a fellow
+passenger sees $1\,\text{m/s}$; you see yourself at rest. None of these is "the real"
+velocity — each is correct in its own **reference frame**. Physics only demands that
+observers agree on the *laws*, not on the velocities.
 
-## Formal Definition
+## The velocity-addition rule
 
-Relative Motion
+Label frames and objects with subscripts — "P relative to A" as $\vec v_{PA}$. The
+chain rule of frames:
 
-## Mathematical Formulation
+$$\boxed{\,\vec v_{PA} = \vec v_{PB} + \vec v_{BA}\,}$$
 
-See related equations: 
+Read the subscripts like dominoes: $PA = PB + BA$ (inner letters match and cancel).
+Reversing a pair flips the sign: $\vec v_{AB} = -\vec v_{BA}$.
 
+Because the rule is a vector equation, it works in 2-D: this is where
+[vector components](vectors.md) earn their keep.
 
+## Worked example: crossing a river (two strategies)
 
-## Derivation
+River flows east at $3\,\text{m/s}$; boat does $5\,\text{m/s}$ relative to the water.
 
-Derivation varies across lectures. Core steps are scattered across lecture25_waves_beats_shock, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion.
+**Fastest crossing:** aim straight across. Ground velocity =
+$5$ across + $3$ downstream = $\sqrt{34} \approx 5.8\,\text{m/s}$; you land
+downstream but in minimum time.
 
+**Straight-line crossing:** aim *upstream* at angle $\sin\theta = 3/5 \Rightarrow
+\theta = 37°$. Ground speed across: $\sqrt{5^2 - 3^2} = 4\,\text{m/s}$. You land
+directly opposite, but the crossing takes longer.
 
+Same physics, different goals — the classic exam pair.
 
-## Worked Example
+## Worked example: rain on a moving car
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 14
-Review — Midterm
-SC133 - Lecture 14
-Lecturer: Pakorn Wongwaitayakornkul
+Rain falls vertically at $8\,\text{m/s}$; you drive at $6\,\text{m/s}$. In your frame
+the rain has a horizontal component $6\,\text{m/s}$ *toward* you:
+it appears to fall at $\tan^{-1}(6/8) \approx 37°$ from vertical, at
+$10\,\text{m/s}$. This is why the front windscreen catches rain and the rear window
+stays dry.
 
-Outline
-First Half
-1. Measurement
-7. Potential Energy and
-2. Motion Along a Straight Line
-Conservation of Energy
-3.Vectors
-8. Center of Mass and Linear
-4. Motion in Two and Three
-Momentum
-Dimensions
-9.Rotation
-5. Force and Motion
-10. Rolling, Torque, and Angular
-6. Kinetic Energy and Work
-Momentum
+## Frames and the laws of physics
 
-Measurement
-Measurement in Physics
-Physics is based on measurement
-successively by conversion factors written as unity and the units
-of physical quantities. Certain physical quantities have been cho-
-are manipulated like algebraic quantities until only the desired
-sen as base quantities (such as length, time, and mass); each has
-units remain.
-been defined in terms of a standard and given a unit of measure
-(such as meter, second, and kilogram). Other physical quantities
-Leng
-SC133
-Physics for Engineering 1
-SC133
-Lecture 25
-Waves——Beats, Doppler Effect, Shock
-SC133 - Lecture 25
-Lecturer: Pakorn Wongwaitayakornkul
+All frames moving at *constant velocity* (inertial frames) agree on accelerations —
+$\vec a_{PA} = \vec a_{PB}$ when $\vec v_{BA}$ is constant — so they agree on
+[Newton's laws](newtons-laws.md). Accelerating frames disagree, and require
+fictitious forces; that thread leads to the
+[rotating-bucket problem in fluids](../../fluids/concepts/fluid-in-rigid-body-motion.md)
+and beyond.
 
-Beats
-Two sound waves of equal amplitude S,
-S1 = Sm cOs wt
-S2 = Sm cOS W2t,
-S = S1 + S2 = Sm(cos wit + cos w2t).
-Time
-s = 2sm cos[2(∞1 - w2)t] cos[(∞1 + w2)t]
-s(t) = [2sm cos w't] cos wt.
-fbeat = fi - f2  (
-(beat frequency).
+## Common mistakes
 
-SampleProblem
-Two identical piano wires have a fundamental frequency of 6oo Hz
-when kept under the same tension. What fractional increase in the
-tension of one wire will lead to the occurrence of 6.0 beats/s when
-both wires oscillate simultaneously?
+- **Adding speeds instead of velocities.** Direction matters — use components.
+- **Scrambling subscripts.** Write the chain out ($v_{PA} = v_{PB} + v_{BA}$) and
+  check the inner letters cancel before plugging numbers.
+- **Believing one frame is "really" at rest.** The ground is just a convenient frame
+  — it's also on a spinning planet orbiting a star.
 
-The Doppler Effect
-If there is relative motion between you and the police car/ambulance, you
-will hear a different frequency.
-True for both sound waves and electromagnetic waves.
- Measure the speeds of a source S of sound waves and a detector D of
-those waves relative to that body 
+## Related concepts
 
+- [Vectors](vectors.md) — the addition rule is vector addition
+- [Projectile motion](projectile-motion.md) — try analyzing it from the frame moving horizontally with the projectile
+- [Eulerian vs Lagrangian frames (PC316)](../../fluids/concepts/eulerian-vs-lagrangian.md) — frames of reference as a research tool
 
+## Knowledge graph position
 
-## Common Mistakes
+**Prerequisites:** [Vectors](vectors.md), [Kinematics](kinematics.md).
+**Leads to:** [Newton's laws](newtons-laws.md) (inertial frames), collision analysis in the [center-of-mass frame](center-of-mass.md).
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+## Quiz
 
+**Q1 (computational).** Plane airspeed $200\,\text{km/h}$ pointing north; wind
+$50\,\text{km/h}$ blowing east. Ground speed and track?
 
+??? success "Answer"
+    $v = \sqrt{200^2 + 50^2} \approx 206\,\text{km/h}$, heading
+    $\tan^{-1}(50/200) \approx 14°$ east of north.
 
-## Related Concepts
+**Q2 (conceptual).** Two cars approach each other, each at $60\,\text{km/h}$. What is
+the velocity of car A in car B's frame?
 
-- [acceleration](acceleration.md)
-- [angular-acceleration](angular-acceleration.md)
-- [angular-momentum](angular-momentum.md)
-- [angular-velocity](angular-velocity.md)
-- [beats](beats.md)
-- [center-of-mass](center-of-mass.md)
-- [circular-motion](circular-motion.md)
-- [collision](collision.md)
+??? success "Answer"
+    $120\,\text{km/h}$ toward B: $\vec v_{AB} = \vec v_{A,\text{gnd}} - \vec v_{B,\text{gnd}}
+    = 60 - (-60) = 120$ km/h.
 
+**Q3 (multiple choice).** You drop a ball inside a train moving at constant velocity.
+It lands: (a) behind your hand (b) directly below your hand (c) ahead of your hand
 
-## Further Reading
-
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture25_waves_beats_shock, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(b).** The ball keeps the train's horizontal velocity (Newton's first law); in
+    the train frame the physics is identical to standing still — the definition of an
+    inertial frame.

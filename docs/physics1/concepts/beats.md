@@ -1,90 +1,102 @@
 # Beats
 
-> Beats
+*Source lecture(s):* [SC133 Lec 25](../lectures.md)
 
 ## Intuition
 
-Beats is introduced in lecture25_waves_beats_shock. The formulation helps bridge intuitive motion and mathematical description.
+Play two tones *almost* in tune — 440 Hz and 442 Hz — and you hear a single note that
+throbs: *wah–wah–wah*, twice per second. The waves drift in and out of step, adding
+when aligned and cancelling when opposed. Beats are
+[interference](superposition.md) unfolding **in time** rather than in space — and the
+most sensitive tuner nature ever gave a musician's ear.
 
-## Formal Definition
+## The mathematics
 
-Beats
+Add equal-amplitude tones at $f_1$ and $f_2$ (product-to-sum identity):
 
-## Mathematical Formulation
+$$y = A\cos(2\pi f_1 t) + A\cos(2\pi f_2 t)
+= \underbrace{2A\cos\!\big(2\pi \tfrac{f_1 - f_2}{2} t\big)}_{\text{slow envelope}}
+\;\underbrace{\cos\!\big(2\pi \tfrac{f_1 + f_2}{2} t\big)}_{\text{fast carrier}}$$
 
-See related equations: 
+You hear the **average** frequency, modulated by a slow envelope. The loudness peaks
+**twice** per envelope cycle, so
 
+$$\boxed{\,f_\text{beat} = |f_1 - f_2|\,}$$
 
+440 & 442 Hz ⇒ a 441 Hz tone beating 2 times per second.
 
-## Derivation
+## Tuning by beats
 
-Derivation varies across lectures. Core steps are scattered across lecture25_waves_beats_shock.
+Slow beats = nearly in tune. A tuner adjusts until the beats *slow to zero* — the ear
+detects sub-hertz mismatches this way, far beyond its ability to compare pitches
+directly. Piano technicians, guitarists using harmonics, and orchestras tuning to the
+oboe all listen for the wobble, not the pitch.
 
+## Beyond music
 
+- **Superheterodyne radio & radar guns:** mix a received signal with a local
+  oscillator; the beat ("intermediate") frequency is easy to measure — police radar
+  literally hears the beat between sent and Doppler-shifted returns.
+- **Optical beats** between lasers measure tiny frequency differences.
+- **Binaural beats** (one tone per ear) are constructed by your brain — a perception
+  experiment hiding in headphones.
 
-## Worked Example
+## Worked example: tuning a guitar string
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 25
-Waves——Beats, Doppler Effect, Shock
-SC133 - Lecture 25
-Lecturer: Pakorn Wongwaitayakornkul
+Your A-string against a 110 Hz reference produces beats every 0.5 s. How far off are
+you?
 
-Beats
-Two sound waves of equal amplitude S,
-S1 = Sm cOs wt
-S2 = Sm cOS W2t,
-S = S1 + S2 = Sm(cos wit + cos w2t).
-Time
-s = 2sm cos[2(∞1 - w2)t] cos[(∞1 + w2)t]
-s(t) = [2sm cos w't] cos wt.
-fbeat = fi - f2  (
-(beat frequency).
+$f_\text{beat} = 1/0.5 = 2\,\text{Hz}$ ⇒ the string is at 108 or 112 Hz. Tighten
+slightly: beats *speed up* ⇒ you were sharp (112 Hz) — reverse. When the wobble
+dies, you're tuned.
 
-SampleProblem
-Two identical piano wires have a fundamental frequency of 6oo Hz
-when kept under the same tension. What fractional increase in the
-tension of one wire will lead to the occurrence of 6.0 beats/s when
-both wires oscillate simultaneously?
+## Try it live
 
-The Doppler Effect
-If there is relative motion between you and the police car/ambulance, you
-will hear a different frequency.
-True for both sound waves and electromagnetic waves.
- Measure the speeds of a source S of sound waves and a detector D of
-those waves relative to that body 
+In the **[wave studio](../simulations/wave-studio.md)**, set the two frequencies a
+few hertz apart and watch the envelope form — then close the gap and watch the beats
+slow to nothing.
 
+## Common mistakes
 
+- **Halving the beat frequency.** The envelope $\cos(2\pi\frac{\Delta f}{2}t)$ peaks
+  twice per cycle — the audible beat rate is the *full* $|f_1 - f_2|$.
+- **Expecting beats from far-apart frequencies.** Beyond ~15 Hz difference the throb
+  blurs into roughness, then into two separate tones.
+- **Confusing beats with [standing waves](superposition.md)** — beats are temporal
+  interference of *different* frequencies; standing waves are spatial interference of
+  *equal* frequencies.
 
-## Common Mistakes
+## Related concepts
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+- [Superposition](superposition.md) — the parent principle
+- [Sound waves](sound-waves.md) — where you hear them
+- [Wave studio (live demo)](../simulations/wave-studio.md)
+- [Wave–wave interactions in plasmas (PC368)](../../plasma/concepts/plasma-waves.md)
 
+## Knowledge graph position
 
+**Prerequisites:** [Superposition](superposition.md), [Sound waves](sound-waves.md).
+**Leads to:** signal processing, radio engineering (SC134 and beyond).
 
-## Related Concepts
+## Quiz
 
-- [relative-motion](relative-motion.md)
-- [shock-wave](shock-wave.md)
-- [tension](tension.md)
-- [velocity](velocity.md)
-- [wave](wave.md)
+**Q1 (computational).** A 256 Hz tuning fork with a slightly loaded 260 Hz fork:
+beat frequency?
 
+??? success "Answer"
+    $|260 - 256| = 4$ Hz — four throbs per second, at an apparent pitch of 258 Hz.
 
-## Further Reading
+**Q2 (conceptual).** While tuning, you hear beats at 3 Hz. You tighten the string and
+beats rise to 5 Hz. Sharp or flat — and what should you do?
 
-Additional examples and exercises can be found in the lecture PDFs.
+??? success "Answer"
+    You moved the *wrong* way: the difference grew, so the string was already sharp.
+    Loosen through 3, 2, 1 Hz until the beating vanishes.
 
-<details><summary><strong>Quiz Questions</strong></summary>
+**Q3 (multiple choice).** Two flutes play "the same note" but listeners hear a slow
+wobble. The flutes differ in frequency by about:
+(a) 100 Hz (b) 1 Hz (c) 0 Hz
 
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture25_waves_beats_shock)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(b).** A slow, audible throb means a small difference — beats live in the
+    few-hertz regime.

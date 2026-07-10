@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wave Studio</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --w1:#2471a3; --w2:#1e8449; --sum:#c0392b; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --w1:#5dade2; --w2:#58d68d; --sum:#e74c3c; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; }
+  input[type=range] { width:120px; accent-color:var(--sum); }
+  select { background:var(--panel); color:var(--fg); border:1px solid var(--muted);
+           border-radius:4px; padding:3px 8px; font-size:13px; }
+  .legend { font-size:12px; padding:4px 2px; }
+  .l1 { color:var(--w1); } .l2 { color:var(--w2); } .ls { color:var(--sum); font-weight:600; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>Mode</label>
+      <select id="mode">
+        <option value="same">Same direction</option>
+        <option value="opposite" selected>Opposite → standing wave</option>
+        <option value="beats">Same direction, Δf → beats</option>
+      </select></div>
+    <div class="ctl"><label>Frequency f₁ (Hz)</label>
+      <input type="range" id="f1" min="0.5" max="3" step="0.1" value="1"><output id="of1">1.0</output></div>
+    <div class="ctl"><label>Frequency f₂ (Hz)</label>
+      <input type="range" id="f2" min="0.5" max="3" step="0.1" value="1"><output id="of2">1.0</output></div>
+    <div class="ctl"><label>Phase φ₂ (deg)</label>
+      <input type="range" id="ph" min="0" max="360" step="5" value="0"><output id="oph">0°</output></div>
+  </div>
+  <div class="legend"><span class="l1">— wave 1</span> &nbsp;
+    <span class="l2">— wave 2</span> &nbsp; <span class="ls">— sum</span></div>
+  <canvas id="cv" width="760" height="380"></canvas>
+  <p class="note" id="cap"></p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const S = { mode: 'opposite', f1: 1, f2: 1, ph: 0 };
+  const v = 120;  // px per second wave speed
+  for (const id of ['f1','f2','ph']) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById('o'+id).value = id === 'ph' ? el.value + '°' : (+el.value).toFixed(1); });
+  }
+  document.getElementById('mode').onchange = e => {
+    S.mode = e.target.value;
+    if (S.mode === 'beats') { S.f2 = Math.min(3, S.f1 + 0.2);
+      document.getElementById('f2').value = S.f2;
+      document.getElementById('of2').value = S.f2.toFixed(1); }
+    if (S.mode === 'opposite') { S.f2 = S.f1;
+      document.getElementById('f2').value = S.f2;
+      document.getElementById('of2').value = S.f2.toFixed(1); }
+  };
+
+  function wave(f, dir, phase, x, t) {
+    const k = 2*Math.PI*f/v;   // ω/v so all waves share speed v
+    return Math.sin(k*x - dir*2*Math.PI*f*t + phase);
+  }
+
+  function draw(now) {
+    const t = now/1000;
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim(); ctx.fillRect(0, 0, W, H);
+    const rows = [[H*0.18, '--w1'], [H*0.46, '--w2'], [H*0.8, '--sum']];
+    for (const [y0] of rows) {
+      ctx.strokeStyle = css.getPropertyValue('--panel').trim(); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+    }
+    const dir2 = S.mode === 'opposite' ? -1 : 1;
+    const ph2 = S.ph*Math.PI/180;
+    const amp1 = 34, amp2 = 34, ampS = 40;
+    // wave 1
+    ctx.strokeStyle = css.getPropertyValue('--w1').trim(); ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const y = rows[0][0] - amp1*wave(S.f1, 1, 0, x, t);
+      x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+    // wave 2
+    ctx.strokeStyle = css.getPropertyValue('--w2').trim();
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const y = rows[1][0] - amp2*wave(S.f2, dir2, ph2, x, t);
+      x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+    // sum
+    ctx.strokeStyle = css.getPropertyValue('--sum').trim(); ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const s = wave(S.f1, 1, 0, x, t) + wave(S.f2, dir2, ph2, x, t);
+      const y = rows[2][0] - ampS*s/2;
+      x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+    // node markers for standing waves
+    const cap = document.getElementById('cap');
+    if (S.mode === 'opposite' && Math.abs(S.f1 - S.f2) < 0.01) {
+      const k = 2*Math.PI*S.f1/v, lambda = 2*Math.PI/k;
+      ctx.fillStyle = css.getPropertyValue('--muted').trim();
+      for (let x = (ph2/2)/k % (lambda/2); x <= W; x += lambda/2) {
+        ctx.beginPath(); ctx.arc(x, rows[2][0], 3, 0, 2*Math.PI); ctx.fill();
+      }
+      cap.textContent = 'Standing wave: the sum oscillates in place. Dots mark nodes — spaced λ/2 = '
+        + (lambda/2).toFixed(0) + ' px apart. No energy travels; it sloshes between the nodes.';
+    } else if (S.mode === 'beats') {
+      cap.textContent = 'Beats: two nearby frequencies drift in and out of phase. Envelope frequency = |f₁ − f₂| = '
+        + Math.abs(S.f1 - S.f2).toFixed(1) + ' Hz. Watch the sum swell and vanish.';
+    } else {
+      cap.textContent = 'Superposition: the sum is the pointwise addition of the two waves. Set φ₂ = 180° with equal f for total cancellation.';
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

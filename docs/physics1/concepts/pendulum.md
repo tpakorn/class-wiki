@@ -1,225 +1,104 @@
-# Pendulum
+# The Pendulum
 
-> Pendulum
+*Source lecture(s):* [SC133 Lec 21](../lectures.md)
 
 ## Intuition
 
-Pendulum is introduced in lecture21_oscillations_pendulum_damped_forced, lecture01_measurement, lecture20_oscillations_simple_harmonic_motion. The formulation helps bridge intuitive motion and mathematical description.
+A mass on a string, pulled aside and released, swings with a rhythm so steady it
+timed civilization's clocks for 300 years. For small swings it is
+[simple harmonic motion](simple-harmonic-motion.md) with gravity playing the spring —
+and its most famous property is what it *doesn't* depend on: the mass and (for small
+angles) the amplitude.
 
-## Formal Definition
+## The simple pendulum
 
-Pendulum
+Tangential Newton's law for a bob on a string of length $L$ at angle $\theta$:
 
-## Mathematical Formulation
+$$mL\ddot\theta = -mg\sin\theta$$
 
-See related equations: [hookes-law](../equations/hookes-law.md), [newtons-second-law](../equations/newtons-second-law.md)
+**Small-angle approximation** $\sin\theta \approx \theta$ (good to 1% below ~14°):
 
+$$\ddot\theta = -\frac{g}{L}\,\theta
+\quad\Rightarrow\quad
+\boxed{\,\omega = \sqrt{\frac{g}{L}}, \qquad T = 2\pi\sqrt{\frac{L}{g}}\,}$$
 
+- **Mass cancels** — the same equivalence of inertial and gravitational mass behind
+  [Galileo's falling bodies](gravitation.md).
+- Longer pendulum, slower swing: a 1 m pendulum ticks $T \approx 2.0$ s (the
+  historical "seconds pendulum" — one second per half-swing).
+- Measure $T$ and $L$, and you've measured $g$: the classic first-year lab.
 
-## Derivation
+Beyond small angles, the period *grows* with amplitude
+($T \approx T_0[1 + \theta_0^2/16 + \dots]$) — pendulum clocks needed small,
+constant swings.
 
-Derivation varies across lectures. Core steps are scattered across lecture21_oscillations_pendulum_damped_forced, lecture01_measurement, lecture20_oscillations_simple_harmonic_motion.
+## The physical pendulum
 
+Any rigid body swinging about a pivot: replace force balance with
+[torque](torque.md) about the pivot,
 
+$$I\ddot\theta = -mgd\sin\theta
+\quad\Rightarrow\quad
+T = 2\pi\sqrt{\frac{I}{mgd}}$$
 
-## Worked Example
+where $d$ is pivot-to-[CM](center-of-mass.md) distance and $I$ the
+[moment of inertia](moment-of-inertia.md) about the pivot. Check: a rod pivoted at
+its end ($I = \tfrac13 mL^2$, $d = L/2$) gives
+$T = 2\pi\sqrt{2L/3g}$ — swings like a simple pendulum of length $\tfrac23 L$.
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 1
-Measurement
-SC133 - Lecture 1
-Lecturer: Pakorn Wongwaitayakornkul
+## Worked example: pendulum on the Moon
 
-Measurement
-Quantity: length, time, mass, temperature, pressure, current
-Comparison with a standard
-Unit = measures of that quantity
-Ex: 1 meter (m) — the quantity length
-Appropriate standard
- Distance to a star
- Radius of an atom
-Introduction
+Your grandfather clock keeps perfect time on Earth. On the Moon
+($g_M = g/6$), each period stretches by $\sqrt6 \approx 2.45$: the clock runs
+**slow by a factor 2.45**. Pendulum clocks are gravimeters in disguise — expedition
+scientists once mapped $g$ (and thus Earth's shape) by timing pendulums.
 
-Measurement
-Table 1-1 Units for Three Sl
-Base Quantities
-Which unit to use?
-Quantity
-Unit Name
-Unit Symbol
-Length: human height
-Length
-meter
-m
-Time
-second
-S
-Which human?
-Mass
-kilogram
-kg
-When to measure?
-Base standard must be both accessible and invariable
-Metric system — human scale
-Introduction
+## Energy view
 
-Measurement
-International System of Units (SI)
-SI unit of power
-1 watt = 1 W = 1 kg · m2/s3
- For small and large number, use scientific notation
-3 560 000 000 m = 3.56 X 109 m
-0.000 000 492 s = 4.92 × 10-7 s.
-Use 3.56E9 m or 4.29E-7 (E = exp
-SC133
-Physics for Engineering 1
-SC133
-Lecture 20
-Oscillations——Simple Harmonic Motion
-SC133 - Lecture 20
-Lecturer: Pakorn Wongwaitayakornkul
+$U = mgL(1 - \cos\theta)$ from the lowest point; release from $\theta_0$ gives bottom
+speed $v = \sqrt{2gL(1 - \cos\theta_0)}$ — pure
+[energy conservation](conservation-of-energy.md), valid at *any* amplitude (unlike
+the small-angle period).
 
-Oscillations
-Oscillations = objects move back and forth repeatedly.
-Example
-Airplane in flight with turbulence
-Earthquake
-Coins drop on the floor
+## Common mistakes
 
-Simple Harmonic Motion
-一Xn
-+xm
-·A particle that is oscillating about the origin of an x axis, repeatedly going
-left and right by identical amounts.
- The frequency f of the oscillation is the number of times per second that it
-completes a full oscillation (a cycle)
-1 hertz = 1 Hz = 1 oscillation per second = 1 s-1.
+- **Including the mass in the period.** It cancels — a lead bob and a wooden bob of
+  equal length keep identical time.
+- **Using the small-angle formula for large swings** — at $\theta_0 = 90°$ the true
+  period is ~18% longer.
+- **Confusing $L$ with the string length for a physical pendulum** — you need $I$ and
+  $d$, not just geometry's longest line.
+- **Assuming tension does work** — it's always ⊥ motion; only gravity trades energy.
 
-Simple Harmonic Motion
-The time for one full cycle is the period T of the oscillation
-1
-T=
-Displacement/position is a sinusoidal function of time t
-+ 1m)s00 ux = (1)x
+## Related concepts
 
-Simple Harmonic Motion
- Freeze-Frames of the motion
-A particle oscillates left
-The speed
-and right in simple
-is zero at the
-Th
-SC133
-Physics for Engineering 1
-SC133
-Lecture 21
-Oscillations——Pendulum, Damped and Forced Oscillations
-SC133 - Lecture 21
-Lecturer: Pakorn Wongwaitayakornkul
+- [Simple harmonic motion](simple-harmonic-motion.md) — the framework
+- [Torque](torque.md) & [Moment of inertia](moment-of-inertia.md) — the physical pendulum
+- [Damped & driven oscillations](damped-oscillations.md) — real pendulums run down
+- [Measurement](measurement.md) — dimensional analysis *predicts* $T \propto \sqrt{L/g}$
 
-Simple Pendulum
-Simple Pendulum consists of
-Pivot
-point
-a particle of mass m
-massless string of length L
-swing back and forth in the plane of
-m
-the page
+## Knowledge graph position
 
-Simple Pendulum
-The Restoring Torque.
-T from the string
-S=Lθ
-Gravitational force F
-m
-g
-F cos θ
-String makes an angle 0
-A
-This
-F sinθ
-g
-component
-bring the bob back toward
-This
-merely
-component
-pulls on
-equilibrium position (0 = 0)
-brings the
-the string.
-bob back
-to center.
+**Prerequisites:** [SHM](simple-harmonic-motion.md), [Torque](torque.md).
+**Leads to:** [Damped oscillations](damped-oscillations.md); historically, to precision timekeeping and gravimetry.
 
-Simple Pendulum
-The Restoring Torque.
-T = -L(Fg sin 0),
-S=Lθ
--L(mg sin 0) = Iα,
-m
-F cos θ
-Approximate sin θ  θ for θ < 1
-θ
-This
-F sinθ
-g
-component
-This
-merely
-mgL
-=0
-0.
-component
-pulls on
-I
-brings the
-the string.
-bob back
-Hallmark of SHM
-to center.
+## Quiz
 
-SimplePendulum
-mgL
-0.
-=0
-I
-simple pendulum swinging through o
+**Q1 (computational).** What length pendulum has a period of exactly 1 s on Earth?
 
+??? success "Answer"
+    $L = g(T/2\pi)^2 = 9.8/(4\pi^2)\times1 \approx 0.248\,\text{m}$ — about 25 cm.
 
+**Q2 (conceptual).** A pendulum clock is moved from sea level to a high mountain.
+Fast or slow?
 
-## Common Mistakes
+??? success "Answer"
+    Slow: $g$ decreases with altitude, so $T = 2\pi\sqrt{L/g}$ lengthens. (Correcting
+    clocks like this is literally how $g$-variations were first surveyed.)
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+**Q3 (multiple choice).** A child stands up on a moving swing. The period:
+(a) increases (b) decreases (c) unchanged
 
-
-
-## Related Concepts
-
-- [acceleration](acceleration.md)
-- [center-of-mass](center-of-mass.md)
-- [circular-motion](circular-motion.md)
-- [collision](collision.md)
-- [displacement](displacement.md)
-- [drag](drag.md)
-- [elasticity](elasticity.md)
-- [equilibrium](equilibrium.md)
-
-
-## Further Reading
-
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture21_oscillations_pendulum_damped_forced, lecture01_measurement, lecture20_oscillations_simple_harmonic_motion)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(b).** Standing raises the CM toward the pivot — shorter effective $L$, shorter
+    period. (Kneeling/standing rhythmically is also how you *pump* a swing.)

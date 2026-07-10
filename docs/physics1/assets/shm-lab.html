@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oscillator Lab</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#667; --panel:#f4f2ee;
+          --x:#c0392b; --resp:#2471a3; --mark:#1e8449; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --fg:#e8e6e1; --muted:#99a; --panel:#1e2126;
+            --x:#e74c3c; --resp:#5dade2; --mark:#58d68d; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:12px; }
+  canvas { width:100%; border:1px solid var(--panel); border-radius:6px; display:block;
+           margin-bottom:8px; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; padding:8px 2px; align-items:flex-end; }
+  .ctl { display:flex; flex-direction:column; }
+  .ctl label { font-size:12px; color:var(--muted); }
+  .ctl output { font-size:12px; font-variant-numeric:tabular-nums; }
+  input[type=range] { width:130px; accent-color:var(--x); }
+  label.cb { font-size:12px; display:flex; gap:4px; align-items:center; }
+  .note { color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="ctl"><label>Mass m (kg)</label>
+      <input type="range" id="m" min="0.2" max="3" step="0.1" value="1"><output id="om">1.0</output></div>
+    <div class="ctl"><label>Spring k (N/m)</label>
+      <input type="range" id="k" min="5" max="120" step="5" value="40"><output id="ok">40</output></div>
+    <div class="ctl"><label>Damping b (kg/s)</label>
+      <input type="range" id="b" min="0" max="8" step="0.1" value="0.5"><output id="ob">0.5</output></div>
+    <label class="cb"><input type="checkbox" id="drive"> drive it:</label>
+    <div class="ctl"><label>Drive freq ω_d (rad/s)</label>
+      <input type="range" id="wd" min="0.5" max="15" step="0.1" value="4"><output id="owd">4.0</output></div>
+  </div>
+  <canvas id="cv" width="760" height="270"></canvas>
+  <canvas id="rc" width="760" height="200"></canvas>
+  <p class="note" id="cap"></p>
+</div>
+<script>
+(() => {
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const rc = document.getElementById('rc'), rx = rc.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const S = { m: 1, k: 40, b: 0.5, wd: 4, drive: false };
+  const fmt1 = v => (+v).toFixed(1);
+  for (const id of ['m','k','b','wd']) {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { S[id] = +el.value;
+      document.getElementById('o'+id).value = fmt1(el.value); reset(); });
+  }
+  document.getElementById('drive').onchange = e => { S.drive = e.target.checked; reset(); };
+
+  // simulation state (leapfrog-ish semi-implicit Euler, fine for display)
+  let x = 1.2, v = 0, t = 0, hist = [];
+  const F0 = 4;    // drive amplitude (N)
+  const DT = 1/240, SPEED = 2;   // sim substeps per frame
+
+  function reset() { x = 1.2; v = 0; t = 0; hist = []; drawResp(); }
+
+  function stepSim() {
+    for (let i = 0; i < SPEED*4; i++) {
+      const F = -S.k*x - S.b*v + (S.drive ? F0*Math.cos(S.wd*t) : 0);
+      v += F/S.m*DT;
+      x += v*DT;
+      t += DT;
+    }
+    hist.push(x);
+    if (hist.length > 700) hist.shift();
+  }
+
+  function draw() {
+    stepSim();
+    const css = getComputedStyle(document.documentElement);
+    ctx.fillStyle = css.getPropertyValue('--bg').trim(); ctx.fillRect(0, 0, W, H);
+    // spring + mass cartoon (top strip)
+    const cx = W/2 + x*120, cy = 46;
+    ctx.strokeStyle = css.getPropertyValue('--muted').trim(); ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(20, cy);
+    const coils = 12, x0 = 20, x1 = cx - 18;
+    for (let i = 0; i <= coils; i++) {
+      const xx = x0 + (x1 - x0)*i/coils;
+      ctx.lineTo(xx, cy + (i % 2 ? -10 : 10) * (i === 0 || i === coils ? 0 : 1));
+    }
+    ctx.lineTo(x1, cy); ctx.stroke();
+    ctx.fillStyle = css.getPropertyValue('--x').trim();
+    ctx.fillRect(cx - 16, cy - 16, 32, 32);
+    // equilibrium mark
+    ctx.strokeStyle = css.getPropertyValue('--mark').trim(); ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(W/2, 14); ctx.lineTo(W/2, 78); ctx.stroke();
+    ctx.setLineDash([]);
+    // x(t) trace
+    ctx.strokeStyle = css.getPropertyValue('--panel').trim();
+    ctx.beginPath(); ctx.moveTo(0, H*0.62); ctx.lineTo(W, H*0.62); ctx.stroke();
+    ctx.strokeStyle = css.getPropertyValue('--x').trim(); ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    hist.forEach((h, i) => {
+      const X = W - hist.length + i, Y = H*0.62 - h*55;
+      i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+    });
+    ctx.stroke();
+    requestAnimationFrame(draw);
+  }
+
+  function drawResp() {
+    const css = getComputedStyle(document.documentElement);
+    rx.fillStyle = css.getPropertyValue('--bg').trim(); rx.fillRect(0, 0, rc.width, rc.height);
+    const w0 = Math.sqrt(S.k/S.m);
+    document.getElementById('cap').textContent =
+      `ω₀ = √(k/m) = ${w0.toFixed(2)} rad/s · T = ${(2*Math.PI/w0).toFixed(2)} s · ` +
+      `Q ≈ ${(w0*S.m/Math.max(S.b,0.01)).toFixed(1)}` +
+      (S.drive ? ` · driving at ω_d = ${S.wd.toFixed(1)} rad/s` : ' · free oscillation');
+    // amplitude response curve A(ω_d)
+    const WMAX = 15;
+    const pxr = w => 40 + w/WMAX*(rc.width - 55);
+    let amax = 0; const pts = [];
+    for (let i = 1; i <= 300; i++) {
+      const w = WMAX*i/300;
+      const A = (F0/S.m)/Math.sqrt((w0*w0 - w*w)**2 + (S.b*w/S.m)**2);
+      pts.push([w, A]); amax = Math.max(amax, A);
+    }
+    const pyr = A => rc.height - 25 - A/amax*(rc.height - 45);
+    rx.strokeStyle = css.getPropertyValue('--muted').trim(); rx.lineWidth = 1;
+    rx.beginPath(); rx.moveTo(40, 12); rx.lineTo(40, rc.height - 25);
+    rx.lineTo(rc.width - 15, rc.height - 25); rx.stroke();
+    rx.fillStyle = css.getPropertyValue('--muted').trim(); rx.font = '11px sans-serif';
+    rx.fillText('driven amplitude A(ω_d)', 48, 18);
+    rx.strokeStyle = css.getPropertyValue('--resp').trim(); rx.lineWidth = 2;
+    rx.beginPath();
+    pts.forEach(([w, A], i) => i ? rx.lineTo(pxr(w), pyr(A)) : rx.moveTo(pxr(w), pyr(A)));
+    rx.stroke();
+    // markers: w0 and current drive
+    rx.strokeStyle = css.getPropertyValue('--mark').trim(); rx.setLineDash([3,3]);
+    rx.beginPath(); rx.moveTo(pxr(w0), rc.height - 25); rx.lineTo(pxr(w0), 14); rx.stroke();
+    rx.setLineDash([]);
+    rx.fillStyle = css.getPropertyValue('--mark').trim();
+    rx.fillText('ω₀', pxr(w0) - 6, 12);
+    if (S.drive) {
+      rx.fillStyle = css.getPropertyValue('--x').trim();
+      rx.beginPath(); rx.arc(pxr(S.wd), rc.height - 25, 4, 0, 2*Math.PI); rx.fill();
+      rx.fillText('ω_d', pxr(S.wd) - 8, rc.height - 8);
+    }
+  }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawResp);
+  drawResp();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

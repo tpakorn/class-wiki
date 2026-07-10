@@ -1,176 +1,127 @@
 # Simple Harmonic Motion
 
-> the projection of uniform circular motion on a
+*Source lecture(s):* [SC133 Lec 20](../lectures.md)
 
 ## Intuition
 
-Simple Harmonic Motion is introduced in lecture21_oscillations_pendulum_damped_forced, lecture20_oscillations_simple_harmonic_motion. The formulation helps bridge intuitive motion and mathematical description.
+Displace almost anything slightly from stable equilibrium — a mass on a spring, a
+swing, a molecule in a crystal, a ship on water — and it oscillates the same way:
+sinusoidally. The reason is universal: near any
+[energy-valley bottom](potential-energy.md), the restoring force is proportional to
+displacement ($F = -kx$), and that one law has exactly one kind of solution. SHM is
+not one system among many; it is the *local behavior of every stable system in
+physics*.
 
-## Formal Definition
+## The equation and its solution
 
-the projection of uniform circular motion on a
+Newton's second law with a linear restoring force:
 
-## Mathematical Formulation
+$$m\ddot x = -kx
+\qquad\Longrightarrow\qquad
+\ddot x = -\omega^2 x, \quad \omega = \sqrt{\frac{k}{m}}$$
 
-See related equations: [hookes-law](../equations/hookes-law.md), [newtons-second-law](../equations/newtons-second-law.md)
+Solution (see the [equation page](../equations/shm-differential-equation.md)):
 
+$$x(t) = A\cos(\omega t + \phi)$$
 
+- **Amplitude** $A$: set by initial conditions
+- **Phase** $\phi$: where in the cycle you start
+- **Angular frequency** $\omega$: set by the *system* ($k$, $m$) — **not by the
+  amplitude**. Period $T = 2\pi\sqrt{m/k}$, frequency $f = 1/T = \omega/2\pi$.
 
-## Derivation
+That amplitude-independence (*isochronism*) is SHM's signature — it's why springs
+and pendulums could run clocks.
 
-Derivation varies across lectures. Core steps are scattered across lecture21_oscillations_pendulum_damped_forced, lecture20_oscillations_simple_harmonic_motion.
+Velocity and acceleration follow by differentiation:
+$v = -A\omega\sin(\omega t + \phi)$ (max $A\omega$ at center),
+$a = -A\omega^2\cos(\omega t + \phi)$ (max $A\omega^2$ at extremes).
 
+## Energy in SHM
 
+$$E = \tfrac12 kA^2 = \underbrace{\tfrac12 mv^2}_{\text{max at center}}
++ \underbrace{\tfrac12 kx^2}_{\text{max at turning points}}$$
 
-## Worked Example
+Energy sloshes between kinetic and potential twice per cycle; the total is constant
+and proportional to *amplitude squared* — a scaling that echoes through
+[waves](waves.md) and light.
 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 20
-Oscillations——Simple Harmonic Motion
-SC133 - Lecture 20
-Lecturer: Pakorn Wongwaitayakornkul
+## SHM and circular motion
 
-Oscillations
-Oscillations = objects move back and forth repeatedly.
-Example
-Airplane in flight with turbulence
-Earthquake
-Coins drop on the floor
+SHM is the shadow of [uniform circular motion](circular-motion.md): project a point
+moving on a circle of radius $A$ at angular speed $\omega$ onto a diameter and you
+get $A\cos\omega t$ exactly. This is why the "angular" frequency of a linear
+oscillator is measured in rad/s, and why phasors work.
 
-Simple Harmonic Motion
-一Xn
-+xm
-·A particle that is oscillating about the origin of an x axis, repeatedly going
-left and right by identical amounts.
- The frequency f of the oscillation is the number of times per second that it
-completes a full oscillation (a cycle)
-1 hertz = 1 Hz = 1 oscillation per second = 1 s-1.
+## Worked example: car suspension
 
-Simple Harmonic Motion
-The time for one full cycle is the period T of the oscillation
-1
-T=
-Displacement/position is a sinusoidal function of time t
-+ 1m)s00 ux = (1)x
+A 1200 kg car settles 3 cm when its 80 kg driver enters. Estimate the bounce
+frequency.
 
-Simple Harmonic Motion
- Freeze-Frames of the motion
-A particle oscillates left
-The speed
-and right in simple
-is zero at the
-Th
-SC133
-Physics for Engineering 1
-SC133
-Lecture 21
-Oscillations——Pendulum, Damped and Forced Oscillations
-SC133 - Lecture 21
-Lecturer: Pakorn Wongwaitayakornkul
+Spring constant: $k = mg/x = 80(9.8)/0.03 \approx 2.6\times10^4\,\text{N/m}$… per
+settling, for the whole suspension. Then
 
-Simple Pendulum
-Simple Pendulum consists of
-Pivot
-point
-a particle of mass m
-massless string of length L
-swing back and forth in the plane of
-m
-the page
+$$f = \frac{1}{2\pi}\sqrt{\frac{k}{M}} = \frac{1}{2\pi}\sqrt{\frac{2.6\times10^4}{1280}} \approx 0.7\,\text{Hz}$$
 
-Simple Pendulum
-The Restoring Torque.
-T from the string
-S=Lθ
-Gravitational force F
-m
-g
-F cos θ
-String makes an angle 0
-A
-This
-F sinθ
-g
-component
-bring the bob back toward
-This
-merely
-component
-pulls on
-equilibrium position (0 = 0)
-brings the
-the string.
-bob back
-to center.
+— about right for a comfortable car (1 Hz-ish; sports cars run stiffer/faster).
 
-Simple Pendulum
-The Restoring Torque.
-T = -L(Fg sin 0),
-S=Lθ
--L(mg sin 0) = Iα,
-m
-F cos θ
-Approximate sin θ  θ for θ < 1
-θ
-This
-F sinθ
-g
-component
-This
-merely
-mgL
-=0
-0.
-component
-pulls on
-I
-brings the
-the string.
-bob back
-Hallmark of SHM
-to center.
+## Try it live
 
-SimplePendulum
-mgL
-0.
-=0
-I
-simple pendulum swinging through o
+The **[oscillator lab](../simulations/shm-lab.md)** lets you drag mass, spring
+constant, damping and driving frequency, and watch $x(t)$ and the resonance curve
+respond.
 
+## Common mistakes
 
+- **Thinking bigger swings take longer.** For ideal SHM, period is
+  amplitude-independent — larger $A$ means proportionally larger speeds.
+- **Maximum acceleration at the center?** No: $a \propto -x$ — acceleration is
+  *zero* at the center (where speed peaks) and maximal at the turning points.
+- **Using $\omega = \sqrt{k/m}$ for a pendulum** — the pendulum's "$k$" is
+  $mg/L$; see [pendulum](pendulum.md).
+- **Confusing $\omega$ (rad/s) with $f$ (Hz)** — a factor $2\pi$ that ruins exam
+  answers.
 
-## Common Mistakes
+## Related concepts
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+- [Potential energy](potential-energy.md) — why valleys ⇒ SHM
+- [Pendulum](pendulum.md) — SHM's most famous example
+- [Damped & driven oscillations](damped-oscillations.md) — reality's corrections
+- [Waves](waves.md) — SHM handed from particle to particle
+- [SHM differential equation (reference)](../equations/shm-differential-equation.md)
 
+## Knowledge graph position
 
+**Prerequisites:** [Newton's laws](newtons-laws.md), [Potential energy](potential-energy.md), [Circular motion](circular-motion.md).
+**Leads to:** [Pendulum](pendulum.md), [Damped oscillations](damped-oscillations.md), [Waves](waves.md) — and, eventually, every "normal mode" in physics, from [plasma oscillations](../../plasma/concepts/plasma-frequency.md) to quantum fields.
 
-## Related Concepts
+## Quiz
 
-- [acceleration](acceleration.md)
-- [center-of-mass](center-of-mass.md)
-- [circular-motion](circular-motion.md)
-- [collision](collision.md)
-- [displacement](displacement.md)
-- [drag](drag.md)
-- [elasticity](elasticity.md)
-- [equilibrium](equilibrium.md)
+**Q1 (computational).** A 0.5 kg mass on a 200 N/m spring is pulled 10 cm and
+released. Find $\omega$, the period, and the maximum speed.
 
+??? success "Answer"
+    $\omega = \sqrt{200/0.5} = 20\,\text{rad/s}$; $T = 2\pi/\omega \approx 0.31\,\text{s}$;
+    $v_\text{max} = A\omega = 0.1\times20 = 2\,\text{m/s}$.
 
-## Further Reading
+**Q2 (conceptual).** Where in the cycle are speed, acceleration, and elastic PE each
+maximal?
 
-Additional examples and exercises can be found in the lecture PDFs.
+??? success "Answer"
+    Speed: at the center ($x=0$). Acceleration and PE: at the turning points
+    ($x = \pm A$). KE and PE trade places twice per period.
 
-<details><summary><strong>Quiz Questions</strong></summary>
+**Q3 (multiple choice).** Doubling the amplitude of SHM multiplies the total energy
+by: (a) 2 (b) 4 (c) leaves the period unchanged and the energy ×4 — both
 
+??? success "Answer"
+    **(c).** $E = \frac12 kA^2 \to 4E$, while $T = 2\pi\sqrt{m/k}$ never noticed the
+    amplitude.
 
-1. What is the mathematical definition of this concept?
+**Q4 (conceptual).** Why does *every* small oscillation look simple harmonic,
+whatever the system?
 
-2. Where in your lectures is this concept used? (lecture21_oscillations_pendulum_damped_forced, lecture20_oscillations_simple_harmonic_motion)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    Taylor-expand any potential about a minimum:
+    $U \approx U_0 + \frac12 U''(x_0)(x-x_0)^2$ — the linear term vanishes at
+    equilibrium, and the quadratic term *is* a spring with $k = U''(x_0)$. Nature
+    reuses one solution everywhere.

@@ -1,212 +1,102 @@
 # Circular Motion
 
-> Circular Motion
+*Source lecture(s):* [SC133 Lec 5](../lectures.md)
 
 ## Intuition
 
-Circular Motion is introduced in lecture07_force_and_motion_friction_and_drag, lecture21_oscillations_pendulum_damped_forced, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion. The formulation helps bridge intuitive motion and mathematical description.
+A ball on a string moves in a circle at constant speed — yet it is *accelerating* the
+whole time, because its velocity's **direction** keeps changing. The acceleration
+points toward the center (centripetal, "center-seeking"): the string constantly pulls
+the velocity vector around without ever changing its length. No inward force, no
+circle — let go of the string and the ball flies off along the *tangent*, not
+outward.
 
-## Formal Definition
+## The formulas
 
-Circular Motion
+For speed $v$ on a circle of radius $r$:
 
-## Mathematical Formulation
+$$\boxed{\,a_c = \frac{v^2}{r} = \omega^2 r\,} \qquad \text{directed toward the center}$$
 
-See related equations: 
+with angular speed $\omega = v/r$ (rad/s), period $T = 2\pi r/v = 2\pi/\omega$.
 
+The inward force required, by [Newton's second law](newtons-laws.md):
 
+$$F_c = \frac{m v^2}{r}$$
 
-## Derivation
+**Centripetal force is not a new force** — it is a *role* played by whatever real
+force points inward: string tension, gravity (orbits), friction (cornering car),
+normal force (banked turn, loop-the-loop).
 
-Derivation varies across lectures. Core steps are scattered across lecture07_force_and_motion_friction_and_drag, lecture21_oscillations_pendulum_damped_forced, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion.
+## Derivation of $a_c = v^2/r$
 
+In time $\Delta t$ the position vector rotates by $\Delta\theta = \omega\Delta t$; so
+does the velocity vector. For small angles the change in velocity has magnitude
+$|\Delta \vec v| \approx v\,\Delta\theta$, pointing toward the center. Hence
 
+$$a = \frac{|\Delta\vec v|}{\Delta t} = v\frac{\Delta\theta}{\Delta t} = v\omega = \frac{v^2}{r}.$$
 
-## Worked Example
+The geometry of the velocity triangle mirrors the position triangle — that similarity
+is the entire proof.
 
-SC133
-Physics for Engineering 1
-SC133 sec 1
-Lecture7
-Force and Motion——-Friction and Drags
-SC133 - Lecture 7
-Lecturer: Pakorn Wongwaitayakornkul
+## Non-uniform circular motion
 
-Friction
-Unavoidable in our daily lives
-Lubricant to counteract friction in engine
-All transportation requires friction
-Holding pencil and write
-Three experiments
-1. Send a book sliding across a long horizontal counter.
-2. Push horizontally on the book to make it travel at constant velocity
-along the counter.
-3. Push horizontally on a heavy crate. The crate does not move.
-Friction
+If the speed changes too, add a **tangential** component $a_t = dv/dt$ along the
+motion; total acceleration $a = \sqrt{a_c^2 + a_t^2}$. The centripetal part handles
+turning, the tangential part handles speeding up.
 
-Two Types of Friction
-Static frictional force (f) —— apply when the object is stationary
-Kinetic frictional force (f) —— apply when the object is in motion
-Friction
+## Worked example: how fast can a car corner?
 
-Two Types of Friction
-There is no attempt
-at sliding. Thus,
-Frictional force = 0
-no friction and
-no motion.
-Force F attempts
-sliding but is balanced
-by the frictional force.
-F
-$<
-Frictional force = F
-No 
-SC133
-Physics for Engineering 1
-SC133
-Lecture 14
-Review — Midterm
-SC133 - Lecture 14
-Lecturer: Pakorn Wongwaitayakornkul
+Static friction supplies the centripetal force: $\mu_s m g \geq mv^2/r$, so
 
-Outline
-First Half
-1. Measurement
-7. Potential Energy and
-2. Motion Along a Straight Line
-Conservation of Energy
-3.Vectors
-8. Center of Mass and Linear
-4. Motion in Two and Three
-Momentum
-Dimensions
-9.Rotation
-5. Force and Motion
-10. Rolling, Torque, and Angular
-6. Kinetic Energy and Work
-Momentum
+$$v_\text{max} = \sqrt{\mu_s\, g\, r}$$
 
-Measurement
-Measurement in Physics
-Physics is based on measurement
-successively by conversion factors written as unity and the units
-of physical quantities. Certain physical quantities have been cho-
-are manipulated like algebraic quantities until only the desired
-sen as base quantities (such as length, time, and mass); each has
-units remain.
-been defined in terms of a standard and given a unit of measure
-(such as meter, second, and kilogram). Other physical quantities
-Leng
-SC133
-Physics for Engineering 1
-SC133
-Lecture 21
-Oscillations——Pendulum, Damped and Forced Oscillations
-SC133 - Lecture 21
-Lecturer: Pakorn Wongwaitayakornkul
+For $\mu_s = 0.8$, $r = 50\,\text{m}$: $v_\text{max} = \sqrt{0.8\times9.8\times50}
+\approx 19.8\,\text{m/s} \approx 71\,\text{km/h}$. Independent of the car's mass —
+heavier cars need more force but also grip harder.
 
-Simple Pendulum
-Simple Pendulum consists of
-Pivot
-point
-a particle of mass m
-massless string of length L
-swing back and forth in the plane of
-m
-the page
+## Common mistakes
 
-Simple Pendulum
-The Restoring Torque.
-T from the string
-S=Lθ
-Gravitational force F
-m
-g
-F cos θ
-String makes an angle 0
-A
-This
-F sinθ
-g
-component
-bring the bob back toward
-This
-merely
-component
-pulls on
-equilibrium position (0 = 0)
-brings the
-the string.
-bob back
-to center.
+- **Inventing "centrifugal force".** In an inertial frame there is no outward force on
+  the ball; the outward *feeling* is your body trying to go straight while the car
+  turns under you.
+- **Thinking constant speed means zero acceleration.** Acceleration is change of
+  *velocity* — direction counts.
+- **Drawing $F_c$ as an extra arrow on a free-body diagram.** Label the *actual*
+  forces (tension, gravity, friction, normal); their inward resultant *is* the
+  centripetal force.
 
-Simple Pendulum
-The Restoring Torque.
-T = -L(Fg sin 0),
-S=Lθ
--L(mg sin 0) = Iα,
-m
-F cos θ
-Approximate sin θ  θ for θ < 1
-θ
-This
-F sinθ
-g
-component
-This
-merely
-mgL
-=0
-0.
-component
-pulls on
-I
-brings the
-the string.
-bob back
-Hallmark of SHM
-to center.
+## Related concepts
 
-SimplePendulum
-mgL
-0.
-=0
-I
-simple pendulum swinging through o
+- [Vectors](vectors.md) — velocity direction is everything here
+- [Newton's laws](newtons-laws.md) — supplies the required force
+- [Rotation](rotation.md) — same angular language for spinning bodies
+- [Kepler's laws & orbits](keplers-laws.md) — gravity as centripetal force
+- [Gyration in magnetic fields (PC368)](../../plasma/concepts/larmor-radius.md) — the same circle with $qvB$ as the inward force
 
+## Knowledge graph position
 
+**Prerequisites:** [Kinematics](kinematics.md), [Vectors](vectors.md).
+**Leads to:** [Rotation](rotation.md), [Gravitation & orbits](gravitation.md).
 
-## Common Mistakes
+## Quiz
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+**Q1 (computational).** A satellite orbits at $r = 7000\,\text{km}$ with
+$v = 7.5\,\text{km/s}$. Its centripetal acceleration?
 
+??? success "Answer"
+    $a_c = v^2/r = (7500)^2 / 7\times10^6 \approx 8.0\,\text{m/s}^2$ — nearly $g$!
+    Orbiting *is* falling; the satellite just keeps missing the ground.
 
+**Q2 (conceptual).** A ball on a string is swung in a vertical circle. Where is the
+string tension largest?
 
-## Related Concepts
+??? success "Answer"
+    At the bottom: tension must supply the centripetal force *and* fight gravity,
+    $T = mv^2/r + mg$ (and $v$ is also largest there by energy conservation).
 
-- [acceleration](acceleration.md)
-- [angular-acceleration](angular-acceleration.md)
-- [angular-momentum](angular-momentum.md)
-- [angular-velocity](angular-velocity.md)
-- [center-of-mass](center-of-mass.md)
-- [collision](collision.md)
-- [conservation-of-energy](conservation-of-energy.md)
-- [displacement](displacement.md)
+**Q3 (multiple choice).** The string breaks at the top of a horizontal circle. The
+ball initially flies: (a) radially outward (b) along the tangent (c) spirally
 
-
-## Further Reading
-
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture07_force_and_motion_friction_and_drag, lecture21_oscillations_pendulum_damped_forced, lecture14_review_midterm, lecture05_2D_3D_motion_circular_and_relative_motion)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(b).** Remove the force and Newton's first law takes over: straight-line motion
+    along the instantaneous velocity — the tangent.

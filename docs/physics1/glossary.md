@@ -9,7 +9,7 @@
 | Center of Mass | Mass-weighted average position. |
 | Drag | Force opposing motion through a fluid, $F_D \sim v^2$. |
 | Entropy | Measure of unavailable energy / microscopic disorder. |
-| Equilibrium | $\sum F = 0$ and $\sum 	au = 0$. |
+| Equilibrium | $\sum F = 0$ and $\sum \tau = 0$. |
 | Ideal Gas | Point particles with elastic collisions, obeying $PV=nRT$. |
 | Impulse | Time-integrated force, equal to momentum change. |
 | Kinetic Energy | $K = \tfrac12 m v^2$. |

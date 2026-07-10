@@ -1,6 +1,6 @@
 # Physics Class Wiki
 
-Lecture notes, re-engineered. Four physics courses taught at **Thammasat University**
+Lecture notes, re-engineered. Seven physics courses taught at **Thammasat University**
 by Pakorn Wongwaitayakornkul, rebuilt as cross-linked knowledge systems: every concept
 explained from intuition to derivation, every equation dissected, every page quizzed —
 built for studying, not just reading.
@@ -10,8 +10,8 @@ built for studying, not just reading.
 <span class="cw-code">SC133 · Year 1</span>
 ### [Physics for Engineers I](physics1/index.md)
 Mechanics from vectors to gravitation, fluids, oscillations, waves and
-thermodynamics.
-<span class="cw-meta">≈ 50 concepts · 30 lectures · quizzes & widgets</span>
+thermodynamics — fully rebuilt.
+<span class="cw-meta">36 concepts · 30 lectures · 4 live demos</span>
 </div>
 <div class="cw-card" markdown>
 <span class="cw-code">SC134 · Year 1</span>

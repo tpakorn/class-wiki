@@ -1,170 +1,117 @@
-# Superposition
+# Superposition, Interference & Standing Waves
 
-> Superposition
+*Source lecture(s):* [SC133 Lec 23](../lectures.md)
 
 ## Intuition
 
-Superposition is introduced in lecture23_waves_interference_standing_waves, lecture06_force_and_motion_newtons_law, lecture16_gravitation_newton_superposition. The formulation helps bridge intuitive motion and mathematical description.
+Two waves in the same medium don't collide — they **add**, point by point, instant by
+instant, then pass through each other unchanged. That politeness (linearity) has loud
+consequences: waves can reinforce into double heights (**constructive interference**),
+cancel into silence (**destructive**), or — when a wave meets its own reflection —
+freeze into a **standing wave** that oscillates in place. Every musical instrument is
+a standing-wave machine.
 
-## Formal Definition
+## The superposition principle
 
-Superposition
+$$y_\text{total}(x,t) = y_1(x,t) + y_2(x,t)$$
 
-## Mathematical Formulation
+Two equal sinusoids offset by phase $\phi$:
 
-See related equations: 
+$$y = \left[2A\cos\frac{\phi}{2}\right]\sin\left(kx - \omega t + \frac{\phi}{2}\right)$$
 
+- $\phi = 0$: amplitude $2A$ — fully constructive
+- $\phi = \pi$ (half a wavelength of path difference): amplitude $0$ — fully
+  destructive
 
+**Path-difference rule** for two sources in step: constructive where
+$\Delta L = m\lambda$, destructive where $\Delta L = (m + \tfrac12)\lambda$ — the
+fringe logic that reappears with light (SC134) and in the
+[FDTD double-slit simulation](../../comp-plasma/examples/double-slit-fdtd.md).
 
-## Derivation
+## Standing waves
 
-Derivation varies across lectures. Core steps are scattered across lecture23_waves_interference_standing_waves, lecture06_force_and_motion_newtons_law, lecture16_gravitation_newton_superposition.
+Add identical waves traveling in *opposite* directions (e.g., incident + reflected):
 
+$$y = A\sin(kx - \omega t) + A\sin(kx + \omega t) = \boxed{\,2A\sin kx\,\cos\omega t\,}$$
 
+Space and time have **separated**: every point oscillates in step, with a
+position-dependent amplitude. **Nodes** (never move) sit every $\lambda/2$;
+**antinodes** (maximum swing) between them. No net energy travels — it's trapped,
+sloshing between the nodes.
 
-## Worked Example
+## Normal modes of a string
 
-SC133
-Physics for Engineering 1
-SC133 sec 1
-Lecture 6
-Force and Motion-Newton's Laws
-SC133 - Lecture 6
-Lecturer: Pakorn Wongwaitayakornkul
+A string fixed at both ends demands nodes at $x = 0, L$, so only certain wavelengths
+fit:
 
-Newtonian Mechanics
-Newton (1642-1727) first understood that
-a force causes the acceleration
-Three primary laws of motion
-Breakdown when
-Speed is large (~speed of light)
-Special Relativity
-Size is small (~atomic scale)
-Quantum Mechanics
-Portrait of Sir Isaac Newton, 1689
+$$\lambda_n = \frac{2L}{n}, \qquad
+f_n = \frac{nv}{2L} = n f_1, \qquad n = 1, 2, 3, \dots$$
 
-Newton's First Law
-Previously, at rest = natural state. A body moving at constant speed has to
-be propelled in some way. Otherwise, it “naturally” stops.
-However, pick sliding over the ice of a skating rink (frictionless surface)
-suggests otherwise.
-Newton's First Law: If no force acts on a body, the body's velocity cannot
-change; that is, the body cannot accelerate.
+The **fundamental** $f_1 = v/2L$ sets the pitch; the **harmonics** $2f_1, 3f_1,\dots$
+color the timbre — why a guitar and violin playing the same note sound different.
+Tuning = changing $v = \sqrt{F_T/\mu}$ (tension pegs) or $L$ (frets).
 
-Force
-Unit
-1 newton (N) = (1 kg)(1 m/s2)
-F
-Vector
-Adding forces as vectors
-Principle of superposition
-→
-a
-velocity c
-SC133
-Physics for Engineering 1
-SC133
-Lecture 16
-GravitationNewton and Superposition
-SC133 - Lecture 16
-Lecturer: Pakorn Wongwaitayakornkul
+These discrete allowed patterns are physics' first **eigenmode problem** — the same
+mathematics that later quantizes [PDE solutions (PHY621)](../../phy621/concepts/partial-differential-equations.md)
+and electron orbitals.
 
-Newton's Law of Gravitation
- In 1665, the 23-year-old Isaac Newton recognized
-that the force pulling downward is also
-responsible for holding the Moon in its orbit.
-Every body in the universe attracts every other
-body.
-mm2
-F = G
-r2
-The Andromeda Galaxy.
+## Worked example: which harmonics?
 
-Newton's Law of Gravitation
-This is the pull on
-mm2
-particle 1 due to
-F =G
-particle 2.
-r2
-G is the gravitational constant:
-Draw the vector with
-G = 6.67 X 10-11 N ·m2/kg2
-its tail on particle 1 
-to show the pulling.
-= 6.67 X 10-11 m3/kg ·s2.
-Attractive force
-A unit vector points
-mm2r.
-along the radial axis.
-F =G
-r2
+A 0.9 m string has wave speed 360 m/s. A tuner drives it at 800 Hz. Does it resonate?
 
-Newton's Law of Gravitation
-Nonparticles.Apply shell theorem
-A uniform spherical shell of matter attracts a particle that is outside the
-shell as if all the shell's mass were concentrate
-SC133
-Physics for Engineering 1
-SC133
-Lecture 23
-Waves——-Interference, Standing Waves
-SC133 - Lecture 23
-Lecturer: Pakorn Wongwaitayakornkul
+$f_1 = v/2L = 200\,\text{Hz}$; harmonics at 200, 400, 600, **800** ✓ — yes, the
+$n = 4$ mode, with 3 interior nodes.
 
-The Principle of Superposition for Waves
- When two waves overlap, we see the resultant wave, not the individual waves.
+## Try it live
 
-The Principle of Superposition for Waves
+The **[wave studio](../simulations/wave-studio.md)** superposes two waves live —
+flip the second wave's direction to build standing waves and watch nodes appear;
+detune the frequencies slightly to preview [beats](beats.md).
 
-The Principle of Superposition for Waves
-Let yi(x, t) and y2(x, t) be the displacements that the string would
-experience if each wave traveled alone.
-y'(x,t) = y1(x, t) + y2(x, t).
- Overlapping waves algebraically add to produce a resultant wave (or net
-wave).
-Principle of Superposition = their net effect is the sum of the individual
-effects.
+## Common mistakes
 
-The Principle of Superposition for Waves
-· If two effects somehow amplified each other, the resulting nonlinear world
-would be very difficult to manage and understand.
-Overlapping waves do not in any way alter the travel of each other.
+- **Expecting waves to bounce off each other.** They overlap and continue — only the
+  *displacement* adds while they share space.
+- **"Destructive interference destroys energy."** Energy is redistributed to the
+  constructive regions; the books always balance.
+- **Confusing nodes with antinodes**, and node spacing ($\lambda/2$) with $\lambda$.
+- **Forgetting boundary conditions choose the modes.** One fixed + one free end
+  (organ pipes closed at one end) gives odd harmonics only — different physics,
+  same recipe.
 
-Interference 
+## Related concepts
 
+- [Traveling waves](waves.md) — the ingredients
+- [Beats](beats.md) — interference in *time* instead of space
+- [Sound waves](sound-waves.md) — pipes, voices, and room acoustics
+- [Fourier series (PHY621)](../../phy621/concepts/fourier-series.md) — any string shape = sum of modes
 
+## Knowledge graph position
 
-## Common Mistakes
+**Prerequisites:** [Traveling waves](waves.md).
+**Leads to:** [Beats](beats.md), [Sound](sound-waves.md), musical acoustics, [eigenmode thinking everywhere](../../phy621/concepts/eigenvalues-eigenvectors.md).
 
-- Forgetting vector/sign conventions.
-- Mixing up average and instantaneous quantities.
+## Quiz
 
+**Q1 (computational).** Two speakers, in phase, face you: one 3.0 m away, the other
+3.85 m. For sound at 400 Hz ($v = 340$ m/s), loud or quiet?
 
+??? success "Answer"
+    $\lambda = 0.85\,\text{m}$; $\Delta L = 0.85\,\text{m} = 1\lambda$ —
+    **constructive**: loud.
 
-## Related Concepts
+**Q2 (conceptual).** Noise-cancelling headphones exploit which phenomenon, and what
+must they generate?
 
-- [acceleration](acceleration.md)
-- [conservation-of-energy](conservation-of-energy.md)
-- [displacement](displacement.md)
-- [equilibrium](equilibrium.md)
-- [force](force.md)
-- [friction](friction.md)
-- [gravitation](gravitation.md)
-- [interference](interference.md)
+??? success "Answer"
+    Destructive interference: an "anti-noise" wave with equal amplitude and opposite
+    phase ($\phi = \pi$) to the incoming sound at the ear — superposition sums to
+    near-silence.
 
+**Q3 (multiple choice).** On a string fixed at both ends vibrating in its third
+harmonic, the number of nodes (including the ends) is:
+(a) 2 (b) 3 (c) 4
 
-## Further Reading
-
-Additional examples and exercises can be found in the lecture PDFs.
-
-<details><summary><strong>Quiz Questions</strong></summary>
-
-
-1. What is the mathematical definition of this concept?
-
-2. Where in your lectures is this concept used? (lecture23_waves_interference_standing_waves, lecture06_force_and_motion_newtons_law, lecture16_gravitation_newton_superposition)
-
-3. Identify one common mistake when applying this concept.
-
-</details>
+??? success "Answer"
+    **(c).** $n = 3$ means three half-wavelength loops: nodes at both ends + two
+    interior — four total, three antinodes.
